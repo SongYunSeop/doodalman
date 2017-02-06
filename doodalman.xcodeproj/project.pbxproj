@@ -1,0 +1,444 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		045CA9F31E484978006C9645 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CA9F21E484978006C9645 /* AppDelegate.swift */; };
+		045CA9F51E484978006C9645 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CA9F41E484978006C9645 /* MapViewController.swift */; };
+		045CA9F81E484978006C9645 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045CA9F61E484978006C9645 /* Main.storyboard */; };
+		045CA9FA1E484978006C9645 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 045CA9F91E484978006C9645 /* Assets.xcassets */; };
+		045CA9FD1E484978006C9645 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045CA9FB1E484978006C9645 /* LaunchScreen.storyboard */; };
+		045CAA081E484979006C9645 /* doodalmanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CAA071E484979006C9645 /* doodalmanTests.swift */; };
+		049BCA8A1E486E9D00CC8BB9 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA891E486E9D00CC8BB9 /* RoomListViewController.swift */; };
+		049BCA8D1E48795900CC8BB9 /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA8C1E48795900CC8BB9 /* common.swift */; };
+		049BCA8F1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA8E1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		045CAA041E484978006C9645 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 045CA9E71E484978006C9645 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 045CA9EE1E484978006C9645;
+			remoteInfo = doodalman;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		045CA9EF1E484978006C9645 /* doodalman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = doodalman.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		045CA9F21E484978006C9645 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		045CA9F41E484978006C9645 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		045CA9F71E484978006C9645 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		045CA9F91E484978006C9645 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		045CA9FC1E484978006C9645 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		045CA9FE1E484978006C9645 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		045CAA031E484978006C9645 /* doodalmanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = doodalmanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		045CAA071E484979006C9645 /* doodalmanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doodalmanTests.swift; sourceTree = "<group>"; };
+		045CAA091E484979006C9645 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		049BCA891E486E9D00CC8BB9 /* RoomListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListViewController.swift; sourceTree = "<group>"; };
+		049BCA8C1E48795900CC8BB9 /* common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = common.swift; sourceTree = "<group>"; };
+		049BCA8E1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListTableViewCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		045CA9EC1E484978006C9645 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		045CAA001E484978006C9645 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		045CA9E61E484978006C9645 = {
+			isa = PBXGroup;
+			children = (
+				045CA9F11E484978006C9645 /* doodalman */,
+				045CAA061E484978006C9645 /* doodalmanTests */,
+				045CA9F01E484978006C9645 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		045CA9F01E484978006C9645 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				045CA9EF1E484978006C9645 /* doodalman.app */,
+				045CAA031E484978006C9645 /* doodalmanTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		045CA9F11E484978006C9645 /* doodalman */ = {
+			isa = PBXGroup;
+			children = (
+				049BCA8B1E48794800CC8BB9 /* common */,
+				045CA9F21E484978006C9645 /* AppDelegate.swift */,
+				045CA9F41E484978006C9645 /* MapViewController.swift */,
+				045CA9F61E484978006C9645 /* Main.storyboard */,
+				045CA9F91E484978006C9645 /* Assets.xcassets */,
+				045CA9FB1E484978006C9645 /* LaunchScreen.storyboard */,
+				045CA9FE1E484978006C9645 /* Info.plist */,
+				049BCA891E486E9D00CC8BB9 /* RoomListViewController.swift */,
+				049BCA8E1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift */,
+			);
+			path = doodalman;
+			sourceTree = "<group>";
+		};
+		045CAA061E484978006C9645 /* doodalmanTests */ = {
+			isa = PBXGroup;
+			children = (
+				045CAA071E484979006C9645 /* doodalmanTests.swift */,
+				045CAA091E484979006C9645 /* Info.plist */,
+			);
+			path = doodalmanTests;
+			sourceTree = "<group>";
+		};
+		049BCA8B1E48794800CC8BB9 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				049BCA8C1E48795900CC8BB9 /* common.swift */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		045CA9EE1E484978006C9645 /* doodalman */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 045CAA0C1E484979006C9645 /* Build configuration list for PBXNativeTarget "doodalman" */;
+			buildPhases = (
+				045CA9EB1E484978006C9645 /* Sources */,
+				045CA9EC1E484978006C9645 /* Frameworks */,
+				045CA9ED1E484978006C9645 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = doodalman;
+			productName = doodalman;
+			productReference = 045CA9EF1E484978006C9645 /* doodalman.app */;
+			productType = "com.apple.product-type.application";
+		};
+		045CAA021E484978006C9645 /* doodalmanTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 045CAA0F1E484979006C9645 /* Build configuration list for PBXNativeTarget "doodalmanTests" */;
+			buildPhases = (
+				045CA9FF1E484978006C9645 /* Sources */,
+				045CAA001E484978006C9645 /* Frameworks */,
+				045CAA011E484978006C9645 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				045CAA051E484978006C9645 /* PBXTargetDependency */,
+			);
+			name = doodalmanTests;
+			productName = doodalmanTests;
+			productReference = 045CAA031E484978006C9645 /* doodalmanTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		045CA9E71E484978006C9645 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = song;
+				TargetAttributes = {
+					045CA9EE1E484978006C9645 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Q3RWAXNT33;
+						ProvisioningStyle = Automatic;
+					};
+					045CAA021E484978006C9645 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 045CA9EE1E484978006C9645;
+					};
+				};
+			};
+			buildConfigurationList = 045CA9EA1E484978006C9645 /* Build configuration list for PBXProject "doodalman" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 045CA9E61E484978006C9645;
+			productRefGroup = 045CA9F01E484978006C9645 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				045CA9EE1E484978006C9645 /* doodalman */,
+				045CAA021E484978006C9645 /* doodalmanTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		045CA9ED1E484978006C9645 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				045CA9FD1E484978006C9645 /* LaunchScreen.storyboard in Resources */,
+				045CA9FA1E484978006C9645 /* Assets.xcassets in Resources */,
+				045CA9F81E484978006C9645 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		045CAA011E484978006C9645 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		045CA9EB1E484978006C9645 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				049BCA8D1E48795900CC8BB9 /* common.swift in Sources */,
+				049BCA8A1E486E9D00CC8BB9 /* RoomListViewController.swift in Sources */,
+				049BCA8F1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift in Sources */,
+				045CA9F51E484978006C9645 /* MapViewController.swift in Sources */,
+				045CA9F31E484978006C9645 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		045CA9FF1E484978006C9645 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				045CAA081E484979006C9645 /* doodalmanTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		045CAA051E484978006C9645 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 045CA9EE1E484978006C9645 /* doodalman */;
+			targetProxy = 045CAA041E484978006C9645 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		045CA9F61E484978006C9645 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				045CA9F71E484978006C9645 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		045CA9FB1E484978006C9645 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				045CA9FC1E484978006C9645 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		045CAA0A1E484979006C9645 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		045CAA0B1E484979006C9645 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		045CAA0D1E484979006C9645 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Q3RWAXNT33;
+				INFOPLIST_FILE = doodalman/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.song.doodalman;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		045CAA0E1E484979006C9645 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Q3RWAXNT33;
+				INFOPLIST_FILE = doodalman/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.song.doodalman;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		045CAA101E484979006C9645 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = doodalmanTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.song.doodalmanTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/doodalman.app/doodalman";
+			};
+			name = Debug;
+		};
+		045CAA111E484979006C9645 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = doodalmanTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.song.doodalmanTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/doodalman.app/doodalman";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		045CA9EA1E484978006C9645 /* Build configuration list for PBXProject "doodalman" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				045CAA0A1E484979006C9645 /* Debug */,
+				045CAA0B1E484979006C9645 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		045CAA0C1E484979006C9645 /* Build configuration list for PBXNativeTarget "doodalman" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				045CAA0D1E484979006C9645 /* Debug */,
+				045CAA0E1E484979006C9645 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		045CAA0F1E484979006C9645 /* Build configuration list for PBXNativeTarget "doodalmanTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				045CAA101E484979006C9645 /* Debug */,
+				045CAA111E484979006C9645 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 045CA9E71E484978006C9645 /* Project object */;
+}
