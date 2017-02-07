@@ -1,49 +1,58 @@
 //
-//  RoomListViewController.swift
+//  RoomTableViewController.swift
 //  doodalman
 //
-//  Created by mac on 2017. 2. 6..
+//  Created by mac on 2017. 2. 7..
 //  Copyright © 2017년 song. All rights reserved.
 //
 
 import UIKit
 
-class RoomListViewController: UITableViewController {
+class RoomListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet var tableView : UITableView!
     
     var roomList:[[String:AnyObject]]!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
-    // MARK: - Table view data source
+    /*
+    // MARK: - Navigation
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return self.roomList.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "roomListCell", for: indexPath) as! RoomListTableViewCell
+        let imageURL = URL(string: self.roomList[indexPath.row]["thumbnail"] as! String)
+        let imageData = try? Data(contentsOf: imageURL!)
         
-        cell.roomThumbnail.image = loadImage(urlString: self.roomList[indexPath.row]["thumbnail"] as! String)
-        cell.roomTitle.text = self.roomList[indexPath.row]["title"] as! String
+        cell.roomThumbnail.image = UIImage(data: imageData!)
+        cell.roomTitle.text = self.roomList[indexPath.row]["title"] as? String
         return cell
     }
     
@@ -56,67 +65,45 @@ class RoomListViewController: UITableViewController {
         } else {
             return nil
         }
+        
+    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let id = self.roomList[indexPath.row]["id"] as! Int
+        let roomURL = URL(string: "http://localhost:3000/rooms/get/\(id)")!
+        
+        let task = URLSession.shared.dataTask(with: roomURL) { (data, response, error) in
+            if error == nil {
+                let parsedResult: [String:AnyObject]!
+                do {
+                    parsedResult = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:AnyObject]
+                    
+                    performUIUpdatesOnMain{
+                        self.performSegue(withIdentifier: "showRoom", sender: parsedResult["data"] as! [String: AnyObject])
+                    }
+                    
+                } catch {
+                    print("Could not parse the data as JSON: '\(data)'")
+                    return
+                }
+                
+                
+            }
+        }
+        
+        task.resume()
+        
+        
     }
-
-//    func load_image(urlString:String) -> UIImage {
-//        
-//        let imgURL: URL = URL(string: urlString)!
-//        let request: URLRequest = URLRequest(url: imgURL)
-//        NSURLConnection.sendAsynchronousRequest(
-//            request, queue: OperationQueue.main,
-//            completionHandler: {(response, data, error) -> Void in
-//                if error == nil {
-//                    return UIImage(data: data!)
-//                }
-//        })
-//        
-//    }
-
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showRoom" {
+            let RoomVC = segue.destination as! RoomViewController
+            RoomVC.room = sender as! [String:AnyObject]
+        }
     }
-    */
+
+
 
 }

@@ -10,8 +10,9 @@ import UIKit
 
 class RoomListTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var roomThumbnail: UIImageView!
     @IBOutlet weak var roomTitle: UILabel!
+    @IBOutlet weak var roomThumbnail: UIImageView!    
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

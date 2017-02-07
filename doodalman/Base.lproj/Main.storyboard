@@ -50,7 +50,7 @@
                                     <barButtonItem title="show room" id="41C-jc-1J4">
                                         <connections>
                                             <action selector="showRoomList:" destination="nzA-VU-rbb" id="9UD-0f-70a"/>
-                                            <segue destination="mLq-2i-3hk" kind="show" identifier="showRoomList" id="VN8-qw-hx6"/>
+                                            <segue destination="sHb-js-gjt" kind="show" identifier="showRoomList" id="h8F-iM-dpg"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -69,49 +69,129 @@
             <point key="canvasLocation" x="789.60000000000002" y="165.06746626686657"/>
         </scene>
         <!--Room List View Controller-->
-        <scene sceneID="HDt-Jq-vus">
+        <scene sceneID="JZq-EQ-yNO">
             <objects>
-                <tableViewController id="mLq-2i-3hk" customClass="RoomListViewController" customModule="doodalman" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" id="BlO-0f-5ye">
+                <viewController id="sHb-js-gjt" customClass="RoomListViewController" customModule="doodalman" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qAm-3l-TH3"/>
+                        <viewControllerLayoutGuide type="bottom" id="HxL-g5-jZg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qTS-ZO-amg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="roomListCell" rowHeight="82" id="Ho6-zv-Yuh" customClass="RoomListTableViewCell" customModule="doodalman" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="82"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ho6-zv-Yuh" id="92D-W3-qfe">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="81"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FPv-oX-pcX">
-                                            <rect key="frame" x="0.0" y="0.0" width="106" height="81"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9DW-C0-a52">
-                                            <rect key="frame" x="125" y="30" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3qe-j7-LTu">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="roomListCell" rowHeight="90" id="e4r-kg-1xD" customClass="RoomListTableViewCell" customModule="doodalman" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e4r-kg-1xD" id="hBt-IB-n2l">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9c5-yp-9oQ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="106" height="89"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R3E-p0-dw9">
+                                                    <rect key="frame" x="121" y="30" width="112" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="roomThumbnail" destination="9c5-yp-9oQ" id="XoB-6s-iig"/>
+                                            <outlet property="roomTitle" destination="R3E-p0-dw9" id="fRL-6Z-Y0M"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
-                                    <outlet property="roomThumbnail" destination="FPv-oX-pcX" id="jvd-lo-JTC"/>
-                                    <outlet property="roomTitle" destination="9DW-C0-a52" id="zQh-7r-qxt"/>
+                                    <outlet property="dataSource" destination="sHb-js-gjt" id="Ltm-7d-yYt"/>
+                                    <outlet property="delegate" destination="sHb-js-gjt" id="psY-Hj-XwY"/>
                                 </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="mLq-2i-3hk" id="qfi-rM-3J0"/>
-                            <outlet property="delegate" destination="mLq-2i-3hk" id="aFM-fl-XQr"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aec-Ls-GG6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3qe-j7-LTu" firstAttribute="top" secondItem="qTS-ZO-amg" secondAttribute="top" id="RxH-CU-Nsd"/>
+                            <constraint firstItem="3qe-j7-LTu" firstAttribute="leading" secondItem="qTS-ZO-amg" secondAttribute="leading" id="dbh-kR-F5j"/>
+                            <constraint firstAttribute="trailing" secondItem="3qe-j7-LTu" secondAttribute="trailing" id="dz0-XF-bc4"/>
+                            <constraint firstItem="HxL-g5-jZg" firstAttribute="top" secondItem="3qe-j7-LTu" secondAttribute="bottom" id="vKH-lt-DQk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="3qe-j7-LTu" id="Bqs-yM-3tz"/>
+                        <segue destination="VEm-2j-eXj" kind="show" identifier="showRoom" id="bDI-oL-yEu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gTW-qK-Rse" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1592.8" y="164.16791604197903"/>
+            <point key="canvasLocation" x="1563.5" y="163.5"/>
+        </scene>
+        <!--Room View Controller-->
+        <scene sceneID="f1q-f6-7Ij">
+            <objects>
+                <viewController id="VEm-2j-eXj" customClass="RoomViewController" customModule="doodalman" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="htf-YQ-AjM"/>
+                        <viewControllerLayoutGuide type="bottom" id="kga-Nd-6NS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Pyw-Ea-0tE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FZm-Ua-osW">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ign-D2-4H8" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="-68" width="375" height="667"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Akc-c9-Hmw">
+                                                <rect key="frame" x="0.0" y="257" width="375" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6hz-iq-fje">
+                                                <rect key="frame" x="0.0" y="-13" width="375" height="240"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Ign-D2-4H8" firstAttribute="top" secondItem="FZm-Ua-osW" secondAttribute="top" constant="-68" id="0mu-RR-cxn"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ign-D2-4H8" secondAttribute="trailing" id="UXU-5K-Fzz"/>
+                                    <constraint firstItem="Ign-D2-4H8" firstAttribute="leading" secondItem="FZm-Ua-osW" secondAttribute="leading" id="cR9-3K-GzF"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ign-D2-4H8" secondAttribute="bottom" id="hpO-iK-0TW"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="FZm-Ua-osW" secondAttribute="trailing" id="FVf-74-v94"/>
+                            <constraint firstItem="Ign-D2-4H8" firstAttribute="height" secondItem="Pyw-Ea-0tE" secondAttribute="height" id="QgC-Qn-oJ7"/>
+                            <constraint firstItem="FZm-Ua-osW" firstAttribute="top" secondItem="htf-YQ-AjM" secondAttribute="bottom" id="SYk-5P-4O6"/>
+                            <constraint firstItem="Ign-D2-4H8" firstAttribute="width" secondItem="Pyw-Ea-0tE" secondAttribute="width" id="am7-Yb-bYj"/>
+                            <constraint firstItem="FZm-Ua-osW" firstAttribute="leading" secondItem="Pyw-Ea-0tE" secondAttribute="leading" id="ctm-ko-bBj"/>
+                            <constraint firstItem="kga-Nd-6NS" firstAttribute="top" secondItem="FZm-Ua-osW" secondAttribute="bottom" id="vtR-sP-YUy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="roomImageView" destination="6hz-iq-fje" id="D1t-fm-uk5"/>
+                        <outlet property="roomTitle" destination="Akc-c9-Hmw" id="Cym-rr-UG4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5H0-de-eIt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2386" y="167"/>
         </scene>
     </scenes>
 </document>

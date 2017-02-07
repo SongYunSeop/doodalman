@@ -24,7 +24,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.initMap()
         
         
-        let roomListURL = URL(string: "http://localhost:3000/room")!
+        let roomListURL = URL(string: "http://localhost:3000/rooms/list")!
         
         let task = URLSession.shared.dataTask(with: roomListURL) { (data, response, error) in
             if error == nil {
@@ -77,6 +77,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     
     @IBAction func showRoomList(_ sender: UIBarButtonItem) {
+        
         performSegue(withIdentifier: "showRoomList", sender: 1)
         
         

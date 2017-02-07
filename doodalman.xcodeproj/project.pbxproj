@@ -9,13 +9,16 @@
 /* Begin PBXBuildFile section */
 		045CA9F31E484978006C9645 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CA9F21E484978006C9645 /* AppDelegate.swift */; };
 		045CA9F51E484978006C9645 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CA9F41E484978006C9645 /* MapViewController.swift */; };
-		045CA9F81E484978006C9645 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045CA9F61E484978006C9645 /* Main.storyboard */; };
 		045CA9FA1E484978006C9645 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 045CA9F91E484978006C9645 /* Assets.xcassets */; };
 		045CA9FD1E484978006C9645 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045CA9FB1E484978006C9645 /* LaunchScreen.storyboard */; };
 		045CAA081E484979006C9645 /* doodalmanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CAA071E484979006C9645 /* doodalmanTests.swift */; };
-		049BCA8A1E486E9D00CC8BB9 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA891E486E9D00CC8BB9 /* RoomListViewController.swift */; };
+		046BDA691E4989E400080576 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BDA681E4989E400080576 /* Constants.swift */; };
+		046BDA6B1E4999F900080576 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BDA6A1E4999F900080576 /* GCDBlackBox.swift */; };
+		046BDA721E49C4A900080576 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BDA711E49C4A900080576 /* RoomListViewController.swift */; };
+		046BDA751E49CA2E00080576 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 046BDA731E49CA2E00080576 /* Main.storyboard */; };
 		049BCA8D1E48795900CC8BB9 /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA8C1E48795900CC8BB9 /* common.swift */; };
 		049BCA8F1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA8E1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift */; };
+		049BCA911E48E18700CC8BB9 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA901E48E18700CC8BB9 /* RoomViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,16 +35,19 @@
 		045CA9EF1E484978006C9645 /* doodalman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = doodalman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045CA9F21E484978006C9645 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		045CA9F41E484978006C9645 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		045CA9F71E484978006C9645 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		045CA9F91E484978006C9645 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		045CA9FC1E484978006C9645 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		045CA9FE1E484978006C9645 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		045CAA031E484978006C9645 /* doodalmanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = doodalmanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		045CAA071E484979006C9645 /* doodalmanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doodalmanTests.swift; sourceTree = "<group>"; };
 		045CAA091E484979006C9645 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		049BCA891E486E9D00CC8BB9 /* RoomListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListViewController.swift; sourceTree = "<group>"; };
+		046BDA681E4989E400080576 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		046BDA6A1E4999F900080576 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
+		046BDA711E49C4A900080576 /* RoomListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListViewController.swift; sourceTree = "<group>"; };
+		046BDA741E49CA2E00080576 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		049BCA8C1E48795900CC8BB9 /* common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = common.swift; sourceTree = "<group>"; };
 		049BCA8E1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListTableViewCell.swift; sourceTree = "<group>"; };
+		049BCA901E48E18700CC8BB9 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,15 +89,14 @@
 		045CA9F11E484978006C9645 /* doodalman */ = {
 			isa = PBXGroup;
 			children = (
-				049BCA8B1E48794800CC8BB9 /* common */,
 				045CA9F21E484978006C9645 /* AppDelegate.swift */,
-				045CA9F41E484978006C9645 /* MapViewController.swift */,
-				045CA9F61E484978006C9645 /* Main.storyboard */,
-				045CA9F91E484978006C9645 /* Assets.xcassets */,
-				045CA9FB1E484978006C9645 /* LaunchScreen.storyboard */,
-				045CA9FE1E484978006C9645 /* Info.plist */,
-				049BCA891E486E9D00CC8BB9 /* RoomListViewController.swift */,
-				049BCA8E1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift */,
+				046BDA6A1E4999F900080576 /* GCDBlackBox.swift */,
+				046BDA6C1E49B16E00080576 /* Model */,
+				046BDA6D1E49B17400080576 /* View */,
+				046BDA6E1E49B17900080576 /* Controller */,
+				049BCA8B1E48794800CC8BB9 /* common */,
+				046BDA6F1E49B19A00080576 /* Assets */,
+				046BDA701E49B1E700080576 /* Support */,
 			);
 			path = doodalman;
 			sourceTree = "<group>";
@@ -105,10 +110,54 @@
 			path = doodalmanTests;
 			sourceTree = "<group>";
 		};
+		046BDA6C1E49B16E00080576 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		046BDA6D1E49B17400080576 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				049BCA8E1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		046BDA6E1E49B17900080576 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				045CA9F41E484978006C9645 /* MapViewController.swift */,
+				049BCA901E48E18700CC8BB9 /* RoomViewController.swift */,
+				046BDA711E49C4A900080576 /* RoomListViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		046BDA6F1E49B19A00080576 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				046BDA731E49CA2E00080576 /* Main.storyboard */,
+				045CA9F91E484978006C9645 /* Assets.xcassets */,
+				045CA9FB1E484978006C9645 /* LaunchScreen.storyboard */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		046BDA701E49B1E700080576 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				045CA9FE1E484978006C9645 /* Info.plist */,
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
 		049BCA8B1E48794800CC8BB9 /* common */ = {
 			isa = PBXGroup;
 			children = (
 				049BCA8C1E48795900CC8BB9 /* common.swift */,
+				046BDA681E4989E400080576 /* Constants.swift */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -197,9 +246,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				046BDA751E49CA2E00080576 /* Main.storyboard in Resources */,
 				045CA9FD1E484978006C9645 /* LaunchScreen.storyboard in Resources */,
 				045CA9FA1E484978006C9645 /* Assets.xcassets in Resources */,
-				045CA9F81E484978006C9645 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,9 +266,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				046BDA6B1E4999F900080576 /* GCDBlackBox.swift in Sources */,
 				049BCA8D1E48795900CC8BB9 /* common.swift in Sources */,
-				049BCA8A1E486E9D00CC8BB9 /* RoomListViewController.swift in Sources */,
+				046BDA691E4989E400080576 /* Constants.swift in Sources */,
 				049BCA8F1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift in Sources */,
+				049BCA911E48E18700CC8BB9 /* RoomViewController.swift in Sources */,
+				046BDA721E49C4A900080576 /* RoomListViewController.swift in Sources */,
 				045CA9F51E484978006C9645 /* MapViewController.swift in Sources */,
 				045CA9F31E484978006C9645 /* AppDelegate.swift in Sources */,
 			);
@@ -244,20 +296,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		045CA9F61E484978006C9645 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				045CA9F71E484978006C9645 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		045CA9FB1E484978006C9645 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				045CA9FC1E484978006C9645 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		046BDA731E49CA2E00080576 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				046BDA741E49CA2E00080576 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
