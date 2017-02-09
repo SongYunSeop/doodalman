@@ -83,16 +83,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 } else {
                     thumbnail = UIImage(named: "default")!
                 }
+                let coordinate = CLLocationCoordinate2D(latitude: data["lat"] as! CLLocationDegrees, longitude: data["lon"] as! CLLocationDegrees)
 
                 let room = Room(
                     id: index,
-                    title: data["title"] as? String,
-                    location: CLLocation(latitude: data["lat"] as! CLLocationDegrees, longitude: data["lon"] as! CLLocationDegrees),
-                    thumbnail: thumbnail
+                    title: (data["title"] as? String)!,
+                    thumbnail: thumbnail,
+                    coordinate: coordinate
                 )
                 
                 model.rooms.append(room)
-                
+                self.mapView.addAnnotation(room)
             }
             
             performUIUpdatesOnMain {
@@ -121,25 +122,24 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         performSegue(withIdentifier: "showRoomList", sender: 1)
     }
     
-    private func makeURLFromParameters(_ url: String, _ parameters: [String:AnyObject]) -> URL {
-        
-        var components = URLComponents()
-        components.scheme = Constants.Server.APIScheme
-        components.host = Constants.Server.APIHost
-        components.path = url
-        components.queryItems = [URLQueryItem]()
-        
-        for (key, value) in parameters {
-            let queryItem = URLQueryItem(name: key, value: "\(value)")
-            components.queryItems!.append(queryItem)
-        }
-        
-        return components.url!
-    }
-
-
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         print(mapView.region.center)
+        
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let room = view.annotation as? Room {
+            self.mapView.setCenter(room.coordinate, animated: false)
+
+            performSegue(withIdentifier: "showRoom", sender: room.id)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showRoom" {
+            let roomVC = segue.destination as! RoomViewController
+            roomVC.roomIdx = sender as! Int
+        }
     }
 
 

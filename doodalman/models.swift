@@ -10,11 +10,21 @@ import Foundation
 import UIKit
 import MapKit
 
-struct Room {
+class Room: NSObject, MKAnnotation {
     var id: Int?
     var title: String?
-    var location: CLLocation?
     var thumbnail: UIImage?
+    var coordinate: CLLocationCoordinate2D
+    
+    init(id:Int, title: String, thumbnail: UIImage, coordinate: CLLocationCoordinate2D) {
+        self.id = id
+        self.title = title
+        self.thumbnail = thumbnail
+        self.coordinate = coordinate
+    }
+    
+
+
 //    var price: Int?
 //    var startDate: Date?
 //    var endDate: Date?
@@ -30,6 +40,22 @@ class DooDalMan {
     
     var history = [Room]()
     
+    
+    private func makeURLFromParameters(_ url: String, _ parameters: [String:AnyObject]) -> URL {
+        
+        var components = URLComponents()
+        components.scheme = Constants.Server.APIScheme
+        components.host = Constants.Server.APIHost
+        components.path = url
+        components.queryItems = [URLQueryItem]()
+        
+        for (key, value) in parameters {
+            let queryItem = URLQueryItem(name: key, value: "\(value)")
+            components.queryItems!.append(queryItem)
+        }
+        
+        return components.url!
+    }
     
     
 }

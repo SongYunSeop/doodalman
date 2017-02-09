@@ -15,7 +15,7 @@
         <scene sceneID="gw7-zh-lQs">
             <objects>
                 <navigationController id="d4I-OZ-JEw" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xJV-da-oMz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xJV-da-oMz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -86,6 +86,7 @@
                         <outlet property="mapView" destination="cNJ-Fo-KKc" id="TuF-qi-HfH"/>
                         <outlet property="roomCountLabel" destination="Wyl-wC-Fff" id="iLE-RC-vV9"/>
                         <outlet property="roomListButton" destination="41C-jc-1J4" id="QrK-ti-0oL"/>
+                        <segue destination="VEm-2j-eXj" kind="show" identifier="showRoom" id="x2b-MH-TZy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dXQ-eR-3i4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -112,7 +113,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e4r-kg-1xD" id="hBt-IB-n2l">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9c5-yp-9oQ">
@@ -156,7 +157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTW-qK-Rse" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1563.5" y="163.5"/>
+            <point key="canvasLocation" x="1586" y="499"/>
         </scene>
         <!--Room Info-->
         <scene sceneID="f1q-f6-7Ij">
@@ -234,23 +235,8 @@
             </objects>
             <point key="canvasLocation" x="2384.8000000000002" y="166.8665667166417"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="69E-eh-KJE">
-            <objects>
-                <viewController id="ciy-VC-ft1" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="k7s-Mw-JHr"/>
-                        <viewControllerLayoutGuide type="bottom" id="dG2-2O-LnA"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="toc-wS-rOe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Qmj-ap-khv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3167" y="167"/>
-        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="x2b-MH-TZy"/>
+    </inferredMetricsTieBreakers>
 </document>
