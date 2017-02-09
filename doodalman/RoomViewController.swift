@@ -12,21 +12,30 @@ class RoomViewController: UIViewController {
 
     @IBOutlet weak var roomImageView: UIImageView!
     @IBOutlet weak var roomTitle: UILabel!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var likeButton: UIBarButtonItem!
 
-    var room: [String:AnyObject]!
-    
+//    var room: [String:AnyObject]!
+    var roomIdx: Int!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let imageURL = URL(string: (room["thumbnail"] as? String)!)
-        let imageData = try? Data(contentsOf: imageURL!)
         
-        self.roomImageView.image = UIImage(data: imageData!)
+        let model = DooDalMan.shared
         
-        self.roomTitle.text = room["title"] as? String
+        self.roomImageView.image = model.rooms[self.roomIdx].thumbnail
+        self.roomTitle.text = model.rooms[self.roomIdx].title
+        
+//        let imageURL = URL(string: (room["thumbnail"] as? String)!)
+//        let imageData = try? Data(contentsOf: imageURL!)
+//        
+//        self.roomImageView.image = UIImage(data: imageData!)
+//        
+//        self.roomTitle.text = room["title"] as? String
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,15 +43,12 @@ class RoomViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func shareRoom(_ sender: UIBarButtonItem) {
+        print("share it")
     }
-    */
+    
+    @IBAction func likeRoom(_ sender: UIBarButtonItem) {
+        print("like it")
+    }
 
 }
