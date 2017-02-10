@@ -10,12 +10,14 @@ import Foundation
 
 // MARK: - Constants
 
+
 struct Constants {
     
     // MARK: Server
     struct Server {
-        static let APISchema = "http"
-        static let APIHost = "localhost:3000"
+        static let APIScheme = "http"
+        static let APIHost = "omsh.ga"
+//        static let APIHost = "doodalman-ios.herokuapp.com"
         static let APIPath = "/"
 
     }

@@ -7,12 +7,3 @@
 //
 
 import Foundation
-
-struct Room {
-    var latitude: Double
-    var longitude: Double
-    var thumbnail: String
-    var region: Int
-    var description: String
-    var id: Int
-}

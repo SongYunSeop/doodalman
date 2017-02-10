@@ -10,9 +10,10 @@ import UIKit
 import MapKit
 
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var testButton: UIBarButtonItem!
     @IBOutlet weak var roomListButton: UIBarButtonItem!
     @IBOutlet weak var roomCountLabel: UILabel!
     
@@ -25,7 +26,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         self.initMap()
         
-        self.fetchRoomData()
 
     }
     
@@ -38,45 +38,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func fetchRoomData() {
+        let centerLat = self.mapView.region.center.latitude
+        let centerLon = self.mapView.region.center.longitude
+        let spanLat = self.mapView.region.span.latitudeDelta
+        let spanLon = self.mapView.region.span.longitudeDelta
+
+        let parameters = ["centerLat": centerLat, "centerLon": centerLon, "spanLat": spanLat, "spanLon": spanLon]
         
-        let roomListURL = URL(string: "http://localhost:3000/rooms/list")!
+        let model = DooDalMan.shared
+
         
-        let task = URLSession.shared.dataTask(with: roomListURL) { (data, response, error) in
-            /* GUARD: Was there an error? */
-            guard (error == nil) else {
-                print("There was an error with your request: \(error)")
-                return
+        model.fetchRooms(parameters as [String : AnyObject]) { roomList, error in
+            
+            model.rooms = []
+            performUIUpdatesOnMain {
+                self.mapView.removeAnnotations(self.mapView.annotations)
+
             }
-            
-            /* GUARD: Did we get a successful 2XX response? */
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                print("Your request returned a status code other than 2xx!")
-                return
-            }
-            
-            /* GUARD: Was there any data returned? */
-            guard let data = data else {
-                print("No data was returned by the request!")
-                return
-            }
-            
-            // parse the data
-            let parsedResult: [String:AnyObject]!
-            do {
-                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
-            } catch {
-                print("Could not parse the data as JSON: '\(data)'")
-                return
-            }
-            
-            guard let roomList = parsedResult["data"] as? [[String: AnyObject]] else {
-                print("No data: Room List")
-                return
-            }
-            
-            let model = DooDalMan.shared
-            
-            for (index, data) in roomList.enumerated() {
+
+            for (index, data) in (roomList?.enumerated())! {
                 let thumbnail: UIImage
                 if let imageData = try? Data(contentsOf: URL(string: data["thumbnail"] as! String)!) {
                     thumbnail = UIImage(data: imageData)!
@@ -84,55 +64,31 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     thumbnail = UIImage(named: "default")!
                 }
                 let coordinate = CLLocationCoordinate2D(latitude: data["lat"] as! CLLocationDegrees, longitude: data["lon"] as! CLLocationDegrees)
-
+            
                 let room = Room(
                     id: index,
                     title: (data["title"] as? String)!,
                     thumbnail: thumbnail,
                     coordinate: coordinate
                 )
-                
-                model.rooms.append(room)
-                self.mapView.addAnnotation(room)
-            }
             
+                model.rooms.append(room)
+                performUIUpdatesOnMain {
+                    self.mapView.addAnnotation(room)
+
+                }
+            }
+                        
             performUIUpdatesOnMain {
                 self.roomCountLabel?.text = "Room Count: \(model.rooms.count)"
             }
-            
         }
         
-        task.resume()
-        
     }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations.last
-        let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
-        self.mapView.setRegion(region, animated: true)
-        self.locationManager.stopUpdatingLocation()
-        self.mapView.delegate = self
-
-        
-    }
-    
+   
     
     @IBAction func showRoomList(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "showRoomList", sender: 1)
-    }
-    
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        print(mapView.region.center)
-        
-    }
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if let room = view.annotation as? Room {
-            self.mapView.setCenter(room.coordinate, animated: false)
-
-            performSegue(withIdentifier: "showRoom", sender: room.id)
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -142,6 +98,72 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
 
-
 }
 
+
+extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last
+        let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+        self.mapView.setRegion(region, animated: false)
+        self.locationManager.stopUpdatingLocation()
+        self.mapView.delegate = self
+        
+//        let parameters = ["centerLat": location!.coordinate.latitude, "centerLon": location!.coordinate.longitude, "spanLat": 0.02, "spanLon": 0.02]
+//
+//        
+//        let model = DooDalMan.shared
+//        
+//        
+//        model.fetchRooms(parameters as [String : AnyObject]) { roomList, error in
+//            
+//            model.rooms = []
+//            performUIUpdatesOnMain {
+//                self.mapView.removeAnnotations(self.mapView.annotations)
+//            }
+//
+//            
+//            for (index, data) in (roomList?.enumerated())! {
+//                let thumbnail: UIImage
+//                if let imageData = try? Data(contentsOf: URL(string: data["thumbnail"] as! String)!) {
+//                    thumbnail = UIImage(data: imageData)!
+//                } else {
+//                    thumbnail = UIImage(named: "default")!
+//                }
+//                let coordinate = CLLocationCoordinate2D(latitude: data["lat"] as! CLLocationDegrees, longitude: data["lon"] as! CLLocationDegrees)
+//                
+//                let room = Room(
+//                    id: index,
+//                    title: (data["title"] as? String)!,
+//                    thumbnail: thumbnail,
+//                    coordinate: coordinate
+//                )
+//                
+//                model.rooms.append(room)
+//            }
+//            
+//            performUIUpdatesOnMain {
+//                self.roomCountLabel?.text = "Room Count: \(model.rooms.count)"
+//                self.mapView.addAnnotations(model.rooms)
+//            }
+//        }
+
+
+        
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        print("moved!")
+//        self.fetchRoomData()
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let room = view.annotation as? Room {
+            performSegue(withIdentifier: "showRoom", sender: room.id)
+        }
+    }
+    
+}
