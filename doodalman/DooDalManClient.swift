@@ -57,5 +57,4 @@ class DooDalMan {
         return components.url!
     }
     
-    
 }
