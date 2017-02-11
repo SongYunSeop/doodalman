@@ -9,38 +9,60 @@
 import Foundation
 import UIKit
 import MapKit
-import SwiftyJSON
-
-class Room: NSObject, MKAnnotation {
-    var id: Int?
-    var title: String?
-    var thumbnail: UIImage?
-    var coordinate: CLLocationCoordinate2D
-    
-    init(id:Int, title: String, thumbnail: UIImage, coordinate: CLLocationCoordinate2D) {
-        self.id = id
-        self.title = title
-        self.thumbnail = thumbnail
-        self.coordinate = coordinate
-    }
-    
-
-
-//    var price: Int?
-//    var startDate: Date?
-//    var endDate: Date?
-//    var photos: [UIImage]?
-    
-    
-}
+import AlamofireObjectMapper
+import Alamofire
+import ObjectMapper
 
 struct Filter {
-    var startPrice: Int?
-    var endPirce: Int?
     var startDate: Date?
     var endDate: Date?
+    var startPrice: Int?
+    var endPirce: Int?
 }
 
+
+class RoomsResponse: Mappable {
+    var rooms: [Room]?
+    
+    required init(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        rooms <- map["rooms"]
+    }
+}
+
+class Room: NSObject, MKAnnotation, Mappable {
+    
+    var id: Int?
+    var title: String?
+    var thumbnail: String?
+    var latitude: Double?
+    var longitude: Double?
+    var coordinate: CLLocationCoordinate2D {
+        get {
+            return CLLocationCoordinate2D(latitude: self.latitude! as CLLocationDegrees, longitude: self.longitude! as CLLocationDegrees)
+        }
+    }
+    var price: Int?
+    var startDate: String?
+    var endDate: String?
+    
+    required init(map: Map) { }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        title <- map["title"]
+        thumbnail <- map["thumbnail"]
+        latitude <- map["latitude"]
+        longitude <- map["longitude"]
+        price <- map["price"]
+        startDate <- map["startDate"]
+        endDate <- map["endDate"]
+        
+    }
+}
 
 class DooDalMan {
     
@@ -48,7 +70,19 @@ class DooDalMan {
     
     var rooms = [Room]()
     
-    var history = [Room]()
+    var history = [Int]()
+    
+    var filter = Filter()
+    
+    var filterdRooms: [Room] {
+        get {
+            if let startPrice = self.filter.startPrice {
+                return self.rooms.filter({ $0.price! > startPrice})
+            }
+            
+            return self.rooms
+        }
+    }
     
     
     private func makeURLFromParameters(_ url: String, _ parameters: [String:AnyObject]?) -> URL {
@@ -72,70 +106,31 @@ class DooDalMan {
         return components.url!
     }
     
-    
-    func fetchRooms(_ parameters: [String: AnyObject], _ compeletionHandler: @escaping ((_ roomList: [[String:AnyObject]]?, _ error: NSError? ) -> ()) ) -> Void {
-        let url = makeURLFromParameters("/rooms/list", parameters)
-        
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
-            func sendError(_ error: String) {
-                print(error)
-                let userInfo = [NSLocalizedDescriptionKey : error]
-                compeletionHandler(nil, NSError(domain: "taskForGETMethod", code: 1, userInfo: userInfo))
-            }
-            
-            /* GUARD: Was there an error? */
-            guard (error == nil) else {
-                sendError("There was an error with your request: \(error)")
-                return
-            }
-            
-            /* GUARD: Did we get a successful 2XX response? */
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                sendError("Your request returned a status code other than 2xx!")
-                return
-            }
-            
-            /* GUARD: Was there any data returned? */
-            guard let data = data else {
-                sendError("No data was returned by the request!")
-                return
-            }
-            
-            // SwiftyJSON
-            // let parsedResult = JSON(data: data)
-
-            
-            // parse the data
-            let parsedResult: [String:AnyObject]!
-            do {
-                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
-            } catch {
-                sendError("Could not parse the data as JSON: '\(data)'")
-                return
-            }
-//
-            guard let roomList = parsedResult["data"] as? [[String: AnyObject]] else {
-                sendError("No data: Room List")
-                return
-            }
-            
-            compeletionHandler(roomList, nil)
-            
+    func fetchRooms(_ parameters:[String: AnyObject], _ compeletionHandler: @escaping (_ roomList:[Room]?, _ error:Error?) -> ()) {
+        func sendError(_ error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey : error]
+            compeletionHandler(nil, NSError(domain: "taskForGETMethod", code: 1, userInfo: userInfo))
         }
-        
-        task.resume()
 
-        
-    }
-    
-    func fetchRoomsByGps(_ parameters: [String: AnyObject], _ compeletionHandler: @escaping ((_ roomList: [[String:AnyObject]]?, _ error: NSError? ) -> ()) ) -> Void  {
-        
         let url = makeURLFromParameters("/rooms/list", parameters)
         
-        compeletionHandler(nil, nil)
-    
+        Alamofire.request(url).responseObject { (response: DataResponse<RoomsResponse>) in
+            guard response.result.isSuccess else {
+                sendError("There was an error with your request: \(response.error)")
+                return
+            }
+            
+            let roomsResponse = response.result.value
+            if let rooms = roomsResponse?.rooms {
+                self.rooms = rooms
+            }
+            
+            compeletionHandler([], nil)
+        }
+
     }
+    
     
     
 }

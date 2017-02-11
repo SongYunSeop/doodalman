@@ -16,6 +16,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var testButton: UIBarButtonItem!
     @IBOutlet weak var roomListButton: UIBarButtonItem!
     @IBOutlet weak var roomCountLabel: UILabel!
+    @IBOutlet weak var navigationButton: UIButton!
     
     var roomList: [[String:AnyObject]]!
     
@@ -24,17 +25,22 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.locationManager.delegate = self
+        self.mapView.delegate = self
+
         self.initMap()
-        
+
+
 
     }
     
     func initMap() {
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
+        // default
+        let center = CLLocationCoordinate2D(latitude: 37.497395, longitude: 127.02933)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+        self.mapView.setRegion(region, animated: false)
         self.mapView.showsUserLocation = true
+//        self.fetchRoomData()
     }
     
     func fetchRoomData() {
@@ -47,48 +53,23 @@ class MapViewController: UIViewController {
         
         let model = DooDalMan.shared
 
-        
         model.fetchRooms(parameters as [String : AnyObject]) { roomList, error in
-            
-            model.rooms = []
             performUIUpdatesOnMain {
                 self.mapView.removeAnnotations(self.mapView.annotations)
-
-            }
-
-            for (index, data) in (roomList?.enumerated())! {
-                let thumbnail: UIImage
-                if let imageData = try? Data(contentsOf: URL(string: data["thumbnail"] as! String)!) {
-                    thumbnail = UIImage(data: imageData)!
-                } else {
-                    thumbnail = UIImage(named: "default")!
-                }
-                let coordinate = CLLocationCoordinate2D(latitude: data["lat"] as! CLLocationDegrees, longitude: data["lon"] as! CLLocationDegrees)
-            
-                let room = Room(
-                    id: index,
-                    title: (data["title"] as? String)!,
-                    thumbnail: thumbnail,
-                    coordinate: coordinate
-                )
-            
-                model.rooms.append(room)
-                performUIUpdatesOnMain {
-                    self.mapView.addAnnotation(room)
-
-                }
-            }
-                        
-            performUIUpdatesOnMain {
+                self.mapView.addAnnotations(model.rooms)
                 self.roomCountLabel?.text = "Room Count: \(model.rooms.count)"
             }
         }
-        
     }
-   
     
     @IBAction func showRoomList(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "showRoomList", sender: 1)
+    }
+    
+    @IBAction func getUserLocation(_ sender: UIButton) {
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -103,61 +84,24 @@ class MapViewController: UIViewController {
 
 extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to find user's location: \(error.localizedDescription)")
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations.last
-        let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
-        self.mapView.setRegion(region, animated: false)
-        self.locationManager.stopUpdatingLocation()
-        self.mapView.delegate = self
-        
-//        let parameters = ["centerLat": location!.coordinate.latitude, "centerLon": location!.coordinate.longitude, "spanLat": 0.02, "spanLon": 0.02]
-//
-//        
-//        let model = DooDalMan.shared
-//        
-//        
-//        model.fetchRooms(parameters as [String : AnyObject]) { roomList, error in
-//            
-//            model.rooms = []
-//            performUIUpdatesOnMain {
-//                self.mapView.removeAnnotations(self.mapView.annotations)
-//            }
-//
-//            
-//            for (index, data) in (roomList?.enumerated())! {
-//                let thumbnail: UIImage
-//                if let imageData = try? Data(contentsOf: URL(string: data["thumbnail"] as! String)!) {
-//                    thumbnail = UIImage(data: imageData)!
-//                } else {
-//                    thumbnail = UIImage(named: "default")!
-//                }
-//                let coordinate = CLLocationCoordinate2D(latitude: data["lat"] as! CLLocationDegrees, longitude: data["lon"] as! CLLocationDegrees)
-//                
-//                let room = Room(
-//                    id: index,
-//                    title: (data["title"] as? String)!,
-//                    thumbnail: thumbnail,
-//                    coordinate: coordinate
-//                )
-//                
-//                model.rooms.append(room)
-//            }
-//            
-//            performUIUpdatesOnMain {
-//                self.roomCountLabel?.text = "Room Count: \(model.rooms.count)"
-//                self.mapView.addAnnotations(model.rooms)
-//            }
-//        }
-
-
-        
+        if let location = locations.first {
+            print("Found user's location: \(location)")
+            self.locationManager.stopUpdatingLocation()
+            let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+            self.mapView.setRegion(region, animated: true)
+        }
     }
     
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         print("moved!")
-//        self.fetchRoomData()
+        self.fetchRoomData()
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {

@@ -7,14 +7,16 @@
 //
 
 import UIKit
+import SwiftRangeSlider
 
 class FilterViewController: UIViewController {
 
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var startDate: UITextField!
     @IBOutlet weak var endDate: UITextField!
-    @IBOutlet weak var startPrice: UITextField!
-    @IBOutlet weak var endPrice: UITextField!
+    @IBOutlet weak var priceRange: RangeSlider!
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var revertButton: UIBarButtonItem!
     
     var startDatePicker: UIDatePicker = UIDatePicker()
     var endDatePicker: UIDatePicker = UIDatePicker()
@@ -73,5 +75,39 @@ class FilterViewController: UIViewController {
     func cancelDatePick(sender: UIBarButtonItem) {
         self.view.endEditing(true)
     }
+    
 
+    
+    @IBAction func priceChange(_ sender: RangeSlider) {
+        let start = Int(sender.lowerValue)
+        let end: Any = sender.upperValue == sender.maximumValue ? "제한없음" : Int(sender.upperValue)
+        print("\(start) ~ \(end)")
+        priceLabel.text = "\(start) ~ \(end)"
+    }
+    
+    @IBAction func revertFilter(_ sender: UIBarButtonItem) {
+        priceRange.lowerValue = 0
+        priceRange.upperValue = 100
+        priceLabel.text = "0 ~ 제한없음"
+        startDate.text = ""
+        endDate.text = ""
+        startDatePicker.setDate(Date(), animated: false)
+        endDatePicker.setDate(Date(), animated: false)
+        
+    }
+
+    @IBAction func saveFilter(_ sender: UIBarButtonItem) {
+        let model = DooDalMan.shared
+        
+        if self.startDate.text != "" {
+            model.filter.startDate = startDatePicker.date
+        }
+        if self.endDate.text != "" {
+            model.filter.endDate = endDatePicker.date
+        }
+        
+        
+
+
+    }
 }

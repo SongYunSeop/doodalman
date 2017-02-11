@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KFSwiftImageLoader
 
 class RoomListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -29,8 +30,7 @@ class RoomListViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "roomListCell", for: indexPath) as! RoomListTableViewCell
         
         let model = DooDalMan.shared
-        
-        cell.roomThumbnail.image = model.rooms[indexPath.row].thumbnail
+        cell.roomThumbnail.loadImage(urlString:model.rooms[indexPath.row].thumbnail!)
         cell.roomTitle.text = model.rooms[indexPath.row].title
 
         return cell
