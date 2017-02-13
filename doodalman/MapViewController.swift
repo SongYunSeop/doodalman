@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-
+import GooglePlaces
 
 class MapViewController: UIViewController, FilterViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
@@ -81,10 +81,14 @@ class MapViewController: UIViewController, FilterViewDelegate {
     @IBAction func showFilter(_ sender: UIBarButtonItem) {
         let filterVC = self.storyboard?.instantiateViewController(withIdentifier: "filterview") as! FilterViewController
         filterVC.delegate = self
-        
         self.present(filterVC, animated: true, completion: nil)
-    
 
+    }
+    
+    @IBAction func autocompleteClicked(_ sender: UIButton) {
+        let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = self
+        present(autocompleteController, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -123,6 +127,43 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         if let room = view.annotation as? Room {
             performSegue(withIdentifier: "showRoom", sender: room.id)
         }
+    }
+    
+}
+
+extension MapViewController: GMSAutocompleteViewControllerDelegate {
+    
+    // Handle the user's selection.
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        print("Place name: \(place.name)")
+        print("Place address: \(place.formattedAddress)")
+        print("Place attributions: \(place.attributions)")
+        print("Place coordinate: \(place.coordinate)")
+        dismiss(animated: true, completion: nil)
+
+        let center = CLLocationCoordinate2D(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+        self.mapView.setRegion(region, animated: true)
+
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // User canceled the operation.
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
 }
