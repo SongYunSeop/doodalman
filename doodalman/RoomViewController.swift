@@ -15,18 +15,15 @@ class RoomViewController: UIViewController {
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var likeButton: UIBarButtonItem!
 
-    var roomIdx: Int!
+    var room: Room!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let model = DooDalMan.shared
-        
-        self.roomImageView.loadImage(urlString:model.filterdRooms[self.roomIdx].thumbnail!)
-        self.roomTitle.text = model.filterdRooms[self.roomIdx].title
+        self.roomImageView.loadImage(urlString: self.room.thumbnail!)
+        self.roomTitle.text = self.room.title
 
-    }
-    
+    }    
     
     @IBAction func shareRoom(_ sender: UIBarButtonItem) {
         print("share it")

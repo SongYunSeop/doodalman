@@ -38,13 +38,16 @@ class RoomListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "showRoom", sender: indexPath.row)
+        
+        let model = DooDalMan.shared
+        
+        self.performSegue(withIdentifier: "showRoom", sender: model.filterdRooms[indexPath.row])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showRoom" {
             let RoomVC = segue.destination as! RoomViewController
-            RoomVC.roomIdx = sender as! Int
+            RoomVC.room = sender as! Room
         }
     }
 

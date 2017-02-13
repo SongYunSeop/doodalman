@@ -27,11 +27,7 @@ class MapViewController: UIViewController, FilterViewDelegate {
         
         self.locationManager.delegate = self
         self.mapView.delegate = self
-
         self.initMap()
-
-
-
     }
     
     func initMap() {
@@ -94,7 +90,7 @@ class MapViewController: UIViewController, FilterViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showRoom" {
             let roomVC = segue.destination as! RoomViewController
-            roomVC.roomIdx = sender as! Int
+            roomVC.room = sender as! Room!
         }
     }
 
@@ -125,7 +121,7 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let room = view.annotation as? Room {
-            performSegue(withIdentifier: "showRoom", sender: room.id)
+            performSegue(withIdentifier: "showRoom", sender: room)
         }
     }
     

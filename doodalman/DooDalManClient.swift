@@ -65,42 +65,33 @@ class Room: NSObject, MKAnnotation, Mappable {
     var price: Int?
     var startDateString: String?
     var endDateString: String?
-    var startDate: Date? {
-        get {
-            if let startDateString = self.startDateString {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy.MM.dd"
-                return dateFormatter.date(from: startDateString)
+    var startDate: Date?
+    var endDate: Date?
+    var photoList: [String]?
 
-            } else {
-                return nil
-            }
-        }
-    }
-    var endDate: Date? {
-        get {
-            if let endDateString = self.endDateString {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy.MM.dd"
-                return dateFormatter.date(from: endDateString)
-            } else {
-                return nil
-            }
-        }
-    }
     
     
     required init(map: Map) { }
     
     func mapping(map: Map) {
+        
         id <- map["id"]
         title <- map["title"]
+        price <- map["price"]
+
         thumbnail <- map["thumbnail"]
         latitude <- map["latitude"]
         longitude <- map["longitude"]
-        price <- map["price"]
+        
         startDateString <- map["startDate"]
         endDateString <- map["endDate"]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        startDate = dateFormatter.date(from: startDateString!)
+        endDate = dateFormatter.date(from: endDateString!)
+        
+        photoList <- map["photoList"]
+
         
     }
 }
@@ -166,6 +157,31 @@ class DooDalMan {
             compeletionHandler([], nil)
         }
 
+    }
+    
+    func fetchRoomInfo(_ roomId: Int, _ compeletionHandler: @escaping (_ roomInfo: Room?, _ error: Error?) -> ()) {
+        func sendError(_ error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey: error]
+            compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
+        }
+        
+        let url = makeURLFromParameters("/room/get/\(roomId)", nil)
+        
+        Alamofire.request(url).responseJSON{ response in
+            guard response.result.isSuccess else {
+                sendError("There was an error with your request: \(response.error)")
+                return
+            }
+            
+            guard let json = response.result.value else {
+                sendError("cannot json parsing")
+                return
+            }
+            
+            print(json)
+            
+        }
     }
     
     
