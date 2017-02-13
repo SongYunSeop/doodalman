@@ -9,14 +9,21 @@
 import UIKit
 import KFSwiftImageLoader
 
-class RoomListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class RoomListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ToggleViewDelegate {
     
     @IBOutlet var tableView : UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
+    
+    
+    func viewToggled() {
+        print("aa")
+        self.tableView.reloadData()
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

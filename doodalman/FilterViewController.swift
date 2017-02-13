@@ -45,7 +45,6 @@ class FilterViewController: UIViewController {
     @IBAction func priceChange(_ sender: RangeSlider) {
         let start = Int(sender.lowerValue)
         let end = sender.upperValue == sender.maximumValue ? "제한없음" : "\(Int(sender.upperValue))만원"
-        print("\(start) ~ \(end)")
         
         priceLabel.text = "\(start) ~ \(end)"
     }
