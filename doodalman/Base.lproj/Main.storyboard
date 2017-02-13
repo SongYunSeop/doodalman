@@ -93,16 +93,16 @@
                         <barButtonItem key="rightBarButtonItem" image="filter" id="vtV-UV-jps">
                             <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="QFg-Sj-dzA" kind="presentation" id="9mR-vn-eDN"/>
+                                <action selector="showFilter:" destination="nzA-VU-rbb" id="jOI-qe-JJ1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="filterButton" destination="vtV-UV-jps" id="gP1-7Y-O79"/>
                         <outlet property="mapView" destination="cNJ-Fo-KKc" id="TuF-qi-HfH"/>
                         <outlet property="navigationButton" destination="bY8-Ee-jPq" id="j8o-le-atN"/>
                         <outlet property="roomCountLabel" destination="Wyl-wC-Fff" id="iLE-RC-vV9"/>
                         <outlet property="roomListButton" destination="41C-jc-1J4" id="QrK-ti-0oL"/>
-                        <outlet property="testButton" destination="vtV-UV-jps" id="5i8-uJ-Zhb"/>
                         <segue destination="VEm-2j-eXj" kind="show" identifier="showRoom" id="x2b-MH-TZy"/>
                     </connections>
                 </viewController>
@@ -113,7 +113,7 @@
         <!--Filter View Controller-->
         <scene sceneID="cAt-cV-1dU">
             <objects>
-                <viewController id="QFg-Sj-dzA" customClass="FilterViewController" customModule="doodalman" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="filterview" id="QFg-Sj-dzA" customClass="FilterViewController" customModule="doodalman" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MsN-vp-Hwh"/>
                         <viewControllerLayoutGuide type="bottom" id="86d-PZ-X6h"/>
@@ -228,7 +228,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xxf-yf-Dxt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="789.60000000000002" y="-524.8875562218891"/>
+            <point key="canvasLocation" x="790" y="-546"/>
         </scene>
         <!--Room List-->
         <scene sceneID="JZq-EQ-yNO">
@@ -250,7 +250,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e4r-kg-1xD" id="hBt-IB-n2l">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9c5-yp-9oQ">

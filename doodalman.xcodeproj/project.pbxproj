@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0421CA841E4AFE8E0064EA49 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421CA831E4AFE8E0064EA49 /* SignUpViewController.swift */; };
 		0421CA861E4B51CC0064EA49 /* DooDalManClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421CA851E4B51CC0064EA49 /* DooDalManClient.swift */; };
 		045CA9F31E484978006C9645 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CA9F21E484978006C9645 /* AppDelegate.swift */; };
 		045CA9F51E484978006C9645 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CA9F41E484978006C9645 /* MapViewController.swift */; };
@@ -37,7 +36,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0421CA831E4AFE8E0064EA49 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		0421CA851E4B51CC0064EA49 /* DooDalManClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DooDalManClient.swift; sourceTree = "<group>"; };
 		045CA9EF1E484978006C9645 /* doodalman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = doodalman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045CA9F21E484978006C9645 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 				045CA9F41E484978006C9645 /* MapViewController.swift */,
 				046BDA711E49C4A900080576 /* RoomListViewController.swift */,
 				049BCA901E48E18700CC8BB9 /* RoomViewController.swift */,
-				0421CA831E4AFE8E0064EA49 /* SignUpViewController.swift */,
 				04AF38341E4D9C7B008F3484 /* FilterViewController.swift */,
 			);
 			name = Controller;
@@ -414,7 +411,6 @@
 				04AF38351E4D9C7B008F3484 /* FilterViewController.swift in Sources */,
 				0421CA861E4B51CC0064EA49 /* DooDalManClient.swift in Sources */,
 				046BDA721E49C4A900080576 /* RoomListViewController.swift in Sources */,
-				0421CA841E4AFE8E0064EA49 /* SignUpViewController.swift in Sources */,
 				045CA9F51E484978006C9645 /* MapViewController.swift in Sources */,
 				045CA9F31E484978006C9645 /* AppDelegate.swift in Sources */,
 			);

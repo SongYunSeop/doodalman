@@ -10,10 +10,10 @@ import UIKit
 import MapKit
 
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, FilterViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
-    @IBOutlet weak var testButton: UIBarButtonItem!
+    @IBOutlet weak var filterButton: UIBarButtonItem!
     @IBOutlet weak var roomListButton: UIBarButtonItem!
     @IBOutlet weak var roomCountLabel: UILabel!
     @IBOutlet weak var navigationButton: UIButton!
@@ -35,12 +35,11 @@ class MapViewController: UIViewController {
     }
     
     func initMap() {
-        // default
+        // default location
         let center = CLLocationCoordinate2D(latitude: 37.497395, longitude: 127.02933)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
         self.mapView.setRegion(region, animated: false)
         self.mapView.showsUserLocation = true
-//        self.fetchRoomData()
     }
     
     func fetchRoomData() {
@@ -56,10 +55,17 @@ class MapViewController: UIViewController {
         model.fetchRooms(parameters as [String : AnyObject]) { roomList, error in
             performUIUpdatesOnMain {
                 self.mapView.removeAnnotations(self.mapView.annotations)
-                self.mapView.addAnnotations(model.rooms)
-                self.roomCountLabel?.text = "Room Count: \(model.rooms.count)"
+                self.mapView.addAnnotations(model.filterdRooms)
+                self.roomCountLabel?.text = "Room Count: \(model.filterdRooms.count)"
             }
         }
+    }
+    func filterSaved() {
+        let model = DooDalMan.shared
+        
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        self.mapView.addAnnotations(model.filterdRooms)
+        self.roomCountLabel?.text = "Room Count: \(model.filterdRooms.count)"
     }
     
     @IBAction func showRoomList(_ sender: UIBarButtonItem) {
@@ -70,6 +76,15 @@ class MapViewController: UIViewController {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
+        
+    }
+    @IBAction func showFilter(_ sender: UIBarButtonItem) {
+        let filterVC = self.storyboard?.instantiateViewController(withIdentifier: "filterview") as! FilterViewController
+        filterVC.delegate = self
+        
+        self.present(filterVC, animated: true, completion: nil)
+    
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

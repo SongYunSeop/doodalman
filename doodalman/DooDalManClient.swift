@@ -17,7 +17,24 @@ struct Filter {
     var startDate: Date?
     var endDate: Date?
     var startPrice: Int?
-    var endPirce: Int?
+    var endPrice: Int?
+    
+    func check(_ room: Room) -> Bool {
+        if let filterStartDate = self.startDate, let roomStartDate = room.startDate, roomStartDate < filterStartDate   {
+            return false
+        }
+        if let filterEndDate = self.endDate, let roomEndDate = room.endDate, filterEndDate < roomEndDate {
+            return false
+        }
+        if let filterStartPrice = self.startPrice, let roomPrice = room.price, roomPrice < (filterStartPrice * 10000) {
+            return false
+        }
+        
+        if let filterEndPrice = self.endPrice, let roomPrice = room.price, (filterEndPrice * 10000) < roomPrice {
+            return false
+        }
+        return true
+    }
 }
 
 
@@ -46,8 +63,32 @@ class Room: NSObject, MKAnnotation, Mappable {
         }
     }
     var price: Int?
-    var startDate: String?
-    var endDate: String?
+    var startDateString: String?
+    var endDateString: String?
+    var startDate: Date? {
+        get {
+            if let startDateString = self.startDateString {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy.MM.dd"
+                return dateFormatter.date(from: startDateString)
+
+            } else {
+                return nil
+            }
+        }
+    }
+    var endDate: Date? {
+        get {
+            if let endDateString = self.endDateString {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy.MM.dd"
+                return dateFormatter.date(from: endDateString)
+            } else {
+                return nil
+            }
+        }
+    }
+    
     
     required init(map: Map) { }
     
@@ -58,8 +99,8 @@ class Room: NSObject, MKAnnotation, Mappable {
         latitude <- map["latitude"]
         longitude <- map["longitude"]
         price <- map["price"]
-        startDate <- map["startDate"]
-        endDate <- map["endDate"]
+        startDateString <- map["startDate"]
+        endDateString <- map["endDate"]
         
     }
 }
@@ -76,11 +117,7 @@ class DooDalMan {
     
     var filterdRooms: [Room] {
         get {
-            if let startPrice = self.filter.startPrice {
-                return self.rooms.filter({ $0.price! > startPrice})
-            }
-            
-            return self.rooms
+            return self.rooms.filter({self.filter.check($0)})
         }
     }
     

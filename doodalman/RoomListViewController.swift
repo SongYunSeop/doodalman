@@ -23,15 +23,15 @@ class RoomListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let model = DooDalMan.shared
-        return model.rooms.count
+        return model.filterdRooms.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "roomListCell", for: indexPath) as! RoomListTableViewCell
         
         let model = DooDalMan.shared
-        cell.roomThumbnail.loadImage(urlString:model.rooms[indexPath.row].thumbnail!)
-        cell.roomTitle.text = model.rooms[indexPath.row].title
+        cell.roomThumbnail.loadImage(urlString:model.filterdRooms[indexPath.row].thumbnail!)
+        cell.roomTitle.text = model.filterdRooms[indexPath.row].title
 
         return cell
     }

@@ -22,8 +22,8 @@ class RoomViewController: UIViewController {
         
         let model = DooDalMan.shared
         
-        self.roomImageView.loadImage(urlString:model.rooms[self.roomIdx].thumbnail!)
-        self.roomTitle.text = model.rooms[self.roomIdx].title
+        self.roomImageView.loadImage(urlString:model.filterdRooms[self.roomIdx].thumbnail!)
+        self.roomTitle.text = model.filterdRooms[self.roomIdx].title
 
     }
     
