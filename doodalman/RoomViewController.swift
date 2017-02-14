@@ -14,6 +14,9 @@ class RoomViewController: UIViewController {
     @IBOutlet weak var roomTitle: UILabel!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var likeButton: UIBarButtonItem!
+    @IBOutlet weak var roomAddress: UILabel!
+    @IBOutlet weak var roomPrice: UILabel!
+    @IBOutlet weak var roomDate: UILabel!
 
     var room: Room!
 
@@ -22,6 +25,9 @@ class RoomViewController: UIViewController {
         
         self.roomImageView.loadImage(urlString: self.room.thumbnail!)
         self.roomTitle.text = self.room.title
+        self.roomAddress.text = self.room.full_addr
+        self.roomPrice.text = self.room.displayedPrice
+        self.roomDate.text = self.room.displayedDate
 
     }    
     

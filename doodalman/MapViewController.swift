@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import GooglePlaces
+import GoogleMaps
 
 protocol MapViewDelegate {
     func roomLoaded()
@@ -45,8 +46,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            print("Found user's location: \(location)")
+        if let location = locations.last {
             self.locationManager.stopUpdatingLocation()
             let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))

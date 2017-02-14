@@ -12,6 +12,9 @@ class RoomListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var roomTitle: UILabel!
     @IBOutlet weak var roomThumbnail: UIImageView!    
+    @IBOutlet weak var roomAddresss: UILabel!
+    @IBOutlet weak var roomPrice: UILabel!
+    @IBOutlet weak var roomDate: UILabel!
     
 
     override func awakeFromNib() {

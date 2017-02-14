@@ -55,6 +55,8 @@ class Room: NSObject, MKAnnotation, Mappable {
     var id: Int?
     var title: String?
     var thumbnail: String?
+    var photoList: [String]?
+
     var latitude: Double?
     var longitude: Double?
     var coordinate: CLLocationCoordinate2D {
@@ -63,11 +65,32 @@ class Room: NSObject, MKAnnotation, Mappable {
         }
     }
     var price: Int?
+    var displayedPrice: String {
+        get {
+            if let price = self.price {
+                return "\(price)원"
+            }
+            return "No Data"
+        }
+        
+    }
     var startDateString: String?
     var endDateString: String?
     var startDate: Date?
     var endDate: Date?
-    var photoList: [String]?
+    var displayedDate: String {
+        get {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yy.MM.dd"
+            if let startDate = self.startDate, let endDate = self.endDate {
+                return "\(dateFormatter.string(from: startDate)) ~ \(dateFormatter.string(from: endDate))"
+            }
+            
+            return "No Data"
+        }
+    }
+    
+    var full_addr: String?
 
     
     
@@ -91,10 +114,12 @@ class Room: NSObject, MKAnnotation, Mappable {
         endDate = dateFormatter.date(from: endDateString!)
         
         photoList <- map["photoList"]
+        full_addr <- map["full_addr"]
 
         
     }
 }
+
 
 class DooDalMan {
     
@@ -119,9 +144,6 @@ class DooDalMan {
         components.scheme = Constants.Server.APIScheme
         components.host = Constants.Server.APIHost
         components.path = url
-        if Constants.Server.APIHost == "localhost" {
-            components.port = 3000
-        }
         components.queryItems = [URLQueryItem]()
 
         if let parameters = parameters {

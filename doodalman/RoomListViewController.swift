@@ -39,7 +39,9 @@ class RoomListViewController: UIViewController, UITableViewDataSource, UITableVi
         let model = DooDalMan.shared
         cell.roomThumbnail.loadImage(urlString:model.filterdRooms[indexPath.row].thumbnail!)
         cell.roomTitle.text = model.filterdRooms[indexPath.row].title
-
+        cell.roomAddresss.text = model.filterdRooms[indexPath.row].full_addr
+        cell.roomPrice.text = model.filterdRooms[indexPath.row].displayedPrice
+        cell.roomDate.text = model.filterdRooms[indexPath.row].displayedDate
         return cell
     }
     

@@ -240,28 +240,56 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ign-D2-4H8" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="317.5"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6hz-iq-fje">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="226.5"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Akc-c9-Hmw">
-                                                <rect key="frame" x="0.0" y="239" width="375" height="20.5"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G1h-RL-jxW">
-                                                <rect key="frame" x="0.0" y="159" width="375" height="187"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                <connections>
-                                                    <segue destination="rUN-eX-ib4" kind="embed" id="FPf-U4-Ed0"/>
-                                                </connections>
-                                            </containerView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YxQ-ST-y2N">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="317.5"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6hz-iq-fje">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="256"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="256" id="QWZ-pz-z4e"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Akc-c9-Hmw">
+                                                        <rect key="frame" x="0.0" y="256" width="375" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HsU-ys-u2S">
+                                                        <rect key="frame" x="0.0" y="276.5" width="375" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="C0C-1x-MpI">
+                                                        <rect key="frame" x="0.0" y="297" width="375" height="20.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfp-ys-Kma">
+                                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mZ-8u-OW6">
+                                                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="YxQ-ST-y2N" firstAttribute="width" secondItem="Ign-D2-4H8" secondAttribute="width" id="1kr-UU-c6a"/>
+                                            <constraint firstItem="YxQ-ST-y2N" firstAttribute="height" secondItem="Ign-D2-4H8" secondAttribute="height" id="Df5-4V-8sw"/>
+                                            <constraint firstItem="YxQ-ST-y2N" firstAttribute="centerX" secondItem="Ign-D2-4H8" secondAttribute="centerX" id="RUd-vV-KfE"/>
+                                            <constraint firstItem="YxQ-ST-y2N" firstAttribute="centerY" secondItem="Ign-D2-4H8" secondAttribute="centerY" id="zh9-g3-MbJ"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -298,7 +326,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="likeButton" destination="Xom-yO-agn" id="0Li-xl-Cne"/>
+                        <outlet property="roomAddress" destination="HsU-ys-u2S" id="0WK-hz-EOu"/>
+                        <outlet property="roomDate" destination="2mZ-8u-OW6" id="0Xa-qs-cte"/>
                         <outlet property="roomImageView" destination="6hz-iq-fje" id="D1t-fm-uk5"/>
+                        <outlet property="roomPrice" destination="wfp-ys-Kma" id="QO1-GS-N90"/>
                         <outlet property="roomTitle" destination="Akc-c9-Hmw" id="Cym-rr-UG4"/>
                         <outlet property="shareButton" destination="h2s-sX-DHb" id="wcV-VW-jVh"/>
                     </connections>
@@ -307,30 +338,14 @@
             </objects>
             <point key="canvasLocation" x="2505" y="184"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="jmK-Dt-S7b">
-            <objects>
-                <viewController id="rUN-eX-ib4" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="O8s-DN-VV9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="187"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7h9-J2-S97">
-                                <rect key="frame" x="48" y="12" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HzL-of-1Ft" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3097" y="250"/>
-        </scene>
         <!--Map View Controller-->
         <scene sceneID="dkw-n1-WVY">
             <objects>
                 <viewController storyboardIdentifier="MapViewController" id="nmt-8c-w8X" customClass="MapViewController" customModule="doodalman" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Pj7-Pr-5ii"/>
+                        <viewControllerLayoutGuide type="bottom" id="LnD-XG-ghn"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pLl-00-lNU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -340,18 +355,22 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vWO-Mu-bid">
-                                <rect key="frame" x="16" y="20" width="30" height="30"/>
+                                <rect key="frame" x="13" y="8" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
-                                <state key="normal" title="gps"/>
+                                <state key="normal" title="gps">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="getUserLocation:" destination="nmt-8c-w8X" eventType="touchUpInside" id="d5t-xY-5Oa"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oI4-kP-DNg">
-                                <rect key="frame" x="105" y="20" width="164" height="30"/>
+                                <rect key="frame" x="105" y="8" width="164" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="search"/>
+                                <state key="normal" title="search">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="autocompleteClicked:" destination="nmt-8c-w8X" eventType="touchUpInside" id="QPX-Oq-jNy"/>
                                 </connections>
@@ -374,6 +393,10 @@
         <scene sceneID="wVp-ST-m1x">
             <objects>
                 <viewController storyboardIdentifier="RoomListViewController" id="mwo-Bd-ZrF" customClass="RoomListViewController" customModule="doodalman" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CnQ-BF-WfV"/>
+                        <viewControllerLayoutGuide type="bottom" id="83U-TU-OaP"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="UOV-Pn-PIR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -390,20 +413,63 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="105"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IIw-Is-Hu7">
-                                                    <rect key="frame" x="0.0" y="8" width="100" height="97"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hk1-mB-r7K">
-                                                    <rect key="frame" x="120" y="42" width="164" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JmB-1G-Rlz">
+                                                    <rect key="frame" x="-0.5" y="-1" width="375" height="106"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IIw-Is-Hu7">
+                                                            <rect key="frame" x="0.0" y="0.0" width="101" height="106"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="101" id="uNe-zb-SvF"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="D5F-U5-tqu">
+                                                            <rect key="frame" x="101" y="0.0" width="274" height="106"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hk1-mB-r7K">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="274" height="35.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEB-3f-2mQ">
+                                                                    <rect key="frame" x="0.0" y="35.5" width="274" height="35"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="i21-oQ-YEF">
+                                                                    <rect key="frame" x="0.0" y="70.5" width="274" height="35.5"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VI3-fi-yYd">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="137" height="35.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCp-Nj-FK3">
+                                                                            <rect key="frame" x="137" y="0.0" width="137" height="35.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </stackView>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="JmB-1G-Rlz" firstAttribute="centerY" secondItem="HQb-YR-II8" secondAttribute="centerY" id="8Mu-P6-7xb"/>
+                                                <constraint firstItem="JmB-1G-Rlz" firstAttribute="height" secondItem="HQb-YR-II8" secondAttribute="height" id="Chg-cv-beG"/>
+                                                <constraint firstItem="JmB-1G-Rlz" firstAttribute="width" secondItem="HQb-YR-II8" secondAttribute="width" id="MeL-Gw-cu5"/>
+                                                <constraint firstItem="JmB-1G-Rlz" firstAttribute="centerX" secondItem="HQb-YR-II8" secondAttribute="centerX" id="Y1E-e2-yRv"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="roomAddresss" destination="JEB-3f-2mQ" id="UTR-4T-oXe"/>
+                                            <outlet property="roomDate" destination="HCp-Nj-FK3" id="iPw-d5-nhC"/>
+                                            <outlet property="roomPrice" destination="VI3-fi-yYd" id="csa-Si-Agw"/>
                                             <outlet property="roomThumbnail" destination="IIw-Is-Hu7" id="n9f-Rd-okO"/>
                                             <outlet property="roomTitle" destination="hk1-mB-r7K" id="XVY-i1-vAb"/>
                                         </connections>
