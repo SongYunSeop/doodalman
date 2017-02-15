@@ -245,12 +245,12 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YxQ-ST-y2N">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="317.5"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6hz-iq-fje">
+                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXa-Cv-0sU">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="256"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="256" id="QWZ-pz-z4e"/>
+                                                            <constraint firstAttribute="height" constant="256" id="jGz-bq-q5o"/>
                                                         </constraints>
-                                                    </imageView>
+                                                    </scrollView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Akc-c9-Hmw">
                                                         <rect key="frame" x="0.0" y="256" width="375" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -326,9 +326,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="likeButton" destination="Xom-yO-agn" id="0Li-xl-Cne"/>
+                        <outlet property="navitationItem" destination="3hR-SY-sBg" id="ac7-Kw-X2a"/>
                         <outlet property="roomAddress" destination="HsU-ys-u2S" id="0WK-hz-EOu"/>
                         <outlet property="roomDate" destination="2mZ-8u-OW6" id="0Xa-qs-cte"/>
-                        <outlet property="roomImageView" destination="6hz-iq-fje" id="D1t-fm-uk5"/>
+                        <outlet property="roomPhotos" destination="uXa-Cv-0sU" id="Nwy-ap-ban"/>
                         <outlet property="roomPrice" destination="wfp-ys-Kma" id="QO1-GS-N90"/>
                         <outlet property="roomTitle" destination="Akc-c9-Hmw" id="Cym-rr-UG4"/>
                         <outlet property="shareButton" destination="h2s-sX-DHb" id="wcV-VW-jVh"/>
@@ -336,7 +337,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5H0-de-eIt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2505" y="184"/>
+            <point key="canvasLocation" x="2504.8000000000002" y="183.95802098950526"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="dkw-n1-WVY">
@@ -494,6 +495,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="RkG-1h-gYv"/>
+        <segue reference="wVA-Tm-VWP"/>
     </inferredMetricsTieBreakers>
 </document>

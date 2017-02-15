@@ -15,7 +15,6 @@ protocol MapViewDelegate {
     func roomLoaded()
 }
 
-
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, FilterViewDelegate {
 
     @IBOutlet weak var searchButton: UIButton!
@@ -56,7 +55,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        print("moved!")
+        print("moved!")        
         self.fetchRoomData()
     }
     
@@ -110,7 +109,29 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             roomVC.room = sender as! Room!
         }
     }
-
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // Better to make this class property
+        let annotationIdentifier = "AnnotationIdentifier"
+        
+        var annotationView: MKAnnotationView?
+        if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
+            annotationView = dequeuedAnnotationView
+            annotationView?.annotation = annotation
+        }
+        else {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+//            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        
+        if let annotationView = annotationView {
+            // Configure your annotation view here
+            annotationView.canShowCallout = true
+            annotationView.image = UIImage(named: "annotation")
+        }
+        
+        return annotationView
+    }
 
     
 

@@ -91,8 +91,6 @@ class Room: NSObject, MKAnnotation, Mappable {
     }
     
     var full_addr: String?
-
-    
     
     required init(map: Map) { }
     
@@ -113,7 +111,7 @@ class Room: NSObject, MKAnnotation, Mappable {
         startDate = dateFormatter.date(from: startDateString!)
         endDate = dateFormatter.date(from: endDateString!)
         
-        photoList <- map["photoList"]
+        photoList <- map["RoomPhotos"]
         full_addr <- map["full_addr"]
 
         
@@ -181,16 +179,16 @@ class DooDalMan {
 
     }
     
-    func fetchRoomInfo(_ roomId: Int, _ compeletionHandler: @escaping (_ roomInfo: Room?, _ error: Error?) -> ()) {
+    func fetchRoomInfo(_ room: Room, _ compeletionHandler: @escaping (_ roomInfo: Room?, _ error: Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
             let userInfo = [NSLocalizedDescriptionKey: error]
             compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
         }
         
-        let url = makeURLFromParameters("/room/get/\(roomId)", nil)
+        let url = makeURLFromParameters("/rooms/get/\(room.id)", nil)
         
-        Alamofire.request(url).responseJSON{ response in
+        Alamofire.request(url).responseObject{  (response: DataResponse<Room>) in
             guard response.result.isSuccess else {
                 sendError("There was an error with your request: \(response.error)")
                 return
@@ -199,6 +197,12 @@ class DooDalMan {
             guard let json = response.result.value else {
                 sendError("cannot json parsing")
                 return
+            }
+            
+            if let roomInfo:Room = response.result.value {
+                
+                print(roomInfo)
+//                room = roomInfo
             }
             
             print(json)
