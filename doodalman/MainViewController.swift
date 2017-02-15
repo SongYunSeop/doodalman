@@ -11,10 +11,6 @@ import MapKit
 import GooglePlaces
 import FontAwesome_swift
 
-protocol ToggleViewDelegate {
-    func viewToggled()
-}
-
 class MainViewController: UIViewController, FilterViewDelegate, MapViewDelegate {
     
     @IBOutlet weak var filterButton: UIBarButtonItem!
@@ -24,13 +20,12 @@ class MainViewController: UIViewController, FilterViewDelegate, MapViewDelegate 
     @IBOutlet weak var mapContainerView: UIView!
     @IBOutlet weak var listContainerView: UIView!
     
-    var roomListViewController: RoomListViewController?
     var mapViewController: MapViewController?
+
+    var roomListViewController: RoomListViewController?
     
     let locationManager = CLLocationManager()
     
-    var delegate: ToggleViewDelegate?
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,7 +39,11 @@ class MainViewController: UIViewController, FilterViewDelegate, MapViewDelegate 
     
     func roomLoaded() {
         let model = DooDalMan.shared
-        self.roomCountLabel?.text = "Room Count: \(model.filterdRooms.count)"
+        self.roomCountLabel?.text = "Room Count: \(model.rooms.count)"
+        if let mapView = self.mapViewController?.mapView {
+            mapView.removeAnnotations(mapView.annotations)
+            mapView.addAnnotations(model.rooms)
+        }
         if let tableView = self.roomListViewController?.tableView {
             tableView.reloadData()
         }
@@ -52,15 +51,7 @@ class MainViewController: UIViewController, FilterViewDelegate, MapViewDelegate 
     }
     
     func filterSaved() {
-        let model = DooDalMan.shared
-        self.roomCountLabel?.text = "Room Count: \(model.filterdRooms.count)"
-        if let mapView = self.mapViewController?.mapView {
-            mapView.removeAnnotations(mapView.annotations)
-            mapView.addAnnotations(model.filterdRooms)
-        }
-        if let tableView = self.roomListViewController?.tableView {
-            tableView.reloadData()
-        }
+        self.mapViewController?.fetchRoomData()
 
     }
     
@@ -68,6 +59,7 @@ class MainViewController: UIViewController, FilterViewDelegate, MapViewDelegate 
         let filterVC = self.storyboard?.instantiateViewController(withIdentifier: "filterview") as! FilterViewController
         filterVC.delegate = self
         self.present(filterVC, animated: true, completion: nil)
+        
 
     }
     
@@ -86,6 +78,7 @@ class MainViewController: UIViewController, FilterViewDelegate, MapViewDelegate 
             UIView.animate(withDuration: 0.5, animations: {
                 self.mapContainerView.alpha = 0
                 self.listContainerView.alpha = 1
+                
                 
             })
         }

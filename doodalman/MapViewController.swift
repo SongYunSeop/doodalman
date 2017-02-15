@@ -15,7 +15,7 @@ protocol MapViewDelegate {
     func roomLoaded()
 }
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, FilterViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var gpsButton: UIButton!
@@ -55,7 +55,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        print("moved!")        
+        print("moved!")
         self.fetchRoomData()
     }
     
@@ -66,28 +66,29 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
 
     func fetchRoomData() {
-        let centerLat = self.mapView.region.center.latitude
-        let centerLon = self.mapView.region.center.longitude
-        let spanLat = self.mapView.region.span.latitudeDelta
-        let spanLon = self.mapView.region.span.longitudeDelta
+        let centerLat = self.mapView.region.center.latitude as AnyObject
+        let centerLon = self.mapView.region.center.longitude as AnyObject
+        let spanLat = self.mapView.region.span.latitudeDelta as AnyObject
+        let spanLon = self.mapView.region.span.longitudeDelta as AnyObject
         
-        let parameters = ["centerLat": centerLat, "centerLon": centerLon, "spanLat": spanLat, "spanLon": spanLon]
+        var parameters:[String: AnyObject] = ["centerLat": centerLat, "centerLon": centerLon, "spanLat": spanLat, "spanLon": spanLon]
         
         let model = DooDalMan.shared
+
         
-        model.fetchRooms(parameters as [String : AnyObject]) { roomList, error in
+        for (key,value) in model.filter.filterData {
+            parameters.updateValue(value, forKey: key)
+        }
+
+        
+        
+        model.fetchRooms(parameters ) { roomList, error in
             performUIUpdatesOnMain {
                 self.mapView.removeAnnotations(self.mapView.annotations)
-                self.mapView.addAnnotations(model.filterdRooms)
+                self.mapView.addAnnotations(model.rooms)
                 self.delegate?.roomLoaded()
             }
         }
-    }
-    
-    func filterSaved() {
-        let model = DooDalMan.shared
-        self.mapView.removeAnnotations(self.mapView.annotations)
-        self.mapView.addAnnotations(model.filterdRooms)
     }
     
     @IBAction func getUserLocation(_ sender: UIButton) {

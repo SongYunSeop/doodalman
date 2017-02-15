@@ -17,6 +17,7 @@
 		046BDA6B1E4999F900080576 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BDA6A1E4999F900080576 /* GCDBlackBox.swift */; };
 		046BDA721E49C4A900080576 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BDA711E49C4A900080576 /* RoomListViewController.swift */; };
 		046BDA751E49CA2E00080576 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 046BDA731E49CA2E00080576 /* Main.storyboard */; };
+		047F7EFB1E541C8500A258C0 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F7EFA1E541C8500A258C0 /* SignUpViewController.swift */; };
 		049BCA8D1E48795900CC8BB9 /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA8C1E48795900CC8BB9 /* common.swift */; };
 		049BCA8F1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA8E1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift */; };
 		049BCA911E48E18700CC8BB9 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA901E48E18700CC8BB9 /* RoomViewController.swift */; };
@@ -51,6 +52,7 @@
 		046BDA6A1E4999F900080576 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		046BDA711E49C4A900080576 /* RoomListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListViewController.swift; sourceTree = "<group>"; };
 		046BDA741E49CA2E00080576 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		047F7EFA1E541C8500A258C0 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		049BCA8C1E48795900CC8BB9 /* common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = common.swift; sourceTree = "<group>"; };
 		049BCA8E1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListTableViewCell.swift; sourceTree = "<group>"; };
 		049BCA901E48E18700CC8BB9 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				046BDA711E49C4A900080576 /* RoomListViewController.swift */,
 				049BCA901E48E18700CC8BB9 /* RoomViewController.swift */,
 				04AF38341E4D9C7B008F3484 /* FilterViewController.swift */,
+				047F7EFA1E541C8500A258C0 /* SignUpViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				046BDA691E4989E400080576 /* Constants.swift in Sources */,
 				049BCA8F1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift in Sources */,
 				049BCA911E48E18700CC8BB9 /* RoomViewController.swift in Sources */,
+				047F7EFB1E541C8500A258C0 /* SignUpViewController.swift in Sources */,
 				04AF38351E4D9C7B008F3484 /* FilterViewController.swift in Sources */,
 				0421CA861E4B51CC0064EA49 /* DooDalManClient.swift in Sources */,
 				046BDA721E49C4A900080576 /* RoomListViewController.swift in Sources */,

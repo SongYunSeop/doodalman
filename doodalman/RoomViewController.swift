@@ -19,6 +19,7 @@ class RoomViewController: UIViewController {
     @IBOutlet weak var roomPhotos: UIScrollView!
     @IBOutlet weak var navitationItem: UINavigationItem!
 
+    @IBOutlet weak var roomDescription: UITextView!
     var room: Room!
 
     override func viewDidLoad() {
@@ -28,6 +29,7 @@ class RoomViewController: UIViewController {
         self.roomAddress.text = self.room.full_addr
         self.roomPrice.text = self.room.displayedPrice
         self.roomDate.text = self.room.displayedDate
+        self.roomDescription.text = self.room.detail
         self.initPhotoList()
         
     }

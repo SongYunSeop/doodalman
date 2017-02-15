@@ -19,21 +19,29 @@ struct Filter {
     var startPrice: Int?
     var endPrice: Int?
     
-    func check(_ room: Room) -> Bool {
-        if let filterStartDate = self.startDate, let roomStartDate = room.startDate, roomStartDate < filterStartDate   {
-            return false
+    var filterData: [String: AnyObject] {
+        get {
+            var result:[String: AnyObject] = [:]
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy.MM.dd"
+
+            if let startDate = self.startDate {
+                result["startDate"] = dateFormatter.string(from: startDate) as AnyObject
+            }
+            if let endDate = self.endDate {
+                result["endDate"] = dateFormatter.string(from: endDate) as AnyObject
+            }
+            
+            if let startPrice = self.startPrice {
+                result["startPrice"] = startPrice as AnyObject
+            }
+            
+            if let endPrice = self.endPrice {
+                result["endPrice"] = endPrice as AnyObject
+            }
+            
+            return result
         }
-        if let filterEndDate = self.endDate, let roomEndDate = room.endDate, filterEndDate < roomEndDate {
-            return false
-        }
-        if let filterStartPrice = self.startPrice, let roomPrice = room.price, roomPrice < (filterStartPrice * 10000) {
-            return false
-        }
-        
-        if let filterEndPrice = self.endPrice, let roomPrice = room.price, (filterEndPrice * 10000) < roomPrice {
-            return false
-        }
-        return true
     }
 }
 
@@ -89,6 +97,7 @@ class Room: NSObject, MKAnnotation, Mappable {
             return "No Data"
         }
     }
+    var detail: String?
     
     var full_addr: String?
     
@@ -99,7 +108,7 @@ class Room: NSObject, MKAnnotation, Mappable {
         id <- map["id"]
         title <- map["title"]
         price <- map["price"]
-
+        
         thumbnail <- map["thumbnail"]
         latitude <- map["latitude"]
         longitude <- map["longitude"]
@@ -113,10 +122,12 @@ class Room: NSObject, MKAnnotation, Mappable {
         
         photoList <- map["RoomPhotos"]
         full_addr <- map["full_addr"]
+        detail <- map["description"]
 
         
     }
 }
+
 
 
 class DooDalMan {
@@ -128,13 +139,6 @@ class DooDalMan {
     var history = [Int]()
     
     var filter = Filter()
-    
-    var filterdRooms: [Room] {
-        get {
-            return self.rooms.filter({self.filter.check($0)})
-        }
-    }
-    
     
     private func makeURLFromParameters(_ url: String, _ parameters: [String:AnyObject]?) -> URL {
         
@@ -160,8 +164,11 @@ class DooDalMan {
             let userInfo = [NSLocalizedDescriptionKey : error]
             compeletionHandler(nil, NSError(domain: "taskForGETMethod", code: 1, userInfo: userInfo))
         }
-
+        
+ 
         let url = makeURLFromParameters("/rooms/list", parameters)
+        
+        print(url.absoluteString)
         
         Alamofire.request(url).responseObject { (response: DataResponse<RoomsResponse>) in
             guard response.result.isSuccess else {

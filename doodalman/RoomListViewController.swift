@@ -9,19 +9,12 @@
 import UIKit
 import KFSwiftImageLoader
 
-class RoomListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ToggleViewDelegate {
+class RoomListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet var tableView : UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    
-    
-    func viewToggled() {
-        print("aa")
-        self.tableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -30,18 +23,18 @@ class RoomListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let model = DooDalMan.shared
-        return model.filterdRooms.count
+        return model.rooms.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "roomListCell", for: indexPath) as! RoomListTableViewCell
         
         let model = DooDalMan.shared
-        cell.roomThumbnail.loadImage(urlString:model.filterdRooms[indexPath.row].thumbnail!)
-        cell.roomTitle.text = model.filterdRooms[indexPath.row].title
-        cell.roomAddresss.text = model.filterdRooms[indexPath.row].full_addr
-        cell.roomPrice.text = model.filterdRooms[indexPath.row].displayedPrice
-        cell.roomDate.text = model.filterdRooms[indexPath.row].displayedDate
+        cell.roomThumbnail.loadImage(urlString:model.rooms[indexPath.row].thumbnail!)
+        cell.roomTitle.text = model.rooms[indexPath.row].title
+        cell.roomAddresss.text = model.rooms[indexPath.row].full_addr
+        cell.roomPrice.text = model.rooms[indexPath.row].displayedPrice
+        cell.roomDate.text = model.rooms[indexPath.row].displayedDate
         return cell
     }
     
@@ -50,7 +43,7 @@ class RoomListViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let model = DooDalMan.shared
         
-        self.performSegue(withIdentifier: "showRoom", sender: model.filterdRooms[indexPath.row])
+        self.performSegue(withIdentifier: "showRoom", sender: model.rooms[indexPath.row])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
