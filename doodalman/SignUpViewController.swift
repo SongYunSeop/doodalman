@@ -9,7 +9,13 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
-
+    
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var username: UITextField!
+    
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,15 +27,26 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func cancelSignUp(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+//        var save = UserDefaults.standard
+        // 키어쩌구
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
-    */
+    
+    @IBAction func signUp(_ sender: UIButton) {
+
+        let email = self.email.text as AnyObject
+        let password = self.password.text as AnyObject
+        let username = self.username.text as AnyObject
+        
+        let parameters:[String: AnyObject] = ["email": email, "password": password, "username": username ]
+        let model = DooDalMan.shared
+        
+        model.signUp(parameters) { result, error in
+            print("test")
+        }
+    }
+    
 
 }

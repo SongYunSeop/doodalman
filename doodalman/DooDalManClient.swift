@@ -13,122 +13,9 @@ import AlamofireObjectMapper
 import Alamofire
 import ObjectMapper
 
-struct Filter {
-    var startDate: Date?
-    var endDate: Date?
-    var startPrice: Int?
-    var endPrice: Int?
-    
-    var filterData: [String: AnyObject] {
-        get {
-            var result:[String: AnyObject] = [:]
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy.MM.dd"
+import JWT
 
-            if let startDate = self.startDate {
-                result["startDate"] = dateFormatter.string(from: startDate) as AnyObject
-            }
-            if let endDate = self.endDate {
-                result["endDate"] = dateFormatter.string(from: endDate) as AnyObject
-            }
-            
-            if let startPrice = self.startPrice {
-                result["startPrice"] = startPrice as AnyObject
-            }
-            
-            if let endPrice = self.endPrice {
-                result["endPrice"] = endPrice as AnyObject
-            }
-            
-            return result
-        }
-    }
-}
-
-
-class RoomsResponse: Mappable {
-    var rooms: [Room]?
-    
-    required init(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        rooms <- map["rooms"]
-    }
-}
-
-class Room: NSObject, MKAnnotation, Mappable {
-    
-    var id: Int?
-    var title: String?
-    var thumbnail: String?
-    var photoList: [String]?
-
-    var latitude: Double?
-    var longitude: Double?
-    var coordinate: CLLocationCoordinate2D {
-        get {
-            return CLLocationCoordinate2D(latitude: self.latitude! as CLLocationDegrees, longitude: self.longitude! as CLLocationDegrees)
-        }
-    }
-    var price: Int?
-    var displayedPrice: String {
-        get {
-            if let price = self.price {
-                return "\(price)원"
-            }
-            return "No Data"
-        }
-        
-    }
-    var startDateString: String?
-    var endDateString: String?
-    var startDate: Date?
-    var endDate: Date?
-    var displayedDate: String {
-        get {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yy.MM.dd"
-            if let startDate = self.startDate, let endDate = self.endDate {
-                return "\(dateFormatter.string(from: startDate)) ~ \(dateFormatter.string(from: endDate))"
-            }
-            
-            return "No Data"
-        }
-    }
-    var detail: String?
-    
-    var full_addr: String?
-    
-    required init(map: Map) { }
-    
-    func mapping(map: Map) {
-        
-        id <- map["id"]
-        title <- map["title"]
-        price <- map["price"]
-        
-        thumbnail <- map["thumbnail"]
-        latitude <- map["latitude"]
-        longitude <- map["longitude"]
-        
-        startDateString <- map["startDate"]
-        endDateString <- map["endDate"]
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        startDate = dateFormatter.date(from: startDateString!)
-        endDate = dateFormatter.date(from: endDateString!)
-        
-        photoList <- map["RoomPhotos"]
-        full_addr <- map["full_addr"]
-        detail <- map["description"]
-
-        
-    }
-}
-
-
+import SocketIO
 
 class DooDalMan {
     
@@ -139,6 +26,9 @@ class DooDalMan {
     var history = [Int]()
     
     var filter = Filter()
+    
+    var contactClient: Contact?
+    
     
     private func makeURLFromParameters(_ url: String, _ parameters: [String:AnyObject]?) -> URL {
         
@@ -168,8 +58,6 @@ class DooDalMan {
  
         let url = makeURLFromParameters("/rooms/list", parameters)
         
-        print(url.absoluteString)
-        
         Alamofire.request(url).responseObject { (response: DataResponse<RoomsResponse>) in
             guard response.result.isSuccess else {
                 sendError("There was an error with your request: \(response.error)")
@@ -186,37 +74,179 @@ class DooDalMan {
 
     }
     
-    func fetchRoomInfo(_ room: Room, _ compeletionHandler: @escaping (_ roomInfo: Room?, _ error: Error?) -> ()) {
+    func fetchRoomInfo(_ room: Room, _ compeletionHandler: @escaping (_ roomInfo: RoomInfo?, _ error: Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
             let userInfo = [NSLocalizedDescriptionKey: error]
             compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
         }
         
-        let url = makeURLFromParameters("/rooms/get/\(room.id)", nil)
+        let url = makeURLFromParameters("/rooms/get/\(room.id!)", nil)
         
-        Alamofire.request(url).responseObject{  (response: DataResponse<Room>) in
+        Alamofire.request(url).responseObject{  (response: DataResponse<RoomInfo>) in
             guard response.result.isSuccess else {
                 sendError("There was an error with your request: \(response.error)")
                 return
             }
             
-            guard let json = response.result.value else {
+            guard let roomInfo:RoomInfo = response.result.value else {
                 sendError("cannot json parsing")
                 return
             }
             
-            if let roomInfo:Room = response.result.value {
-                
-                print(roomInfo)
-//                room = roomInfo
-            }
+            room.detail = roomInfo.detail
+            room.photoList = roomInfo.photoList
+            room.isLike = roomInfo.isLike
+            room.isHost = roomInfo.isHost
             
-            print(json)
+            compeletionHandler(roomInfo, nil)
             
         }
     }
     
+    func likeRoom(_ room: Room, _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ result: Bool?, _ error: Error?) -> ()) {
+        func sendError(_ error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey: error]
+            compeletionHandler(nil, nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
+        }
+        
+        let url = makeURLFromParameters("/rooms/like/\(room.id!)", nil)
+        
+        Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default).responseJSON { response in
+            guard response.result.isSuccess else {
+                sendError("There was an error with your request: \(response.error)")
+                return
+            }
+            
+            guard let result = response.result.value else {
+                sendError("cannot json parsing")
+                return
+            }
+            guard let statusCode = HttpStatusCode(rawValue: (response.response?.statusCode)!) else {
+                sendError("cannot find HttpStatusCode")
+                return
+            }
+            
+            compeletionHandler(statusCode, result as? Bool,  nil)
+            
+            
+        }
+    }
     
+    func signUp(_ parameters: [String: AnyObject], _ compeletionHandler: @escaping (_ result: Bool?, _ error: Error?) -> ()) {
+        func sendError(_ error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey: error]
+            compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
+        }
+        
+        let url = makeURLFromParameters("/auth/signup", nil)
+        
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+            if response.result.isSuccess {
+                print("success")
+            } else {
+                print("fail: \(response.result.error?.localizedDescription)")
+                print("fail: \(response.result.value)")
+                return
+            }
+            
+            if let json = response.result.value {
+                print("JSON: \(json)")
+                
+            }
+        }
+        
+        
+    }
+    
+    
+    func signIn(_ parameters: [String: AnyObject], _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ error: Error?) -> ()) {
+        func sendError(_ error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey: error]
+            compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
+        }
+        
+        let token = JWT.encode(parameters, algorithm: .hs256("doodalman".data(using: .utf8)!))
+        
+        self.signIn(withToken: token, compeletionHandler)
+        
+    }
+    
+    func signIn(withToken token: String, _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ error: Error?) -> ()) {
+
+        func sendError(_ error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey: error]
+            compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
+        }
+        let url = makeURLFromParameters("/auth/signin", nil)
+        
+        Alamofire.request(url, method:. post, parameters: ["token": token], encoding: JSONEncoding.default).responseJSON { response in
+            if response.result.isSuccess {
+                print("success")
+            } else {
+                print("fail: \(response.result.error?.localizedDescription)")
+                print("fail: \(response.result.value)")
+                return
+            }
+            
+            guard let statusCode = HttpStatusCode(rawValue: (response.response?.statusCode)!) else {
+                sendError("cannot find HttpStatusCode")
+                return
+            }
+            UserDefaults.standard.set(true, forKey: "hasSignedBefore")
+
+            UserDefaults.standard.set(token, forKey: "authToken")
+            
+            
+            compeletionHandler(statusCode, nil)
+            
+        }
+
+        
+    }
+    
+    func contact(_ room: Room, _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ error: Error?) -> ()) {
+        func sendError(_ error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey: error]
+            compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
+        }
+        
+        let url = makeURLFromParameters("/rooms/contact/\(room.id!)", nil)
+        
+        Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default).responseObject{  (response: DataResponse<Contact>) in
+
+            guard response.result.isSuccess else {
+                sendError("There was an error with your request: \(response.error)")
+                return
+            }
+
+            
+            guard let statusCode = HttpStatusCode(rawValue: (response.response?.statusCode)!) else {
+                sendError("cannot find HttpStatusCode")
+                return
+            }
+            
+            guard statusCode == HttpStatusCode.Http200_OK else {
+                compeletionHandler(statusCode, nil)
+                return
+            }
+            
+            guard let contact:Contact = response.result.value else {
+                sendError("cannot json parsing")
+                return
+            }
+
+            self.contactClient = contact
+            
+            compeletionHandler(statusCode, nil)
+            
+            
+        }
+    }
     
 }

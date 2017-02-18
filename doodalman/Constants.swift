@@ -36,4 +36,5 @@ struct Constants {
         static let Page = "page"
 
     }
+    
 }

@@ -9,10 +9,12 @@
 import UIKit
 import MapKit
 import GooglePlaces
-import GoogleMaps
 
-protocol MapViewDelegate {
+protocol RoomDataDelegate {
     func roomLoaded()
+    
+    func showRoom(_ room: Room)
+    
 }
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
@@ -20,8 +22,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var gpsButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
+    
     let locationManager = CLLocationManager()
-    var delegate: MapViewDelegate?
+    var delegate: RoomDataDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,11 +62,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.fetchRoomData()
     }
     
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if let room = view.annotation as? Room {
-            performSegue(withIdentifier: "showRoom", sender: room)
-        }
-    }
+//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+//        if let room = view.annotation as? Room {
+//            self.delegate?.showRoom(room)
+//        }
+//    }
 
     func fetchRoomData() {
         let centerLat = self.mapView.region.center.latitude as AnyObject
@@ -80,8 +83,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             parameters.updateValue(value, forKey: key)
         }
 
-        
-        
         model.fetchRooms(parameters ) { roomList, error in
             performUIUpdatesOnMain {
                 self.mapView.removeAnnotations(self.mapView.annotations)
@@ -103,35 +104,28 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         autocompleteController.delegate = self
         present(autocompleteController, animated: true, completion: nil)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showRoom" {
-            let roomVC = segue.destination as! RoomViewController
-            roomVC.room = sender as! Room!
-        }
-    }
-    
+
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         // Better to make this class property
-        let annotationIdentifier = "AnnotationIdentifier"
+        let annotationIdentifier = "room"
         
         var annotationView: MKAnnotationView?
         if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
             annotationView = dequeuedAnnotationView
             annotationView?.annotation = annotation
-        }
-        else {
+        } else {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-//            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-        }
-        
-        if let annotationView = annotationView {
-            // Configure your annotation view here
-            annotationView.canShowCallout = true
-            annotationView.image = UIImage(named: "annotation")
+            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            annotationView?.canShowCallout = true
+            annotationView?.image = UIImage(named: "annotation")
         }
         
         return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let room = view.annotation
+        self.delegate?.showRoom(room as! Room)
     }
 
     

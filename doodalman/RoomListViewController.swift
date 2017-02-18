@@ -12,6 +12,9 @@ import KFSwiftImageLoader
 class RoomListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet var tableView : UITableView!
+    
+    var delegate: RoomDataDelegate?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,21 +41,11 @@ class RoomListViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let model = DooDalMan.shared
         
-        self.performSegue(withIdentifier: "showRoom", sender: model.rooms[indexPath.row])
+        self.delegate?.showRoom(model.rooms[indexPath.row])
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showRoom" {
-            let RoomVC = segue.destination as! RoomViewController
-            RoomVC.room = sender as! Room
-        }
-    }
-
-
-
 }
