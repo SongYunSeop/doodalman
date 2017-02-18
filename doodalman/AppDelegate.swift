@@ -27,14 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let token = UserDefaults.standard.string(forKey: "authToken") {
                 let model = DooDalMan.shared
 
-                model.signIn(withToken: token, { (httpStatusCode, error) in
+                model.logIn(withToken: token, { (httpStatusCode, error) in
                     print("success")
                 })
             }
-
-            
-        } else {
-            print("none")
         }
     }
     func applicationWillResignActive(_ application: UIApplication) {

@@ -29,6 +29,7 @@ class DooDalMan {
     
     var contactClient: Contact?
     
+    var authToken: String?
     
     private func makeURLFromParameters(_ url: String, _ parameters: [String:AnyObject]?) -> URL {
         
@@ -43,6 +44,11 @@ class DooDalMan {
                 let queryItem = URLQueryItem(name: key, value: "\(value)")
                 components.queryItems!.append(queryItem)
             }
+        }
+        
+        if let token = self.authToken {
+            let queryToken = URLQueryItem(name: "token", value: token)
+            components.queryItems!.append(queryToken)
         }
         
         return components.url!
@@ -80,7 +86,7 @@ class DooDalMan {
             let userInfo = [NSLocalizedDescriptionKey: error]
             compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
         }
-        
+
         let url = makeURLFromParameters("/rooms/get/\(room.id!)", nil)
         
         Alamofire.request(url).responseObject{  (response: DataResponse<RoomInfo>) in
@@ -112,6 +118,7 @@ class DooDalMan {
         }
         
         let url = makeURLFromParameters("/rooms/like/\(room.id!)", nil)
+
         
         Alamofire.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default).responseJSON { response in
             guard response.result.isSuccess else {
@@ -161,49 +168,74 @@ class DooDalMan {
         
     }
     
-    
-    func signIn(_ parameters: [String: AnyObject], _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ error: Error?) -> ()) {
+    func logIn(_ parameters: [String: AnyObject], _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ error: Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
             let userInfo = [NSLocalizedDescriptionKey: error]
             compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
         }
         
-        let token = JWT.encode(parameters, algorithm: .hs256("doodalman".data(using: .utf8)!))
+        let url = makeURLFromParameters("/auth/login", nil)
         
-        self.signIn(withToken: token, compeletionHandler)
-        
-    }
-    
-    func signIn(withToken token: String, _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ error: Error?) -> ()) {
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+            guard response.result.isSuccess else {
+                sendError("There was an error with your request: \(response.error)")
+                return
+            }
 
-        func sendError(_ error: String) {
-            print(error)
-            let userInfo = [NSLocalizedDescriptionKey: error]
-            compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
-        }
-        let url = makeURLFromParameters("/auth/signin", nil)
-        
-        Alamofire.request(url, method:. post, parameters: ["token": token], encoding: JSONEncoding.default).responseJSON { response in
-            if response.result.isSuccess {
-                print("success")
-            } else {
-                print("fail: \(response.result.error?.localizedDescription)")
-                print("fail: \(response.result.value)")
+            guard let statusCode:HttpStatusCode = HttpStatusCode(rawValue: (response.response?.statusCode)!) else {
                 return
             }
             
-            guard let statusCode = HttpStatusCode(rawValue: (response.response?.statusCode)!) else {
-                sendError("cannot find HttpStatusCode")
-                return
+            if statusCode == HttpStatusCode.Http200_OK {
+                if let result = response.result.value {
+                    let JSON = result as! Dictionary<String, AnyObject>
+                    let token = JSON["token"]!
+                    UserDefaults.standard.set(true, forKey: "hasSignedBefore")
+                    UserDefaults.standard.set(token, forKey: "authToken")
+                    self.authToken = token as? String
+                }
             }
-            UserDefaults.standard.set(true, forKey: "hasSignedBefore")
-
-            UserDefaults.standard.set(token, forKey: "authToken")
-            
             
             compeletionHandler(statusCode, nil)
+        }
+    }
+    
+    func logIn(withToken token: String, _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ error: Error?) -> ()) {
+        func sendError(_ error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey: error]
+            compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
+        }
+        
+        let url = makeURLFromParameters("/auth/authToken", nil)
+        
+        Alamofire.request(url, method: .post, parameters: ["token": token], encoding: JSONEncoding.default).responseJSON { response in
+            guard response.result.isSuccess else {
+                sendError("There was an error with your request: \(response.error)")
+                return
+            }
             
+            guard let statusCode:HttpStatusCode = HttpStatusCode(rawValue: (response.response?.statusCode)!) else {
+                return
+            }
+            
+            if statusCode == HttpStatusCode.Http200_OK {
+                if let result = response.result.value {
+                    let JSON = result as! Dictionary<String, AnyObject>
+                    let token = JSON["token"]!
+                    UserDefaults.standard.set(true, forKey: "hasSignedBefore")
+                    UserDefaults.standard.set(token, forKey: "authToken")
+                    self.authToken = token as? String
+                }
+            } else if statusCode == HttpStatusCode.Http401_Unauthorized {
+                UserDefaults.standard.set(false, forKey: "hasSignedBefore")
+                UserDefaults.standard.removeObject(forKey: "authToken")
+                
+
+            }
+            
+            compeletionHandler(statusCode, nil)
         }
 
         

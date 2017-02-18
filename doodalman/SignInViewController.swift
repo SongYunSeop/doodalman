@@ -39,7 +39,7 @@ class SignInViewController: UIViewController {
         let parameters:[String: AnyObject] = ["email": email, "password": password]
         
         let model = DooDalMan.shared
-        model.signIn(parameters) { (httpStatusCode, error) in
+        model.logIn(parameters) { (httpStatusCode, error) in
             
             if httpStatusCode == .Http404_NotFound {
                 performUIUpdatesOnMain {
