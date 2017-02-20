@@ -155,8 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				049BCA8E1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift */,
-				04E922611E57219C00DE21D5 /* ContactTableViewCell.swift */,
 				04E922691E59C71F00DE21D5 /* ContactListTableViewCell.swift */,
+				04E922611E57219C00DE21D5 /* ContactTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";

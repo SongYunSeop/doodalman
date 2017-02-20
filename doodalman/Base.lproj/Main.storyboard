@@ -356,7 +356,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="likeButton" destination="Xom-yO-agn" id="DvN-hp-tAW"/>
-                        <outlet property="navitationItem" destination="3hR-SY-sBg" id="ac7-Kw-X2a"/>
                         <outlet property="roomAddress" destination="HsU-ys-u2S" id="0WK-hz-EOu"/>
                         <outlet property="roomDate" destination="2mZ-8u-OW6" id="0Xa-qs-cte"/>
                         <outlet property="roomDescription" destination="TKa-b3-vEg" id="lJc-Jb-2lU"/>
@@ -364,6 +363,7 @@
                         <outlet property="roomPrice" destination="wfp-ys-Kma" id="QO1-GS-N90"/>
                         <outlet property="roomTitle" destination="Akc-c9-Hmw" id="Cym-rr-UG4"/>
                         <outlet property="shareButton" destination="h2s-sX-DHb" id="6da-Ob-0wN"/>
+                        <outlet property="viewTitle" destination="3hR-SY-sBg" id="nsO-WR-LBN"/>
                         <segue destination="e94-xl-OmZ" kind="show" identifier="contact" id="aM6-N5-fl5"/>
                         <segue destination="0FB-ZE-e2K" kind="show" identifier="contactList" id="zZO-Kj-uSh"/>
                     </connections>
@@ -372,7 +372,7 @@
             </objects>
             <point key="canvasLocation" x="1842" y="165"/>
         </scene>
-        <!--Contact List View Controller-->
+        <!--Contact List-->
         <scene sceneID="BHW-W4-gsh">
             <objects>
                 <viewController id="0FB-ZE-e2K" customClass="ContactListViewController" customModule="doodalman" customModuleProvider="target" sceneMemberID="viewController">
@@ -393,11 +393,11 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HMv-an-nNs" id="RZ6-Kp-BRX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wCI-0G-Io8">
-                                                    <rect key="frame" x="8" y="8" width="359" height="63.5"/>
+                                                    <rect key="frame" x="8" y="8" width="359" height="64"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gkT-hX-BYe">
                                                             <rect key="frame" x="0.0" y="0.0" width="359" height="32"/>
@@ -417,7 +417,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9da-Vx-dYR">
-                                                            <rect key="frame" x="0.0" y="32" width="359" height="31.5"/>
+                                                            <rect key="frame" x="0.0" y="32" width="359" height="32"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -447,6 +447,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Contact List" id="b6c-YR-gxC"/>
                     <connections>
                         <outlet property="tableView" destination="bCu-Ci-Y2q" id="6fb-Cu-Ig2"/>
                         <segue destination="e94-xl-OmZ" kind="show" identifier="contact" id="oDv-Yr-BCj"/>
@@ -674,7 +675,7 @@
             </objects>
             <point key="canvasLocation" x="790" y="865"/>
         </scene>
-        <!--Contact View Controller-->
+        <!--Chat-->
         <scene sceneID="PqL-Vt-wh2">
             <objects>
                 <viewController id="e94-xl-OmZ" customClass="ContactViewController" customModule="doodalman" customModuleProvider="target" sceneMemberID="viewController">
@@ -691,20 +692,20 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="userChatCell" rowHeight="77" id="gV9-DR-eUS" customClass="ContactTableViewCell" customModule="doodalman" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="77"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="userChatCell" rowHeight="40" id="gV9-DR-eUS" customClass="ContactTableViewCell" customModule="doodalman" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gV9-DR-eUS" id="RdH-3p-izW">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="this is text" textAlignment="right" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pzt-yz-O6f">
-                                                    <rect key="frame" x="75" y="8" width="300" height="68"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="this is text" textAlignment="right" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pzt-yz-O6f">
+                                                    <rect key="frame" x="75" y="8" width="292" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.16078431372549018" green="0.58039215686274503" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="no"/>
                                                 </textView>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -712,19 +713,19 @@
                                             <outlet property="contentTextView" destination="Pzt-yz-O6f" id="6Kg-eM-4Hs"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="anotherUserChatCell" rowHeight="77" id="XbB-45-eJu" customClass="ContactTableViewCell" customModule="doodalman" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="105" width="375" height="77"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="anotherUserChatCell" rowHeight="40" id="XbB-45-eJu" customClass="ContactTableViewCell" customModule="doodalman" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="68" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XbB-45-eJu" id="XDg-87-dKY">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="this is text" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ZK-ly-S8U">
-                                                    <rect key="frame" x="0.0" y="8" width="300" height="68"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="this is text" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ZK-ly-S8U">
+                                                    <rect key="frame" x="8" y="8" width="292" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="no"/>
                                                 </textView>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -738,14 +739,6 @@
                                     <outlet property="delegate" destination="e94-xl-OmZ" id="Fsi-ck-yKB"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pu6-uD-qoB">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="7Bq-wl-eJw"/>
-                                    <barButtonItem systemItem="cancel" id="3w8-yn-HdY"/>
-                                </items>
-                            </toolbar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LrD-kx-fWp">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -770,9 +763,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Chat" id="aSz-aY-zGk"/>
                     <connections>
                         <outlet property="chatInput" destination="whc-Rb-MTq" id="5cj-U3-Exh"/>
+                        <outlet property="navigationItem" destination="aSz-aY-zGk" id="rdM-YQ-0A0"/>
                         <outlet property="tableView" destination="sSK-aA-JY8" id="8er-X6-Lyz"/>
+                        <outlet property="viewTitle" destination="aSz-aY-zGk" id="79c-c5-2Ua"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qUK-Ga-TGF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -800,7 +796,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="106"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EER-m7-wK8" id="HQb-YR-II8">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="105.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="105"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JmB-1G-Rlz">
@@ -883,6 +879,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="oDv-Yr-BCj"/>
+        <segue reference="aM6-N5-fl5"/>
     </inferredMetricsTieBreakers>
 </document>

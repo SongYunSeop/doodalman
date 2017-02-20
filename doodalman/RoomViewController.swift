@@ -18,7 +18,7 @@ class RoomViewController: UIViewController {
     @IBOutlet weak var roomPrice: UILabel!
     @IBOutlet weak var roomDate: UILabel!
     @IBOutlet weak var roomPhotos: UIScrollView!
-    @IBOutlet weak var navitationItem: UINavigationItem!
+    @IBOutlet weak var viewTitle: UINavigationItem!
 
     @IBOutlet weak var roomDescription: UITextView!
     
@@ -33,7 +33,7 @@ class RoomViewController: UIViewController {
     }
     
     func settingUI() {
-        self.navitationItem.title = self.room.title
+        self.viewTitle.title = self.room.title
         self.roomTitle.text = self.room.title
         self.roomAddress.text = self.room.full_addr
         self.roomPrice.text = self.room.displayedPrice

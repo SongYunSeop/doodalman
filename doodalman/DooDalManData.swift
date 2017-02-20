@@ -71,6 +71,7 @@ class Room: NSObject, MKAnnotation, Mappable {
     
     var id: Int?
     var title: String?
+    var subtitle: String?
     var thumbnail: String?
     var photoList: [String]?
     
@@ -132,6 +133,8 @@ class Room: NSObject, MKAnnotation, Mappable {
         startDate = dateFormatter.date(from: startDateString!)
         endDate = dateFormatter.date(from: endDateString!)
         full_addr <- map["full_addr"]
+        subtitle = "\(self.displayedPrice) / \(self.displayedDate)"
+
 
     }
 }

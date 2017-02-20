@@ -58,7 +58,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        print("moved!")
         self.fetchRoomData()
     }
     
@@ -121,6 +120,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
         return annotationView
+        
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {

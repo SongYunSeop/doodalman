@@ -20,6 +20,10 @@ class ContactListViewController: UIViewController, UITableViewDelegate, UITableV
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

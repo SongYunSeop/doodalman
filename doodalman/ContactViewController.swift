@@ -8,12 +8,14 @@
 
 import UIKit
 import SocketIO
+import SwiftyJSON
 
 class ContactViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var chatInput: UITextField!
-    
+    @IBOutlet weak var viewTitle: UINavigationItem!
+
     var socket: SocketIOClient?
     var contact: Contact?
     
@@ -22,6 +24,9 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         self.connectSocketIO()
         chatInput.delegate = self
         subscribeToKeyboardNotifications()
+        self.viewTitle.title = self.contact?.username
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 1000
 
 
     }
@@ -52,20 +57,20 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
         let chat = self.contact?.contactChats?[indexPath.row]
+        let cell: ContactTableViewCell
         
         if (chat?.isMe!)! {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "userChatCell", for: indexPath) as! ContactTableViewCell
-            cell.contentTextView?.text = chat?.content
-            return cell
-
+            cell = tableView.dequeueReusableCell(withIdentifier: "userChatCell", for: indexPath) as! ContactTableViewCell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "anotherUserChatCell", for: indexPath) as! ContactTableViewCell
-            cell.contentTextView?.text = chat?.content
-
-            return cell
-
+            cell = tableView.dequeueReusableCell(withIdentifier: "anotherUserChatCell", for: indexPath) as! ContactTableViewCell
         }
+        
+        cell.contentTextView?.text = chat?.content
+        cell.setSize()
+        
+        return cell
     }
     
     @IBAction func send(_ sender: UIBarButtonItem) {
@@ -78,7 +83,21 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         self.socket?.emit("sendChat", ["content":content])
         self.chatInput.text = ""
         self.tableView.reloadData()
+        self.scrollToLastRow()
+
     }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableViewAutomaticDimension
+//    }
+//
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableViewAutomaticDimension
+//    }
+//    
+//    
+    
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // test
     }
@@ -124,6 +143,17 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.cgRectValue.height
     }
+    
+    func scrollToFirstRow() {
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+    }
+    
+    func scrollToLastRow() {
+        let indexPath = IndexPath(row: (self.contact?.contactChats?.count)! - 1 , section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    }
+    
 
 
 
@@ -133,23 +163,33 @@ extension ContactViewController {
     func configSocketIO() {
         self.socket?.on("connect") { data, ack in
             print("connected")
-//            self.socket!.emit("sendChat", ["content":"i send a chat"])
         }
         
-//        self.socket?.on("chat") { data, ack in
-//            print(data)
-//        }
+        self.socket?.on("chatList") { data, ack in
+            
+            let json = data[0] as! Dictionary<String,AnyObject>
+            let chatList = json["chatList"] as! Array<Dictionary<String,AnyObject>>
+            
+            self.contact?.contactChats?.removeAll()
+            
+            for data in chatList {
+                let chat = Chat(content: data["content"] as! String, isMe: data["isMe"] as! Bool)
+                self.contact?.contactChats?.append(chat)
+            }
+            self.tableView.reloadData()
+            self.scrollToLastRow()
+        }
+        
         
         self.socket?.on("receiveChat") { data, ack in
-            print(data)
             if let content = data[0] as? String {
                 let chat = Chat(content: content, isMe: false)
                 
                 self.contact?.contactChats?.append(chat)
                 self.tableView.reloadData()
+                
 
             }
-            
         }
         
         self.socket?.on("disconnect") { data, ack in
@@ -157,11 +197,15 @@ extension ContactViewController {
             
         }
         
-        self.socket?.on("joinRoom") { data, ack in
-            print(data)
-            
+        self.socket?.on("reconnect") { data, ack in
+            print("reconnect")
         }
         
+
+       
+        
+        
+       
 //        self.socket?.on("error") { data, ack in
 //            print("server error")
 //            self.socket?.disconnect()
