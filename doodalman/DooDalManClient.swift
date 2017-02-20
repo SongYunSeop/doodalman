@@ -27,7 +27,7 @@ class DooDalMan {
     
     var filter = Filter()
     
-    var contactClient: Contact?
+    var contacts = [Contact]()
     
     var authToken: String?
     
@@ -241,11 +241,11 @@ class DooDalMan {
         
     }
     
-    func contact(_ room: Room, _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ error: Error?) -> ()) {
+    func contact(_ room: Room, _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ contact: Contact?, _ error: Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
             let userInfo = [NSLocalizedDescriptionKey: error]
-            compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
+            compeletionHandler(nil, nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
         }
         
         let url = makeURLFromParameters("/rooms/contact/\(room.id!)", nil)
@@ -264,7 +264,7 @@ class DooDalMan {
             }
             
             guard statusCode == HttpStatusCode.Http200_OK else {
-                compeletionHandler(statusCode, nil)
+                compeletionHandler(statusCode, nil, nil)
                 return
             }
             
@@ -273,12 +273,37 @@ class DooDalMan {
                 return
             }
 
-            self.contactClient = contact
-            
-            compeletionHandler(statusCode, nil)
-            
+            compeletionHandler(statusCode, contact, nil)
             
         }
     }
     
+    
+    func fetchContactList(_ room: Room, _ compeletionHandler: @escaping (_ result: [Contact]?, _ error: Error?) -> ()) {
+        func sendError(_ error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey: error]
+            compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
+        }
+        
+        let url = makeURLFromParameters("/rooms/contact/\(room.id!)", nil)
+        
+        Alamofire.request(url).responseObject { (response:  DataResponse<ContactList>) in
+            guard response.result.isSuccess else {
+                sendError("There was an error with your request: \(response.error)")
+                return
+            }
+            
+            let roomsResponse = response.result.value
+            if let contacts = roomsResponse?.contacts {
+                self.contacts = contacts
+            }
+            compeletionHandler([], nil)
+            
+
+
+
+
+        }
+    }
 }

@@ -21,6 +21,7 @@ class RoomViewController: UIViewController {
     @IBOutlet weak var navitationItem: UINavigationItem!
 
     @IBOutlet weak var roomDescription: UITextView!
+    
     var room: Room!
 
     override func viewDidLoad() {
@@ -116,18 +117,33 @@ class RoomViewController: UIViewController {
     @IBAction func contact(_ sender: UIButton) {
         let model = DooDalMan.shared
         
-        model.contact(self.room) { (httpStatusCode, error) in
-            if httpStatusCode == .Http401_Unauthorized {
-                performUIUpdatesOnMain {
-                    let signInVC = self.storyboard?.instantiateViewController(withIdentifier: "signinview") as! SignInViewController
-                    self.present(signInVC, animated: true, completion: nil)
-                }
-                
-            } else if httpStatusCode == .Http200_OK {
-                performUIUpdatesOnMain {
-                    self.performSegue(withIdentifier: "contact", sender: 1)
+        if self.room.isHost {
+            print("I'm the Host.")
+            self.performSegue(withIdentifier: "contactList", sender: 1)
+        } else {
+            model.contact(self.room) { (httpStatusCode, contact, error) in
+                if httpStatusCode == .Http401_Unauthorized {
+                    performUIUpdatesOnMain {
+                        let signInVC = self.storyboard?.instantiateViewController(withIdentifier: "signinview") as! SignInViewController
+                        self.present(signInVC, animated: true, completion: nil)
+                    }
+                    
+                } else if httpStatusCode == .Http200_OK {
+                    performUIUpdatesOnMain {
+                        self.performSegue(withIdentifier: "contact", sender: contact!)
+                    }
                 }
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "contactList" {
+            let contactListVC = segue.destination as! ContactListViewController
+            contactListVC.room = self.room
+        } else if segue.identifier == "contact" {
+            let contactVC = segue.destination as! ContactViewController
+            contactVC.contact = sender as? Contact
         }
     }
     

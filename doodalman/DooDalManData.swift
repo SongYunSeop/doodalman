@@ -112,7 +112,7 @@ class Room: NSObject, MKAnnotation, Mappable {
     
     var isLike: Bool = false
     var isHost: Bool = false
-    
+        
     required init(map: Map) { }
     
     func mapping(map: Map) {
@@ -154,9 +154,22 @@ struct RoomInfo: Mappable {
     }
 }
 
+class ContactList: Mappable {
+    var contacts: [Contact]?
+    
+    required init(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        contacts <- map["contactList"]
+    }
+}
+
 class Contact: Mappable {
     var contactId: Int? = nil
     var contactChats: [Chat]?
+    var username: String?
     
     required init(map: Map) { }
 
@@ -164,26 +177,34 @@ class Contact: Mappable {
     func mapping(map: Map) {
         contactId <- map["id"]
         contactChats <- map["ContactChats"]
-        
+        username <- map["username"]
     }
     
 }
 
 
 class Chat: Mappable {
-    var id: Int?
-    var userId: Int?
+//    var id: Int?
+//    var username: String?
     var content: String?
     var isMe: Bool?
 //    var timestamp: Date
     
+    init(content: String, isMe: Bool) {
+        self.content = content
+        self.isMe = isMe
+    }
+    
     required init(map:Map) { }
     
     func mapping(map: Map) {
-        id <- map["id"]
-        userId <- map["UserId"]
+//        id <- map["id"]
+//        username <- map["username"]
         content <- map["content"]
         isMe <- map["isMe"]
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy.MM.dd"
+//        timestamp <- map["createdAt"]
     }
 }
 

@@ -9,24 +9,37 @@
 import UIKit
 import SocketIO
 
-class ContactViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class ContactViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate{
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var chatInput: UITextField!
     
     var socket: SocketIOClient?
+    var contact: Contact?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let model = DooDalMan.shared
         self.connectSocketIO()
+        chatInput.delegate = self
+        subscribeToKeyboardNotifications()
+
+
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.socket?.disconnect()
+        unsubscribeFromKeyboardNotifications()
+
     }
     
     func connectSocketIO() {
         let model = DooDalMan.shared
-
-        self.socket = SocketIOClient(socketURL: URL(string: "http://omsh.ga")!, config: [.log(false), .forcePolling(false), .path("/io/")])
+        let connectParams = ["token": model.authToken! as AnyObject, "contactId": self.contact?.contactId as AnyObject]
+        self.socket = SocketIOClient(socketURL: URL(string: "http://omsh.ga")!,
+                                     config: [.log(false), .forcePolling(false), .path("/io/"), .connectParams(connectParams) ])
         self.socket?.connect()
-        self.socket?.joinNamespace("/room/\(model.contactClient?.contactId!)")
+        self.configSocketIO()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -34,15 +47,12 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let model = DooDalMan.shared
-        
-        return (model.contactClient?.contactChats!.count)!
+        return (self.contact?.contactChats!.count)!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = DooDalMan.shared
         
-        let chat = model.contactClient?.contactChats?[indexPath.row]
+        let chat = self.contact?.contactChats?[indexPath.row]
         
         if (chat?.isMe!)! {
             let cell = tableView.dequeueReusableCell(withIdentifier: "userChatCell", for: indexPath) as! ContactTableViewCell
@@ -56,13 +66,115 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
             return cell
 
         }
+    }
+    
+    @IBAction func send(_ sender: UIBarButtonItem) {
+        let content = self.chatInput.text!
+        
+        
+        let chat = Chat(content: content, isMe: true)
+        self.contact?.contactChats?.append(chat)
+        
+        self.socket?.emit("sendChat", ["content":content])
+        self.chatInput.text = ""
+        self.tableView.reloadData()
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // test
+    }
+    
+    // Notification 등록
+    func subscribeToKeyboardNotifications() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+        
+    }
+    
+    // Notification 해제
+    func unsubscribeFromKeyboardNotifications() {
+        
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    
+//    // textField 리턴키를 눌렀을 때 키보드 내리는 함수
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
+        
+    }
 //
-//        let model = DooDalMan.shared
-//        cell.roomThumbnail.loadImage(urlString:model.rooms[indexPath.row].thumbnail!)
-//        cell.roomTitle.text = model.rooms[indexPath.row].title
-//        cell.roomAddresss.text = model.rooms[indexPath.row].full_addr
-//        cell.roomPrice.text = model.rooms[indexPath.row].displayedPrice
-//        cell.roomDate.text = model.rooms[indexPath.row].displayedDate
+//    // keybord가 올라올 때 이벤트 핸들러
+    func keyboardWillShow(_ notification:Notification) {
+        //keyboard 높이
+        let keyboardHeight = getKeyboardHeight(notification)
+        view.frame.origin.y = 0 - keyboardHeight
+    }
+//
+//    // keyboard가 내려갈 때 이벤트 핸들러
+    func keyboardWillHide(_ notification: Notification) {
+        view.frame.origin.y = 0
+    }
+//
+//    // keyboard 높이 구하는 함수
+    func getKeyboardHeight(_ notification:Notification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.cgRectValue.height
     }
 
+
+
+}
+
+extension ContactViewController {
+    func configSocketIO() {
+        self.socket?.on("connect") { data, ack in
+            print("connected")
+//            self.socket!.emit("sendChat", ["content":"i send a chat"])
+        }
+        
+//        self.socket?.on("chat") { data, ack in
+//            print(data)
+//        }
+        
+        self.socket?.on("receiveChat") { data, ack in
+            print(data)
+            if let content = data[0] as? String {
+                let chat = Chat(content: content, isMe: false)
+                
+                self.contact?.contactChats?.append(chat)
+                self.tableView.reloadData()
+
+            }
+            
+        }
+        
+        self.socket?.on("disconnect") { data, ack in
+            print("disconnected")
+            
+        }
+        
+        self.socket?.on("joinRoom") { data, ack in
+            print(data)
+            
+        }
+        
+//        self.socket?.on("error") { data, ack in
+//            print("server error")
+//            self.socket?.disconnect()
+//            let alert = UIAlertController(title: "Server Error", message: "Retry after few minute.", preferredStyle: UIAlertControllerStyle.alert)
+//            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { alert in
+//                self.navigationController?.popViewController(animated: true)
+//
+//            }
+//            alert.addAction(okAction)
+//            self.present(alert, animated: true, completion: nil)
+//
+//
+//        }
+
+    }
 }

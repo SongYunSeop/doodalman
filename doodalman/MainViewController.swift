@@ -31,7 +31,11 @@ class MainViewController: UIViewController, FilterViewDelegate, RoomDataDelegate
         self.settingUI()
         
     }
-        
+    
+    @IBAction func logout(_ sender: Any) {
+        let model = DooDalMan.shared
+        model.authToken = nil
+    }
     // UI setting
     func settingUI() {
         let attributes = [NSFontAttributeName: UIFont.fontAwesome(ofSize: 20)] as [String: Any]
@@ -109,4 +113,5 @@ class MainViewController: UIViewController, FilterViewDelegate, RoomDataDelegate
     
 
 }
+
 
