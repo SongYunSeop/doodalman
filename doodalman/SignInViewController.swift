@@ -8,10 +8,16 @@
 
 import UIKit
 
+protocol SignInDelegate {
+    func didSingIn()
+}
+
 class SignInViewController: UIViewController {
 
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
+    
+    var delegate: SignInDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +59,7 @@ class SignInViewController: UIViewController {
                 
             } else if httpStatusCode == .Http200_OK {
                 performUIUpdatesOnMain {
+                    self.delegate?.didSingIn()
                     self.dismiss(animated: true, completion: nil)
                     
                 }

@@ -21,10 +21,3 @@ extension UIView {
         
     }
 }
-
-
-//extension UILabel {
-//    func withPadding() {
-//        self.drawText(in: CGRect(x: 0, y: 0, width: 16, height: 16))
-//    }
-//}

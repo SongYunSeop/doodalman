@@ -62,10 +62,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        if let room = view.annotation as? Room {
-//            self.delegate?.showRoom(room)
-//        }
-        print(view.reuseIdentifier)
+        if view.reuseIdentifier == nil {
+            return
+        }
     }
 
     func fetchRoomData() {

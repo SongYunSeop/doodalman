@@ -15,6 +15,7 @@ class MainViewController: UIViewController, FilterViewDelegate, RoomDataDelegate
     @IBOutlet weak var filterButton: UIBarButtonItem!
     @IBOutlet weak var roomCountLabel: UILabel!
     @IBOutlet weak var toggleButton: UIBarButtonItem!
+    @IBOutlet weak var userButton: UIBarButtonItem!
     
     @IBOutlet weak var mapContainerView: UIView!
     @IBOutlet weak var listContainerView: UIView!
@@ -31,11 +32,7 @@ class MainViewController: UIViewController, FilterViewDelegate, RoomDataDelegate
         self.settingUI()
         
     }
-    
-    @IBAction func logout(_ sender: Any) {
-        let model = DooDalMan.shared
-        model.authToken = nil
-    }
+
     // UI setting
     func settingUI() {
         let attributes = [NSFontAttributeName: UIFont.fontAwesome(ofSize: 20)] as [String: Any]
@@ -43,6 +40,9 @@ class MainViewController: UIViewController, FilterViewDelegate, RoomDataDelegate
         self.filterButton.title = String.fontAwesomeIcon(name: .filter)
         self.toggleButton.setTitleTextAttributes(attributes, for: .normal)
         self.toggleButton.title = String.fontAwesomeIcon(name: .list)
+        self.userButton.setTitleTextAttributes(attributes, for: .normal)
+        self.userButton.title = String.fontAwesomeIcon(name: .user)
+        
     }
     
     // 방 정보가 로드되었을때 호출되는 함수
@@ -74,6 +74,11 @@ class MainViewController: UIViewController, FilterViewDelegate, RoomDataDelegate
         let filterVC = self.storyboard?.instantiateViewController(withIdentifier: "filterview") as! FilterViewController
         filterVC.delegate = self
         self.present(filterVC, animated: true, completion: nil)
+    }
+    
+
+    @IBAction func showUser(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "showUser", sender: sender)
     }
     
     // 화면 전환(맵 뷰 & 테이블 뷰)

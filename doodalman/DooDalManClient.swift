@@ -31,6 +31,8 @@ class DooDalMan {
     
     var authToken: String?
     
+//    var userInfo:
+    
     private func makeURLFromParameters(_ url: String, _ parameters: [String:AnyObject]?) -> URL {
         
         var components = URLComponents()
@@ -195,6 +197,10 @@ class DooDalMan {
                     UserDefaults.standard.set(token, forKey: "authToken")
                     self.authToken = token as? String
                 }
+            } else {
+                UserDefaults.standard.set(false, forKey: "hasSignedBefore")
+                UserDefaults.standard.set(nil, forKey: "authToken")
+                self.authToken = nil
             }
             
             compeletionHandler(statusCode, nil)
@@ -239,6 +245,13 @@ class DooDalMan {
         }
 
         
+    }
+    
+    func logOut(_ compeletionHandler: () -> ()) {
+        self.authToken = nil
+        UserDefaults.standard.set(false, forKey: "hasSignedBefore")
+        UserDefaults.standard.removeObject(forKey: "authToken")
+        compeletionHandler()
     }
     
     func contact(_ room: Room, _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ contact: Contact?, _ error: Error?) -> ()) {

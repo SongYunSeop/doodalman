@@ -137,6 +137,7 @@ class Room: NSObject, MKAnnotation, Mappable {
 
 
     }
+
 }
 
 struct RoomInfo: Mappable {
@@ -209,5 +210,10 @@ class Chat: Mappable {
 //        dateFormatter.dateFormat = "yyyy.MM.dd"
 //        timestamp <- map["createdAt"]
     }
+}
+
+class UserInfo {
+    var username: String?
+    
 }
 
