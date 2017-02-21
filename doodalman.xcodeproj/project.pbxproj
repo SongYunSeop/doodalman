@@ -25,6 +25,8 @@
 		049BCA911E48E18700CC8BB9 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA901E48E18700CC8BB9 /* RoomViewController.swift */; };
 		04AF38351E4D9C7B008F3484 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AF38341E4D9C7B008F3484 /* FilterViewController.swift */; };
 		04BB7D641E51A16700B0AB3D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BB7D631E51A16700B0AB3D /* MapViewController.swift */; };
+		04DE64671E5C030B001E9E37 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE64661E5C030B001E9E37 /* UserViewController.swift */; };
+		04DE64691E5C12AF001E9E37 /* DooDalManExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE64681E5C12AF001E9E37 /* DooDalManExtension.swift */; };
 		04E922601E57203000DE21D5 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9225F1E57203000DE21D5 /* ContactViewController.swift */; };
 		04E922621E57219C00DE21D5 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E922611E57219C00DE21D5 /* ContactTableViewCell.swift */; };
 		04E922681E598B3700DE21D5 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E922671E598B3700DE21D5 /* ContactListViewController.swift */; };
@@ -66,6 +68,8 @@
 		049BCA901E48E18700CC8BB9 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		04AF38341E4D9C7B008F3484 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		04BB7D631E51A16700B0AB3D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		04DE64661E5C030B001E9E37 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		04DE64681E5C12AF001E9E37 /* DooDalManExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DooDalManExtension.swift; sourceTree = "<group>"; };
 		04E9225F1E57203000DE21D5 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		04E922611E57219C00DE21D5 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		04E922671E598B3700DE21D5 /* ContactListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 				047988A01E557904002FDD43 /* SignInViewController.swift */,
 				04E922671E598B3700DE21D5 /* ContactListViewController.swift */,
 				04E9225F1E57203000DE21D5 /* ContactViewController.swift */,
+				04DE64661E5C030B001E9E37 /* UserViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -200,6 +205,7 @@
 			children = (
 				049BCA8C1E48795900CC8BB9 /* common.swift */,
 				046BDA681E4989E400080576 /* Constants.swift */,
+				04DE64681E5C12AF001E9E37 /* DooDalManExtension.swift */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -434,6 +440,7 @@
 				04E922681E598B3700DE21D5 /* ContactListViewController.swift in Sources */,
 				04BB7D641E51A16700B0AB3D /* MapViewController.swift in Sources */,
 				04E922621E57219C00DE21D5 /* ContactTableViewCell.swift in Sources */,
+				04DE64691E5C12AF001E9E37 /* DooDalManExtension.swift in Sources */,
 				046BDA691E4989E400080576 /* Constants.swift in Sources */,
 				049BCA8F1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift in Sources */,
 				049BCA911E48E18700CC8BB9 /* RoomViewController.swift in Sources */,
@@ -445,6 +452,7 @@
 				045CA9F51E484978006C9645 /* MainViewController.swift in Sources */,
 				04E922601E57203000DE21D5 /* ContactViewController.swift in Sources */,
 				045CA9F31E484978006C9645 /* AppDelegate.swift in Sources */,
+				04DE64671E5C030B001E9E37 /* UserViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

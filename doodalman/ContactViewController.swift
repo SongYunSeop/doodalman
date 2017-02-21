@@ -68,7 +68,6 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         cell.contentTextView?.text = chat?.content
-        cell.setSize()
         
         return cell
     }
@@ -87,14 +86,15 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
 
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableViewAutomaticDimension
-//    }
-//
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+//    {
 //        return UITableViewAutomaticDimension
 //    }
 //    
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat
+//    {
+//        return 44.0
+//    }
 //    
     
     
@@ -187,7 +187,8 @@ extension ContactViewController {
                 
                 self.contact?.contactChats?.append(chat)
                 self.tableView.reloadData()
-                
+                self.scrollToLastRow()
+
 
             }
         }
@@ -222,3 +223,4 @@ extension ContactViewController {
 
     }
 }
+

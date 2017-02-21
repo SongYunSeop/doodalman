@@ -25,7 +25,7 @@ class MainViewController: UIViewController, FilterViewDelegate, RoomDataDelegate
     
     let locationManager = CLLocationManager()
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.settingUI()

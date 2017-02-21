@@ -61,11 +61,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.fetchRoomData()
     }
     
-//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 //        if let room = view.annotation as? Room {
 //            self.delegate?.showRoom(room)
 //        }
-//    }
+        print(view.reuseIdentifier)
+    }
 
     func fetchRoomData() {
         let centerLat = self.mapView.region.center.latitude as AnyObject
@@ -105,9 +106,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        // Better to make this class property
-        let annotationIdentifier = "room"
         
+        if annotation.isEqual(self.mapView.userLocation) {
+            return nil
+        }
+        
+        let annotationIdentifier = "room"
+
         var annotationView: MKAnnotationView?
         if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
             annotationView = dequeuedAnnotationView
@@ -116,13 +121,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
             annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             annotationView?.canShowCallout = true
-            annotationView?.image = UIImage(named: "annotation")
+            annotationView?.image = UIImage(named: "house_4")
+            
         }
         
         return annotationView
         
     }
-    
+
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let room = view.annotation
         self.delegate?.showRoom(room as! Room)
