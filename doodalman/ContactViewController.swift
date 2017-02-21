@@ -23,16 +23,16 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         self.connectSocketIO()
         chatInput.delegate = self
+        print("aoweifjawoeifjawoeifjawoeijaweoifjaweofij")
+
         subscribeToKeyboardNotifications()
         self.viewTitle.title = self.contact?.username
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 1000
-
-
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         self.socket?.disconnect()
         unsubscribeFromKeyboardNotifications()
 
@@ -52,7 +52,12 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (self.contact?.contactChats!.count)!
+        if let count = self.contact?.contactChats?.count {
+            return count
+        } else {
+            return 0
+        }
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,18 +90,6 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         self.scrollToLastRow()
 
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-//    {
-//        return UITableViewAutomaticDimension
-//    }
-//    
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat
-//    {
-//        return 44.0
-//    }
-//    
-    
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // test
@@ -150,8 +143,11 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func scrollToLastRow() {
-        let indexPath = IndexPath(row: (self.contact?.contactChats?.count)! - 1 , section: 0)
-        self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        
+        if (self.contact?.contactChats?.count)! > 0 {
+            let indexPath = IndexPath(row: (self.contact?.contactChats?.count)! - 1 , section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
     }
     
 
@@ -161,6 +157,8 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
 
 extension ContactViewController {
     func configSocketIO() {
+        
+        
         self.socket?.on("connect") { data, ack in
             print("connected")
         }

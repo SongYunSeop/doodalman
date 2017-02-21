@@ -49,6 +49,10 @@ class UserTableViewController: UITableViewController, SignInDelegate {
         } else if indexPath.section == 1 {
             
         } else if indexPath.section == 2 {
+            if indexPath.row == 0 {
+                print("chatlist")
+                performSegue(withIdentifier: "userContact", sender: 1)
+            }
             
         } 
 

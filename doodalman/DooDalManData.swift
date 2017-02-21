@@ -174,6 +174,8 @@ class Contact: Mappable {
     var contactId: Int? = nil
     var contactChats: [Chat]?
     var username: String?
+    var thumbnail: String?
+    var title: String?
     
     required init(map: Map) { }
 
@@ -182,6 +184,8 @@ class Contact: Mappable {
         contactId <- map["id"]
         contactChats <- map["ContactChats"]
         username <- map["username"]
+        thumbnail <- map["thumbnail"]
+        title <- map["title"]
     }
     
 }

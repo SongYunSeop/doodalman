@@ -27,6 +27,8 @@
 		04BB7D641E51A16700B0AB3D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BB7D631E51A16700B0AB3D /* MapViewController.swift */; };
 		04DE64691E5C12AF001E9E37 /* DooDalManExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE64681E5C12AF001E9E37 /* DooDalManExtension.swift */; };
 		04DE646B1E5C2DF1001E9E37 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE646A1E5C2DF1001E9E37 /* UserTableViewController.swift */; };
+		04DE646D1E5C6614001E9E37 /* UserContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE646C1E5C6614001E9E37 /* UserContactListViewController.swift */; };
+		04DE646F1E5CB8B0001E9E37 /* UserContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE646E1E5CB8B0001E9E37 /* UserContactTableViewCell.swift */; };
 		04E922601E57203000DE21D5 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9225F1E57203000DE21D5 /* ContactViewController.swift */; };
 		04E922621E57219C00DE21D5 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E922611E57219C00DE21D5 /* ContactTableViewCell.swift */; };
 		04E922681E598B3700DE21D5 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E922671E598B3700DE21D5 /* ContactListViewController.swift */; };
@@ -70,6 +72,8 @@
 		04BB7D631E51A16700B0AB3D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		04DE64681E5C12AF001E9E37 /* DooDalManExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DooDalManExtension.swift; sourceTree = "<group>"; };
 		04DE646A1E5C2DF1001E9E37 /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
+		04DE646C1E5C6614001E9E37 /* UserContactListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserContactListViewController.swift; sourceTree = "<group>"; };
+		04DE646E1E5CB8B0001E9E37 /* UserContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserContactTableViewCell.swift; sourceTree = "<group>"; };
 		04E9225F1E57203000DE21D5 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		04E922611E57219C00DE21D5 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		04E922671E598B3700DE21D5 /* ContactListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 				049BCA8E1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift */,
 				04E922691E59C71F00DE21D5 /* ContactListTableViewCell.swift */,
 				04E922611E57219C00DE21D5 /* ContactTableViewCell.swift */,
+				04DE646E1E5CB8B0001E9E37 /* UserContactTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -178,6 +183,7 @@
 				04E922671E598B3700DE21D5 /* ContactListViewController.swift */,
 				04E9225F1E57203000DE21D5 /* ContactViewController.swift */,
 				04DE646A1E5C2DF1001E9E37 /* UserTableViewController.swift */,
+				04DE646C1E5C6614001E9E37 /* UserContactListViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -440,9 +446,11 @@
 				04E922681E598B3700DE21D5 /* ContactListViewController.swift in Sources */,
 				04BB7D641E51A16700B0AB3D /* MapViewController.swift in Sources */,
 				04E922621E57219C00DE21D5 /* ContactTableViewCell.swift in Sources */,
+				04DE646F1E5CB8B0001E9E37 /* UserContactTableViewCell.swift in Sources */,
 				04DE64691E5C12AF001E9E37 /* DooDalManExtension.swift in Sources */,
 				046BDA691E4989E400080576 /* Constants.swift in Sources */,
 				049BCA8F1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift in Sources */,
+				04DE646D1E5C6614001E9E37 /* UserContactListViewController.swift in Sources */,
 				04DE646B1E5C2DF1001E9E37 /* UserTableViewController.swift in Sources */,
 				049BCA911E48E18700CC8BB9 /* RoomViewController.swift in Sources */,
 				04E9226A1E59C71F00DE21D5 /* ContactListTableViewCell.swift in Sources */,

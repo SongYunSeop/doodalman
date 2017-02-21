@@ -103,7 +103,6 @@ class RoomViewController: UIViewController, SignInDelegate {
                 
             } else if httpStatusCode == .Http200_OK {
                 performUIUpdatesOnMain {
-                    print("good")
                     self.setLikeButtonUI(result!)
 
                 }

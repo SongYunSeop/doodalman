@@ -312,11 +312,31 @@ class DooDalMan {
                 self.contacts = contacts
             }
             compeletionHandler([], nil)
+
+        }
+    }
+    
+    func fetchUesrContactList( _ compeletionHandler: @escaping (_ result: [Contact]?, _ error: Error?) -> ()) {
+        func sendError(_ error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey: error]
+            compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
+        }
+        
+        let url = makeURLFromParameters("/auth/contacts", nil)
+        
+        Alamofire.request(url).responseObject { (response:  DataResponse<ContactList>) in
+            guard response.result.isSuccess else {
+                sendError("There was an error with your request: \(response.error)")
+                return
+            }
             
-
-
-
-
+            let roomsResponse = response.result.value
+            if let contacts = roomsResponse?.contacts {
+                self.contacts = contacts
+            }
+            compeletionHandler([], nil)
+            
         }
     }
 }
