@@ -53,7 +53,10 @@ class MainViewController: UIViewController, FilterViewDelegate, RoomDataDelegate
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotations(model.rooms)
         }
+        roomListViewController?.rooms = model.rooms
+
         if let tableView = self.roomListViewController?.tableView {
+            
             tableView.reloadData()
         }
     }
@@ -107,6 +110,7 @@ class MainViewController: UIViewController, FilterViewDelegate, RoomDataDelegate
         if segue.identifier == "RoomList" {
             self.roomListViewController = segue.destination as? RoomListViewController
             self.roomListViewController?.delegate = self
+            
         } else if segue.identifier == "MapView" {
             self.mapViewController = segue.destination as? MapViewController
             self.mapViewController?.delegate = self

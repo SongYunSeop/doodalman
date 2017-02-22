@@ -15,30 +15,48 @@ class UserTableViewController: UITableViewController, SignInDelegate {
     
     @IBOutlet weak var recentRoomCell: UITableViewCell!
     @IBOutlet weak var likeRoomCell: UITableViewCell!
-    
-//    @IBOutlet weak var signInButton: UIButton!
-//    @IBOutlet weak var logOutButton: UIButton!
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-//        self.checkAuth()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("section: \(indexPath.section), row: \(indexPath.row)")
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let model = DooDalMan.shared
         
+        if model.authToken == nil {
+            if indexPath.section == 0 && indexPath.row == 1 {
+                return 0
+            }
+            if indexPath.section == 3 && indexPath.row == 1 {
+                return 0
+            }
+        } else {
+            if indexPath.section == 0 && indexPath.row == 0 {
+                return 0
+            }
+            if indexPath.section == 3 && indexPath.row == 0 {
+                return 0
+            }
+            
+        }
+        
+        return 44
+    }
+    
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        let model = DooDalMan.shared
+//        
+//        if model.authToken == nil && section == 2 {
+//            return 0
+//        }
+//        
+//        return 22
+//    }
+
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 || indexPath.section == 3{
             if indexPath.row == 0 {
                 self.signIn()
@@ -47,11 +65,19 @@ class UserTableViewController: UITableViewController, SignInDelegate {
                 self.logOut()
             }
         } else if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                self.recentRooms()
+            } else if indexPath.row == 1 {
+                self.likeRooms()
+            } else if indexPath.row == 2 {
+                self.contactRooms()
+            }
             
         } else if indexPath.section == 2 {
             if indexPath.row == 0 {
-                print("chatlist")
-                performSegue(withIdentifier: "userContact", sender: 1)
+                self.showMyRoom()
+            } else {
+                self.addRoom()
             }
             
         } 
@@ -81,31 +107,68 @@ class UserTableViewController: UITableViewController, SignInDelegate {
 
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let model = DooDalMan.shared
-        
-        if model.authToken == nil {
-            if indexPath.section == 0 && indexPath.row == 1 {
-                return 0
-            }
-            if indexPath.section == 3 && indexPath.row == 1 {
-                return 0
-            }
-        } else {
-            if indexPath.section == 0 && indexPath.row == 0 {
-                return 0
-            }
-            if indexPath.section == 3 && indexPath.row == 0 {
-                return 0
-            }
-        }
-        
-        return 44
-    }
-    
-    
     func didSingIn() {
         self.tableView.reloadData()
     }
+    
+    
+    func recentRooms() {
+        print("recent Room")
+    }
+    
+    func likeRooms() {
+        let model = DooDalMan.shared
+        
+        if model.authToken == nil {
+            self.signIn()
+        } else {
+            model.fetchLikeRooms({ resut, error in
+                performUIUpdatesOnMain {
+                    self.performSegue(withIdentifier: "RoomList", sender: model.likeRooms)
+                }
+            })
+        }
+    }
 
+    func contactRooms() {
+        let model = DooDalMan.shared
+        
+        if model.authToken == nil {
+            self.signIn()
+        } else {
+            model.fetchUesrContactList({ result, error in
+                performUIUpdatesOnMain {
+                    self.performSegue(withIdentifier: "RoomList", sender: model.contactRooms)
+                }
+            })
+            
+        }
+    }
+    
+    func showMyRoom() {
+        let model = DooDalMan.shared
+        
+        if model.authToken == nil {
+            self.signIn()
+        } else {
+            print("show my room")
+        }
+    }
+    
+    func addRoom() {
+        let model = DooDalMan.shared
+        
+        if model.authToken == nil {
+            self.signIn()
+        } else {
+            print("add room")
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "RoomList" {
+            let roomListVC = segue.destination as! RoomListViewController
+            roomListVC.rooms = sender as! [Room]
+        }
+    }
 }

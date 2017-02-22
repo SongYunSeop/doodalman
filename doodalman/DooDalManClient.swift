@@ -31,6 +31,10 @@ class DooDalMan {
     
     var authToken: String?
     
+    var likeRooms = [Room]()
+    
+    var contactRooms = [Room]()
+    
 //    var userInfo:
     
     private func makeURLFromParameters(_ url: String, _ parameters: [String:AnyObject]?) -> URL {
@@ -325,18 +329,42 @@ class DooDalMan {
         
         let url = makeURLFromParameters("/auth/contacts", nil)
         
-        Alamofire.request(url).responseObject { (response:  DataResponse<ContactList>) in
+        Alamofire.request(url).responseObject { (response:  DataResponse<RoomsResponse>) in
             guard response.result.isSuccess else {
                 sendError("There was an error with your request: \(response.error)")
                 return
             }
             
             let roomsResponse = response.result.value
-            if let contacts = roomsResponse?.contacts {
-                self.contacts = contacts
+            if let rooms = roomsResponse?.rooms {
+                self.contactRooms = rooms
             }
             compeletionHandler([], nil)
             
         }
+    }
+    
+    func fetchLikeRooms( _ compeletionHandler: @escaping (_ result: [Contact]?, _ error: Error?) -> ()) {
+        func sendError(_ error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey: error]
+            compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
+        }
+        
+        let url = makeURLFromParameters("/auth/likes", nil)
+        
+        Alamofire.request(url).responseObject { (response: DataResponse<RoomsResponse>) in
+            guard response.result.isSuccess else {
+                sendError("There was an error with your request: \(response.error)")
+                return
+            }
+            
+            let roomsResponse = response.result.value
+            if let rooms = roomsResponse?.rooms {
+                self.likeRooms = rooms
+            }
+            compeletionHandler([], nil)
+        }
+
     }
 }

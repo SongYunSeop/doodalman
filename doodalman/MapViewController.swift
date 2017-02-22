@@ -35,6 +35,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.gpsButton.setTitle(String.fontAwesomeIcon(name: .locationArrow), for: .normal)
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        print("appear")
+//        self.fetchRoomData()
+//    }
+
     func initMap() {
         // default location
         let center = CLLocationCoordinate2D(latitude: 37.497395, longitude: 127.02933)
@@ -68,6 +74,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
 
     func fetchRoomData() {
+        print("fetched!!!")
         let centerLat = self.mapView.region.center.latitude as AnyObject
         let centerLon = self.mapView.region.center.longitude as AnyObject
         let spanLat = self.mapView.region.span.latitudeDelta as AnyObject

@@ -23,7 +23,6 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         self.connectSocketIO()
         chatInput.delegate = self
-        print("aoweifjawoeifjawoeifjawoeijaweoifjaweofij")
 
         subscribeToKeyboardNotifications()
         self.viewTitle.title = self.contact?.username
