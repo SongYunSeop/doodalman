@@ -28,6 +28,8 @@
 		04DE64691E5C12AF001E9E37 /* DooDalManExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE64681E5C12AF001E9E37 /* DooDalManExtension.swift */; };
 		04DE646B1E5C2DF1001E9E37 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE646A1E5C2DF1001E9E37 /* UserTableViewController.swift */; };
 		04DE646F1E5CB8B0001E9E37 /* UserContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE646E1E5CB8B0001E9E37 /* UserContactTableViewCell.swift */; };
+		04DE64731E5DB1B0001E9E37 /* RoomAddTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE64721E5DB1B0001E9E37 /* RoomAddTableViewController.swift */; };
+		04DE64751E5DB915001E9E37 /* RoomPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE64741E5DB915001E9E37 /* RoomPhotoCollectionViewCell.swift */; };
 		04E922601E57203000DE21D5 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9225F1E57203000DE21D5 /* ContactViewController.swift */; };
 		04E922621E57219C00DE21D5 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E922611E57219C00DE21D5 /* ContactTableViewCell.swift */; };
 		04E922681E598B3700DE21D5 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E922671E598B3700DE21D5 /* ContactListViewController.swift */; };
@@ -72,6 +74,8 @@
 		04DE64681E5C12AF001E9E37 /* DooDalManExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DooDalManExtension.swift; sourceTree = "<group>"; };
 		04DE646A1E5C2DF1001E9E37 /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
 		04DE646E1E5CB8B0001E9E37 /* UserContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserContactTableViewCell.swift; sourceTree = "<group>"; };
+		04DE64721E5DB1B0001E9E37 /* RoomAddTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomAddTableViewController.swift; sourceTree = "<group>"; };
+		04DE64741E5DB915001E9E37 /* RoomPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		04E9225F1E57203000DE21D5 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		04E922611E57219C00DE21D5 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		04E922671E598B3700DE21D5 /* ContactListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 				04E922691E59C71F00DE21D5 /* ContactListTableViewCell.swift */,
 				04E922611E57219C00DE21D5 /* ContactTableViewCell.swift */,
 				04DE646E1E5CB8B0001E9E37 /* UserContactTableViewCell.swift */,
+				04DE64741E5DB915001E9E37 /* RoomPhotoCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 				04E922671E598B3700DE21D5 /* ContactListViewController.swift */,
 				04E9225F1E57203000DE21D5 /* ContactViewController.swift */,
 				04DE646A1E5C2DF1001E9E37 /* UserTableViewController.swift */,
+				04DE64721E5DB1B0001E9E37 /* RoomAddTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -436,6 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04DE64731E5DB1B0001E9E37 /* RoomAddTableViewController.swift in Sources */,
 				047988A11E557904002FDD43 /* SignInViewController.swift in Sources */,
 				0479889F1E557812002FDD43 /* DooDalManData.swift in Sources */,
 				046BDA6B1E4999F900080576 /* GCDBlackBox.swift in Sources */,
@@ -448,6 +455,7 @@
 				046BDA691E4989E400080576 /* Constants.swift in Sources */,
 				049BCA8F1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift in Sources */,
 				04DE646B1E5C2DF1001E9E37 /* UserTableViewController.swift in Sources */,
+				04DE64751E5DB915001E9E37 /* RoomPhotoCollectionViewCell.swift in Sources */,
 				049BCA911E48E18700CC8BB9 /* RoomViewController.swift in Sources */,
 				04E9226A1E59C71F00DE21D5 /* ContactListTableViewCell.swift in Sources */,
 				047F7EFB1E541C8500A258C0 /* SignUpViewController.swift in Sources */,

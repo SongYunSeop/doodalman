@@ -216,8 +216,30 @@ class Chat: Mappable {
     }
 }
 
-class UserInfo {
+class UserInfo: Mappable {
+    var email: String?
     var username: String?
+    
+    var likeRooms: [Room]?
+    var contactRooms: [Room]?
+    var hasRoom: Bool?
+    var myRoom: Room?
+    
+//    init(content:)
+    
+    required init(map: Map) { }
+    
+    func mapping(map: Map) {
+        email <- map["email"]
+        username <- map["uesrname"]
+        likeRooms <- map["RoomLikes"]
+        contactRooms <- map["Contacts"]
+        hasRoom <- map["hasRoom"]
+        myRoom <- map["Rooms"]
+        
+        
+    }
+    
     
 }
 

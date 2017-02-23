@@ -15,6 +15,7 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var chatInput: UITextField!
     @IBOutlet weak var viewTitle: UINavigationItem!
+    @IBOutlet weak var toolbar: UIToolbar!
 
     var socket: SocketIOClient?
     var contact: Contact?
@@ -28,6 +29,8 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         self.viewTitle.title = self.contact?.username
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 1000
+        self.hideKeyboardWhenTappedAround()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -116,19 +119,37 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         return true
         
     }
-//
+
 //    // keybord가 올라올 때 이벤트 핸들러
     func keyboardWillShow(_ notification:Notification) {
         //keyboard 높이
+        
         let keyboardHeight = getKeyboardHeight(notification)
-        view.frame.origin.y = 0 - keyboardHeight
+
+        self.toolbar.frame.origin.y -= keyboardHeight
+        
+        
+        self.tableView.contentInset.bottom = keyboardHeight
+        self.tableView.scrollIndicatorInsets.bottom = keyboardHeight
+
+        self.scrollToLastRow()
+
+        
+        
     }
-//
+
 //    // keyboard가 내려갈 때 이벤트 핸들러
     func keyboardWillHide(_ notification: Notification) {
-        view.frame.origin.y = 0
+
+        let toolbarHeight = self.toolbar.frame.height
+        self.toolbar.frame.origin.y = self.view.frame.height - toolbarHeight
+        self.tableView.contentInset.bottom = 0
+        self.tableView.scrollIndicatorInsets.bottom = 0
+
+//        self.scrollToLastRow()
+
     }
-//
+
 //    // keyboard 높이 구하는 함수
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
         let userInfo = notification.userInfo

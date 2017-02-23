@@ -18,7 +18,11 @@ class UserTableViewController: UITableViewController, SignInDelegate {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let model = DooDalMan.shared
+        
+        if model.authToken != nil {
+            self.fetchUserInfo()
+        }
     }
 
     // MARK: - Table view data source
@@ -32,6 +36,9 @@ class UserTableViewController: UITableViewController, SignInDelegate {
             if indexPath.section == 3 && indexPath.row == 1 {
                 return 0
             }
+            if indexPath.section == 2 && indexPath.row == 1 {
+                return 0
+            }
         } else {
             if indexPath.section == 0 && indexPath.row == 0 {
                 return 0
@@ -39,22 +46,27 @@ class UserTableViewController: UITableViewController, SignInDelegate {
             if indexPath.section == 3 && indexPath.row == 0 {
                 return 0
             }
+
+            if let hasRoom = model.userInfo?.hasRoom! {
+//                print("awefawef")
+                if hasRoom {
+                    if indexPath.section == 2 && indexPath.row == 0 {
+                        return 0
+                    }
+
+                } else {
+                    if indexPath.section == 2 && indexPath.row == 1 {
+                        return 0
+                    }
+
+                }
+            }
+        
             
         }
         
         return 44
     }
-    
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        let model = DooDalMan.shared
-//        
-//        if model.authToken == nil && section == 2 {
-//            return 0
-//        }
-//        
-//        return 22
-//    }
-
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 || indexPath.section == 3{
@@ -75,14 +87,24 @@ class UserTableViewController: UITableViewController, SignInDelegate {
             
         } else if indexPath.section == 2 {
             if indexPath.row == 0 {
-                self.showMyRoom()
-            } else {
                 self.addRoom()
+            } else {
+                self.showMyRoom()
             }
             
-        } 
-
+        }
+    }
+    
+    func fetchUserInfo() {
+        let model = DooDalMan.shared
         
+        model.fetchUserInfo { result, error in
+            performUIUpdatesOnMain {
+                print("succ")
+                self.tableView.reloadData()
+            }
+            
+        }
     }
     
     func signIn() {
@@ -108,7 +130,8 @@ class UserTableViewController: UITableViewController, SignInDelegate {
     }
     
     func didSingIn() {
-        self.tableView.reloadData()
+        self.fetchUserInfo()
+//        self.tableView.reloadData()
     }
     
     
@@ -116,17 +139,14 @@ class UserTableViewController: UITableViewController, SignInDelegate {
         print("recent Room")
     }
     
+    
     func likeRooms() {
         let model = DooDalMan.shared
         
         if model.authToken == nil {
             self.signIn()
         } else {
-            model.fetchLikeRooms({ resut, error in
-                performUIUpdatesOnMain {
-                    self.performSegue(withIdentifier: "RoomList", sender: model.likeRooms)
-                }
-            })
+            self.performSegue(withIdentifier: "RoomList", sender: model.userInfo?.likeRooms)
         }
     }
 
@@ -136,12 +156,7 @@ class UserTableViewController: UITableViewController, SignInDelegate {
         if model.authToken == nil {
             self.signIn()
         } else {
-            model.fetchUesrContactList({ result, error in
-                performUIUpdatesOnMain {
-                    self.performSegue(withIdentifier: "RoomList", sender: model.contactRooms)
-                }
-            })
-            
+            self.performSegue(withIdentifier: "RoomList", sender: model.userInfo?.contactRooms)
         }
     }
     
@@ -152,6 +167,8 @@ class UserTableViewController: UITableViewController, SignInDelegate {
             self.signIn()
         } else {
             print("show my room")
+            self.performSegue(withIdentifier: "showRoom", sender: model.userInfo?.myRoom)
+            
         }
     }
     
@@ -161,7 +178,8 @@ class UserTableViewController: UITableViewController, SignInDelegate {
         if model.authToken == nil {
             self.signIn()
         } else {
-            print("add room")
+            self.performSegue(withIdentifier: "AddRoom", sender: 1)
+//            print("add room")
         }
     }
     
@@ -169,6 +187,9 @@ class UserTableViewController: UITableViewController, SignInDelegate {
         if segue.identifier == "RoomList" {
             let roomListVC = segue.destination as! RoomListViewController
             roomListVC.rooms = sender as! [Room]
+        } else if segue.identifier == "showRoom" {
+            let roomVC = segue.destination as! RoomViewController
+            roomVC.room = sender as! Room
         }
     }
 }

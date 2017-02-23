@@ -127,7 +127,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
             annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             annotationView?.canShowCallout = true
-            annotationView?.image = UIImage(named: "house_4")
+            annotationView?.image = UIImage(named: "house")
             
         }
         

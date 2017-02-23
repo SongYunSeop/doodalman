@@ -35,7 +35,7 @@ class DooDalMan {
     
     var contactRooms = [Room]()
     
-//    var userInfo:
+    var userInfo: UserInfo?
     
     private func makeURLFromParameters(_ url: String, _ parameters: [String:AnyObject]?) -> URL {
         
@@ -320,7 +320,7 @@ class DooDalMan {
         }
     }
     
-    func fetchUesrContactList( _ compeletionHandler: @escaping (_ result: [Contact]?, _ error: Error?) -> ()) {
+    func fetchUserContactList( _ compeletionHandler: @escaping (_ result: [Contact]?, _ error: Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
             let userInfo = [NSLocalizedDescriptionKey: error]
@@ -365,6 +365,76 @@ class DooDalMan {
             }
             compeletionHandler([], nil)
         }
+
+    }
+    
+    func fetchUserInfo(_ compeletionHandler: @escaping (_ result: [Contact]?, _ error: Error?) -> ()) {
+        func sendError(_ error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey: error]
+            compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
+        }
+        
+        let url = makeURLFromParameters("/auth/info", nil)
+        
+        Alamofire.request(url).responseObject { (response: DataResponse<UserInfo>) in
+            guard response.result.isSuccess else {
+                sendError("There was an error with your request: \(response.error)")
+                return
+            }
+            
+            if let userInfo = response.result.value {
+                self.userInfo = userInfo
+            }
+            
+            compeletionHandler([], nil)
+        }
+
+    }
+    
+    func addRoom(_ parameters:[String: AnyObject], _ compeletionHandler: @escaping (_ roomList:[Room]?, _ error:Error?) -> ()) {
+        func sendError(_ error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey: error]
+            compeletionHandler(nil, NSError(domain: "someError", code: 1, userInfo: userInfo))
+        }
+        let url = makeURLFromParameters("/rooms/add", nil)
+
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                
+                for (key, value) in parameters {
+                    if key == "photos" {
+                        let photos = value as! [UIImage]
+                        for photo in photos {
+                            
+                            if let imageData = UIImageJPEGRepresentation(photo.resize(size: CGSize(width: 375 * 2, height: 256 * 2)), 0.5) {
+
+                                multipartFormData.append(imageData, withName: "roomPhoto", fileName: "roomPhoto.jpg", mimeType: "image/jpeg")
+
+                            }
+                        }
+                    }
+                    else {
+                        multipartFormData.append(value.data(using: String.Encoding.utf8.rawValue)!, withName: key)
+                    }
+                }
+            },
+            to: url,
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    print("encode weif")
+                    upload.responseJSON { response in
+                        debugPrint(response)
+                        compeletionHandler(nil, nil)
+                    }
+                case .failure(let encodingError):
+                    print(encodingError)
+                }
+            }
+
+        )
 
     }
 }

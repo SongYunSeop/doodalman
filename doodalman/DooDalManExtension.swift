@@ -21,3 +21,47 @@ extension UIView {
         
     }
 }
+
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        print("Taeta")
+//        if view.isedit
+        view.endEditing(true)
+    }
+}
+
+
+extension UIImage {
+    func resize(size: CGSize) -> UIImage {
+        let originSize = self.size
+        
+        let widthRatio = size.width / originSize.width
+        let heightRatio = size.height / originSize.height
+        
+        var newSize: CGSize
+        
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: originSize.width * heightRatio, height: originSize.height * heightRatio)
+
+        } else {
+            newSize = CGSize(width: originSize.height * heightRatio, height: originSize.height * heightRatio)
+
+        }
+
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        self.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+}

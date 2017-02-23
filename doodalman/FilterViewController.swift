@@ -35,7 +35,7 @@ class FilterViewController: UIViewController {
         self.dateFormatter.timeStyle = DateFormatter.Style.none
         self.initDatePicker()
         self.setUI()
-
+        self.hideKeyboardWhenTappedAround()
     }
 
     @IBAction func closeModal(_ sender: Any) {
