@@ -445,7 +445,7 @@
             </objects>
             <point key="canvasLocation" x="1402" y="-545"/>
         </scene>
-        <!--Room Add Table View Controller-->
+        <!--방 등록-->
         <scene sceneID="dxm-w3-05T">
             <objects>
                 <tableViewController id="mzm-eD-S7W" customClass="RoomAddTableViewController" customModule="doodalman" customModuleProvider="target" sceneMemberID="viewController">
@@ -746,6 +746,7 @@
                             <outlet property="delegate" destination="mzm-eD-S7W" id="JqU-ND-5gG"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="방 등록" id="T1D-za-gCm"/>
                     <connections>
                         <outlet property="addressLabel" destination="yMt-cQ-WvP" id="eWi-1L-IH7"/>
                         <outlet property="endDate" destination="xVN-oE-E1n" id="BQ0-tu-8Jg"/>
@@ -911,7 +912,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="36" id="Pgx-e7-ytB"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <color key="textColor" red="0.99064570669999996" green="0.2949601114" blue="0.45124942060000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -934,7 +935,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="36" id="e0Y-uw-aKv"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -957,7 +958,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="36" id="xCC-St-W06"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <color key="textColor" red="0.082352941176470587" green="0.47058823529411764" blue="0.066666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -987,7 +988,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="36" id="5sE-Ro-Wd9"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <color key="textColor" red="0.16078431369999999" green="0.58039215690000001" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -1480,7 +1481,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjB-z3-Kil">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjB-z3-Kil" customClass="PaddingLabel" customModule="doodalman" customModuleProvider="target">
                                                     <rect key="frame" x="323" y="8" width="44" height="22"/>
                                                     <color key="backgroundColor" red="0.16078431369999999" green="0.58039215690000001" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -1506,9 +1507,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBw-5y-110">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBw-5y-110" customClass="PaddingLabel" customModule="doodalman" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="8" width="44" height="22"/>
-                                                    <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.91749829053878784" green="0.91740959882736206" blue="0.93386024236679077" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1541,7 +1542,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" spellCheckingType="no"/>
                                         </textField>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="hez-rp-Irb"/>

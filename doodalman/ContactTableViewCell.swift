@@ -15,7 +15,7 @@ class ContactTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.contentTextView.layer.cornerRadius = 12.0
+        self.contentTextView.layer.cornerRadius = 8.0
         
         
     }

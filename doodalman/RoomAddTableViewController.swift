@@ -166,6 +166,8 @@ class RoomAddTableViewController: UITableViewController, UIImagePickerController
     }
     
     func addRoom() {
+//        self.dismiss(animated: true, completion: nil)
+
         if self.priceLabel.text == "" || self.startDate.text == "" || self.endDate.text == "" || self.roomDescription.text == "" || self.centerAnnotation == nil {
             let alert = UIAlertController(title: "모든 정보를 입력해주세요", message: "", preferredStyle: UIAlertControllerStyle.alert)
             let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
@@ -186,6 +188,8 @@ class RoomAddTableViewController: UITableViewController, UIImagePickerController
             
             model.addRoom(parameters) { (result, error) in
                 print("room add success")
+                self.navigationController?.popViewController(animated: true)
+
             }
 
         }

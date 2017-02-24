@@ -46,7 +46,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let center = CLLocationCoordinate2D(latitude: 37.497395, longitude: 127.02933)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
         self.mapView.setRegion(region, animated: false)
-        self.mapView.showsUserLocation = true
+//        self.mapView.showsUserLocation = true
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

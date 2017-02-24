@@ -94,9 +94,9 @@ class RoomViewController: UIViewController, SignInDelegate, MKMapViewDelegate {
                 for (i , photo) in self.room.photoList!.enumerated() {
                     let imageView = UIImageView()
                     imageView.loadImage(urlString: photo)
-                    let xPosition = self.view.frame.width * CGFloat(i + 1)
+                    let xPosition = self.view.frame.width * CGFloat(i )
                     imageView.frame = CGRect(x: xPosition, y: 0, width: self.roomPhotos.frame.width, height: self.roomPhotos.frame.height)
-                    self.roomPhotos.contentSize.width = self.roomPhotos.frame.width * CGFloat(i + 2)
+                    self.roomPhotos.contentSize.width = self.roomPhotos.frame.width * CGFloat(i + 1)
                     self.roomPhotos.addSubview(imageView)
                 }
             }
