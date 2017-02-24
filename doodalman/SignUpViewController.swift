@@ -16,6 +16,8 @@ class SignUpViewController: UIViewController {
     
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
+    var delegate: SignInDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,12 +28,8 @@ class SignUpViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     @IBAction func cancelSignUp(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
-//        var save = UserDefaults.standard
-        // 키어쩌구
-
     }
     
     @IBAction func signUp(_ sender: UIButton) {
@@ -43,8 +41,24 @@ class SignUpViewController: UIViewController {
         let parameters:[String: AnyObject] = ["email": email, "password": password, "username": username ]
         let model = DooDalMan.shared
         
-        model.signUp(parameters) { result, error in
-            print("test")
+        model.signUp(parameters) { httpStatusCode, error in
+            if httpStatusCode == .Http400_BadRequest {
+                performUIUpdatesOnMain {
+                    let alert = UIAlertController(title: "이미 가입된 Email 주소입니다.", message: "", preferredStyle: UIAlertControllerStyle.alert)
+                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
+                    alert.addAction(okAction)
+                    
+                    self.present(alert, animated: true, completion: nil)
+                    
+                }
+                
+            } else if httpStatusCode == .Http200_OK {
+                performUIUpdatesOnMain {
+                    self.delegate?.didSingIn()
+                    self.dismiss(animated: true, completion: nil)
+                    
+                }
+            }
         }
     }
     

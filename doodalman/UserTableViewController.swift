@@ -9,13 +9,11 @@
 import UIKit
 
 class UserTableViewController: UITableViewController, SignInDelegate {
+
+    @IBOutlet weak var likeCountLabel: UILabel!
+    @IBOutlet weak var contactCountLabel: UILabel!
     
-    @IBOutlet weak var authCell: UITableViewCell!
-    @IBOutlet weak var logOutCell: UITableViewCell!
     
-    @IBOutlet weak var recentRoomCell: UITableViewCell!
-    @IBOutlet weak var likeRoomCell: UITableViewCell!
-        
     override func viewDidLoad() {
         super.viewDidLoad()
         let model = DooDalMan.shared
@@ -23,6 +21,17 @@ class UserTableViewController: UITableViewController, SignInDelegate {
         if model.authToken != nil {
             self.fetchUserInfo()
         }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+//        let model = DooDalMan.shared
+//        
+//        if model.authToken != nil {
+//            self.fetchUserInfo()
+//        }
     }
 
     // MARK: - Table view data source
@@ -48,7 +57,6 @@ class UserTableViewController: UITableViewController, SignInDelegate {
             }
 
             if let hasRoom = model.userInfo?.hasRoom! {
-//                print("awefawef")
                 if hasRoom {
                     if indexPath.section == 2 && indexPath.row == 0 {
                         return 0
@@ -101,16 +109,27 @@ class UserTableViewController: UITableViewController, SignInDelegate {
         model.fetchUserInfo { result, error in
             performUIUpdatesOnMain {
                 print("succ")
+                if let userInfo = model.userInfo {
+                    if let likeCount = userInfo.likeRooms?.count {
+                        self.likeCountLabel.text = "\(likeCount)"
+                    }
+                    
+                    if let contactCount = userInfo.contactRooms?.count {
+                        self.contactCountLabel.text = "\(contactCount)"
+                    }
+                }
                 self.tableView.reloadData()
             }
             
         }
     }
     
-    func signIn() {
+    func signIn() {        
         let signInVC = self.storyboard?.instantiateViewController(withIdentifier: "signinview") as! SignInViewController
+        let navigationController = UINavigationController(rootViewController: signInVC)
+
         signInVC.delegate = self
-        self.present(signInVC, animated: true, completion: nil)
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     func logOut() {
@@ -122,7 +141,8 @@ class UserTableViewController: UITableViewController, SignInDelegate {
                     self.tableView.reloadData()
                 }
                 alert.addAction(okAction)
-                
+                self.likeCountLabel.text = ""
+                self.contactCountLabel.text = ""
                 self.present(alert, animated: true, completion: nil)
             }
         }
@@ -166,7 +186,6 @@ class UserTableViewController: UITableViewController, SignInDelegate {
         if model.authToken == nil {
             self.signIn()
         } else {
-            print("show my room")
             self.performSegue(withIdentifier: "showRoom", sender: model.userInfo?.myRoom)
             
         }
@@ -179,7 +198,6 @@ class UserTableViewController: UITableViewController, SignInDelegate {
             self.signIn()
         } else {
             self.performSegue(withIdentifier: "AddRoom", sender: 1)
-//            print("add room")
         }
     }
     

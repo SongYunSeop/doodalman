@@ -147,7 +147,7 @@ class DooDalMan {
         }
     }
     
-    func signUp(_ parameters: [String: AnyObject], _ compeletionHandler: @escaping (_ result: Bool?, _ error: Error?) -> ()) {
+    func signUp(_ parameters: [String: AnyObject], _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ error: Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
             let userInfo = [NSLocalizedDescriptionKey: error]
@@ -157,18 +157,31 @@ class DooDalMan {
         let url = makeURLFromParameters("/auth/signup", nil)
         
         Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-            if response.result.isSuccess {
-                print("success")
-            } else {
-                print("fail: \(response.result.error?.localizedDescription)")
-                print("fail: \(response.result.value)")
+            guard response.result.isSuccess else {
+                sendError("There was an error with your request: \(response.error)")
                 return
             }
             
-            if let json = response.result.value {
-                print("JSON: \(json)")
-                
+            guard let statusCode:HttpStatusCode = HttpStatusCode(rawValue: (response.response?.statusCode)!) else {
+                return
             }
+            
+            if statusCode == HttpStatusCode.Http200_OK {
+                if let result = response.result.value {
+                    let JSON = result as! Dictionary<String, AnyObject>
+                    let token = JSON["token"]!
+                    UserDefaults.standard.set(true, forKey: "hasSignedBefore")
+                    UserDefaults.standard.set(token, forKey: "authToken")
+                    self.authToken = token as? String
+                }
+            } else {
+                UserDefaults.standard.set(false, forKey: "hasSignedBefore")
+                UserDefaults.standard.set(nil, forKey: "authToken")
+                self.authToken = nil
+            }
+            
+            compeletionHandler(statusCode, nil)
+
         }
         
         

@@ -12,7 +12,7 @@ protocol SignInDelegate {
     func didSingIn()
 }
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, SignInDelegate {
 
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -66,18 +66,21 @@ class SignInViewController: UIViewController {
             }
 
         }
-        
-        
-        
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    func didSingIn() {
+        self.delegate?.didSingIn()
+    }
+    
+    @IBAction func showSignUp(_ sender: Any) {
+        self.performSegue(withIdentifier: "showSignUp", sender: 1)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showSignUp" {
+            let signUpVC = segue.destination as! SignUpViewController
+            signUpVC.delegate = self
+        }
     }
-    */
-
+    
 }

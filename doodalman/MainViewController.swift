@@ -48,7 +48,7 @@ class MainViewController: UIViewController, FilterViewDelegate, RoomDataDelegate
     // 방 정보가 로드되었을때 호출되는 함수
     func roomLoaded() {
         let model = DooDalMan.shared
-        self.roomCountLabel?.text = "Room Count: \(model.rooms.count)"
+        self.roomCountLabel?.text = "\(model.rooms.count) 개의 방"
         if let mapView = self.mapViewController?.mapView {
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotations(model.rooms)

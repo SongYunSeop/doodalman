@@ -44,6 +44,7 @@ class RoomAddTableViewController: UITableViewController, UIImagePickerController
         if self.roomDescription.text == "" {
             self.textViewDidEndEditing(self.roomDescription)
         }
+        self.mapView.delegate = self
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -165,8 +166,7 @@ class RoomAddTableViewController: UITableViewController, UIImagePickerController
     }
     
     func addRoom() {
-        if self.priceLabel.text == "" || self.startDate.text == "" || self.endDate.text == "" || self.centerAnnotation == nil {
-            print("tset")
+        if self.priceLabel.text == "" || self.startDate.text == "" || self.endDate.text == "" || self.roomDescription.text == "" || self.centerAnnotation == nil {
             let alert = UIAlertController(title: "모든 정보를 입력해주세요", message: "", preferredStyle: UIAlertControllerStyle.alert)
             let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
             alert.addAction(okAction)
@@ -176,13 +176,13 @@ class RoomAddTableViewController: UITableViewController, UIImagePickerController
             let price = self.priceLabel.text as AnyObject
             let startDate = self.startDate.text as AnyObject
             let endDate = self.endDate.text as AnyObject
+            let description = self.roomDescription.text as AnyObject
             let latitude = "\((self.centerAnnotation?.coordinate.latitude)!)" as AnyObject
             let longitude = "\((self.centerAnnotation?.coordinate.longitude)!)" as AnyObject
             let full_addr = self.centerAnnotation?.title as AnyObject
-            
             let model = DooDalMan.shared
             
-            let parameters: [String: AnyObject] = ["latitude": latitude, "longitude": longitude, "price":price, "startDate":startDate, "endDate": endDate,  "full_addr": full_addr, "photos": self.photos  as AnyObject, "address": self.subAddress as AnyObject]
+            let parameters: [String: AnyObject] = ["latitude": latitude, "longitude": longitude, "price":price, "startDate":startDate, "endDate": endDate, "description": description, "full_addr": full_addr, "photos": self.photos  as AnyObject, "address": self.subAddress as AnyObject]
             
             model.addRoom(parameters) { (result, error) in
                 print("room add success")

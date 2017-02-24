@@ -16,7 +16,6 @@ enum HttpStatusCode: Int {
     case Http200_OK = 200
     case Http400_BadRequest = 400
     case Http401_Unauthorized = 401
-    case Http402_PaymentRequired = 402
     case Http403_Forbidden = 403
     case Http404_NotFound = 404
     case Http500_InternalServerError = 500
@@ -74,7 +73,7 @@ class Room: NSObject, MKAnnotation, Mappable {
     var subtitle: String?
     var thumbnail: String?
     var photoList: [String]?
-    
+    var username: String?
     var latitude: Double?
     var longitude: Double?
     var coordinate: CLLocationCoordinate2D {
@@ -119,9 +118,10 @@ class Room: NSObject, MKAnnotation, Mappable {
     func mapping(map: Map) {
         
         id <- map["id"]
-        title <- map["title"]
+//        title <- map["title"]
         price <- map["price"]
-        
+        username <- map["username"]
+        title = self.displayedPrice
         thumbnail <- map["thumbnail"]
         latitude <- map["latitude"]
         longitude <- map["longitude"]
@@ -133,7 +133,7 @@ class Room: NSObject, MKAnnotation, Mappable {
         startDate = dateFormatter.date(from: startDateString!)
         endDate = dateFormatter.date(from: endDateString!)
         full_addr <- map["full_addr"]
-        subtitle = "\(self.displayedPrice) / \(self.displayedDate)"
+        subtitle = self.displayedDate
 
 
     }
