@@ -16,7 +16,7 @@
         <scene sceneID="gw7-zh-lQs">
             <objects>
                 <navigationController id="d4I-OZ-JEw" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xJV-da-oMz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xJV-da-oMz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -452,7 +452,7 @@
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Khc-hT-qbE">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="256"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Es1-ge-cL2">
                                                         <size key="itemSize" width="375" height="256"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -492,6 +492,10 @@
                                                         <outlet property="delegate" destination="mzm-eD-S7W" id="Wcz-sV-jPP"/>
                                                     </connections>
                                                 </collectionView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="photoPlaceHolder" translatesAutoresizingMaskIntoConstraints="NO" id="g94-ah-xnI">
+                                                    <rect key="frame" x="0.0" y="-1" width="375" height="256"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -642,7 +646,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="189"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="방 설명을 써주세요." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xQ0-SC-wDV">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xQ0-SC-wDV">
                                                     <rect key="frame" x="8" y="0.0" width="359" height="181"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -680,8 +684,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="269"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="주소" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMt-cQ-WvP">
+                                                    <rect key="frame" x="8" y="8" width="359" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="yEX-Cf-ZzM">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="269"/>
+                                                    <rect key="frame" x="0.0" y="39" width="375" height="230"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </mapView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mapsearch" translatesAutoresizingMaskIntoConstraints="NO" id="5Pv-cg-hQV">
@@ -722,9 +733,11 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="addressLabel" destination="yMt-cQ-WvP" id="eWi-1L-IH7"/>
                         <outlet property="endDate" destination="xVN-oE-E1n" id="BQ0-tu-8Jg"/>
                         <outlet property="mapPlaceHolder" destination="5Pv-cg-hQV" id="H91-Sj-eY4"/>
                         <outlet property="mapView" destination="yEX-Cf-ZzM" id="jv0-Cy-UvV"/>
+                        <outlet property="photoPlaceHolder" destination="g94-ah-xnI" id="Oc6-D2-qPL"/>
                         <outlet property="priceLabel" destination="P61-Jj-0nV" id="6Uw-7a-CEY"/>
                         <outlet property="roomDescription" destination="xQ0-SC-wDV" id="4Nr-sA-ZNy"/>
                         <outlet property="roomPhotos" destination="Khc-hT-qbE" id="lgn-2J-Jy5"/>
@@ -1012,16 +1025,16 @@
                                                     <rect key="frame" x="8" y="8" width="359" height="63"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gkT-hX-BYe">
-                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="32"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="31.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOJ-3B-GAy">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="180" height="32"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="179.5" height="31.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timestamp" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9w-nf-LfH">
-                                                                    <rect key="frame" x="180" y="0.0" width="179" height="32"/>
+                                                                    <rect key="frame" x="179.5" y="0.0" width="179.5" height="31.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -1029,7 +1042,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9da-Vx-dYR">
-                                                            <rect key="frame" x="0.0" y="32" width="359" height="31"/>
+                                                            <rect key="frame" x="0.0" y="31.5" width="359" height="31.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1423,16 +1436,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JmB-1G-Rlz">
-                                                    <rect key="frame" x="-1" y="0.0" width="376" height="99"/>
+                                                    <rect key="frame" x="-0.5" y="0.0" width="375" height="99"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IIw-Is-Hu7">
-                                                            <rect key="frame" x="0.0" y="0.0" width="121" height="99"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="99"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="120" id="uNe-zb-SvF"/>
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="D5F-U5-tqu">
-                                                            <rect key="frame" x="121" y="0.0" width="255" height="99"/>
+                                                            <rect key="frame" x="120" y="0.0" width="255" height="99"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hk1-mB-r7K">
                                                                     <rect key="frame" x="0.0" y="0.0" width="255" height="33"/>
@@ -1507,6 +1520,7 @@
     </scenes>
     <resources>
         <image name="mapsearch" width="750" height="540"/>
+        <image name="photoPlaceHolder" width="750" height="540"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="VbK-CL-GSR"/>

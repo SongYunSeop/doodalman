@@ -235,7 +235,7 @@ class UserInfo: Mappable {
         likeRooms <- map["RoomLikes"]
         contactRooms <- map["Contacts"]
         hasRoom <- map["hasRoom"]
-        myRoom <- map["Rooms"]
+        myRoom <- map["Room"]
         
         
     }

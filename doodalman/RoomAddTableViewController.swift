@@ -11,7 +11,7 @@ import GooglePlaces
 import MapKit
 
 
-class RoomAddTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class RoomAddTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITextViewDelegate {
     
     @IBOutlet weak var roomPhotos: UICollectionView!
     @IBOutlet weak var priceLabel: UITextField!
@@ -20,6 +20,8 @@ class RoomAddTableViewController: UITableViewController, UIImagePickerController
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapPlaceHolder: UIImageView!
     @IBOutlet weak var roomDescription: UITextView!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var photoPlaceHolder: UIImageView!
     
 
     var photos = Array<UIImage>()
@@ -38,12 +40,10 @@ class RoomAddTableViewController: UITableViewController, UIImagePickerController
         self.dateFormatter.dateStyle = DateFormatter.Style.medium
         self.dateFormatter.timeStyle = DateFormatter.Style.none
         self.initDatePicker()
-
-//        
-//        self.centerAnnotation = MKPointAnnotation()
-//        self.centerAnnotation?.coordinate = CLLocationCoordinate2D(latitude: 37.503158899999995, longitude: 127.09065889999999)
-//        self.centerAnnotation?.title = "대한민국 서울특별시 송파구 삼전동 49-8"
-
+        self.roomDescription.delegate = self
+        if self.roomDescription.text == "" {
+            self.textViewDidEndEditing(self.roomDescription)
+        }
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -58,7 +58,9 @@ class RoomAddTableViewController: UITableViewController, UIImagePickerController
             self.startDate.becomeFirstResponder()
         } else if indexPath.section == 1 && indexPath.row == 2 {
             self.endDate.becomeFirstResponder()
-        } else if indexPath.section == 2 && indexPath.row == 0 {
+        } else if indexPath.section == 2 {
+            self.roomDescription.becomeFirstResponder()
+        } else if indexPath.section == 3 && indexPath.row == 0 {
             let autocompleteController = GMSAutocompleteViewController()
             let filter = GMSAutocompleteFilter()
             filter.country = "KR"
@@ -66,8 +68,6 @@ class RoomAddTableViewController: UITableViewController, UIImagePickerController
             autocompleteController.autocompleteFilter = filter
             autocompleteController.delegate = self
             present(autocompleteController, animated: true, completion: nil)
-        } else if indexPath.section == 3 {
-            self.roomDescription.becomeFirstResponder()
         } else if indexPath.section == 4 {
             self.addRoom()
         }
@@ -83,6 +83,7 @@ class RoomAddTableViewController: UITableViewController, UIImagePickerController
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {        
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            self.photoPlaceHolder.alpha = 0
             self.photos.append(image)
             dismiss(animated: true, completion: nil)
             self.roomPhotos.reloadData()
@@ -99,7 +100,7 @@ class RoomAddTableViewController: UITableViewController, UIImagePickerController
         
         cell.photo.image = self.photos[indexPath.row]
         cell.photoIndexLabel.text = "\(indexPath.row + 1) / \(self.photos.count)"
-        
+        cell.photoIndexLabel.layer.cornerRadius = 12.0
         return cell
     }
     
@@ -145,6 +146,24 @@ class RoomAddTableViewController: UITableViewController, UIImagePickerController
         self.view.endEditing(true)
     }
     
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" {
+            textView.text = "this is placeholder"
+            textView.textColor = UIColor.lightGray
+        }
+        
+        textView.resignFirstResponder()
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "this is placeholder" {
+            textView.text = ""
+            textView.textColor = UIColor.black
+        }
+        
+        textView.becomeFirstResponder()
+    }
+    
     func addRoom() {
         if self.priceLabel.text == "" || self.startDate.text == "" || self.endDate.text == "" || self.centerAnnotation == nil {
             print("tset")
@@ -182,12 +201,12 @@ extension RoomAddTableViewController: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         self.subAddress = ""
         for component in place.addressComponents! {
-            print(component.type)
             if component.type.range(of: "local") != nil || component.type.range(of: "level") != nil {
                 self.subAddress = "\(component.name) " + self.subAddress
             }
         }
         self.place = place
+        self.addressLabel.text = place.formattedAddress
         
         if self.centerAnnotation == nil {
             self.centerAnnotation = MKPointAnnotation()
