@@ -2431,6 +2431,7 @@
 
 			.image.phone .inner, .image.phone:before, .image.phone:after {
 				border-color: #e6e6e6;
+				background: #000;
 			}
 
 			.image.phone .inner:before {
