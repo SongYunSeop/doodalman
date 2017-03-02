@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import KFSwiftImageLoader
+import Nuke
 
 class RoomListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -31,20 +31,20 @@ class RoomListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "roomListCell", for: indexPath) as! RoomListTableViewCell
-                
-        cell.roomThumbnail.loadImage(urlString:self.rooms[indexPath.row].thumbnail!)
-        cell.roomTitle.text = self.rooms[indexPath.row].title
-        cell.roomAddresss.text = self.rooms[indexPath.row].full_addr
+        
+        
+        cell.roomThumbnail.image = nil
+        Nuke.loadImage(with: URL(string: self.rooms[indexPath.row].thumbnail!)!, into: cell.roomThumbnail)
         cell.roomPrice.text = self.rooms[indexPath.row].displayedPrice
         cell.roomDate.text = self.rooms[indexPath.row].displayedDate
+
+        cell.roomAddresss.text = self.rooms[indexPath.row].full_addr
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         self.performSegue(withIdentifier: "showRoom", sender: self.rooms[indexPath.row])
-//        self.delegate?.showRoom(self.rooms[indexPath.row])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

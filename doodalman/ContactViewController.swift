@@ -8,7 +8,6 @@
 
 import UIKit
 import SocketIO
-import SwiftyJSON
 
 class ContactViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate{
 

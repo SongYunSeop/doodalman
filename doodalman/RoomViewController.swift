@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import KFSwiftImageLoader
 import MapKit
+import Nuke
 
 class RoomViewController: UIViewController, SignInDelegate, MKMapViewDelegate {
 
@@ -33,7 +33,6 @@ class RoomViewController: UIViewController, SignInDelegate, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.settingUI()
-        self.initPhotoList()
         self.fetchRoomInfo()
         
     }
@@ -93,7 +92,8 @@ class RoomViewController: UIViewController, SignInDelegate, MKMapViewDelegate {
                 self.setLikeButtonUI(self.room.isLike)
                 for (i , photo) in self.room.photoList!.enumerated() {
                     let imageView = UIImageView()
-                    imageView.loadImage(urlString: photo)
+
+                    Nuke.loadImage(with: URL(string: photo)!, into: imageView)
                     let xPosition = self.view.frame.width * CGFloat(i )
                     imageView.frame = CGRect(x: xPosition, y: 0, width: self.roomPhotos.frame.width, height: self.roomPhotos.frame.height)
                     self.roomPhotos.contentSize.width = self.roomPhotos.frame.width * CGFloat(i + 1)
@@ -101,16 +101,6 @@ class RoomViewController: UIViewController, SignInDelegate, MKMapViewDelegate {
                 }
             }
         }
-    }
-    
-    func initPhotoList() {
-        let imageView = UIImageView()
-        imageView.loadImage(urlString: self.room.thumbnail!)
-        let xPosition = self.view.frame.width * CGFloat(0)
-        imageView.frame = CGRect(x: xPosition, y: 0, width: self.roomPhotos.frame.width, height: self.roomPhotos.frame.height)
-        self.roomPhotos.contentSize.width = self.roomPhotos.frame.width * CGFloat(1)
-        self.roomPhotos.addSubview(imageView)
-       
     }
     
     func setLikeButtonUI(_ isLiked: Bool) {

@@ -17,7 +17,7 @@ protocol RoomDataDelegate {
     
 }
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController {
 
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var gpsButton: UIButton!
@@ -34,12 +34,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.gpsButton.titleLabel?.font = UIFont.fontAwesome(ofSize: 20)
         self.gpsButton.setTitle(String.fontAwesomeIcon(name: .locationArrow), for: .normal)
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        print("appear")
-//        self.fetchRoomData()
-//    }
 
     func initMap() {
         // default location
@@ -49,32 +43,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 //        self.mapView.showsUserLocation = true
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Failed to find user's location: \(error.localizedDescription)")
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            self.locationManager.stopUpdatingLocation()
-            let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
-            self.mapView.setRegion(region, animated: true)
-        }
-    }
-    
-    
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        self.fetchRoomData()
-    }
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if view.reuseIdentifier == nil {
-            return
-        }
-    }
 
     func fetchRoomData() {
-        print("fetched!!!")
         let centerLat = self.mapView.region.center.latitude as AnyObject
         let centerLon = self.mapView.region.center.longitude as AnyObject
         let spanLat = self.mapView.region.span.latitudeDelta as AnyObject
@@ -111,6 +81,33 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         present(autocompleteController, animated: true, completion: nil)
     }
 
+
+}
+
+extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to find user's location: \(error.localizedDescription)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            self.locationManager.stopUpdatingLocation()
+            let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+            self.mapView.setRegion(region, animated: true)
+        }
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        self.fetchRoomData()
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if view.reuseIdentifier == nil {
+            return
+        }
+    }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         if annotation.isEqual(self.mapView.userLocation) {
@@ -118,7 +115,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
         let annotationIdentifier = "room"
-
+        
         var annotationView: MKAnnotationView?
         if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
             annotationView = dequeuedAnnotationView
@@ -134,17 +131,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return annotationView
         
     }
-
+    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let room = view.annotation
         self.delegate?.showRoom(room as! Room)
     }
 
-    
-
-
 }
-
 
 extension MapViewController: GMSAutocompleteViewControllerDelegate {
     
@@ -182,3 +175,4 @@ extension MapViewController: GMSAutocompleteViewControllerDelegate {
     }
     
 }
+

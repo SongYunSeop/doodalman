@@ -10,7 +10,6 @@ import UIKit
 
 class RoomListTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var roomTitle: UILabel!
     @IBOutlet weak var roomThumbnail: UIImageView!    
     @IBOutlet weak var roomAddresss: UILabel!
     @IBOutlet weak var roomPrice: UILabel!
@@ -27,5 +26,6 @@ class RoomListTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
 
 }

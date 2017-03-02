@@ -13,30 +13,38 @@ import AlamofireObjectMapper
 import Alamofire
 import ObjectMapper
 
-import JWT
 
-import SocketIO
-
+// DooDalMan Single tone Model
 class DooDalMan {
     
     static let shared = DooDalMan()
     
+    // RoomListViewController와 MapViewController에서 사용할 방 리스트
     var rooms = [Room]()
     
-    var history = [Int]()
+    // room history
+    // var history = [Int]()
     
+    // 필터 모델
     var filter = Filter()
     
+    // 방 주인일 경우 Contact 리스트를 볼 수있게 사용하는 모델
     var contacts = [Contact]()
     
+    // Auth Token 서버에 요청할 때 포함해서 보내준다
     var authToken: String?
     
+    // 찜한 방 리스트
     var likeRooms = [Room]()
     
+    // 연락한 방 리스트
     var contactRooms = [Room]()
     
+    // 유저 정보
     var userInfo: UserInfo?
     
+    
+    // MARK: - Make URL From Parameters
     private func makeURLFromParameters(_ url: String, _ parameters: [String:AnyObject]?) -> URL {
         
         var components = URLComponents()
@@ -45,6 +53,7 @@ class DooDalMan {
         components.path = url
         components.queryItems = [URLQueryItem]()
 
+        // 파라미터를 URL Query String으로 추가하기 위해 사용
         if let parameters = parameters {
             for (key, value) in parameters {
                 let queryItem = URLQueryItem(name: key, value: "\(value)")
@@ -52,6 +61,7 @@ class DooDalMan {
             }
         }
         
+        // 로그인이 되어있으면 authToken을 가지고 있음
         if let token = self.authToken {
             let queryToken = URLQueryItem(name: "token", value: token)
             components.queryItems!.append(queryToken)
@@ -60,6 +70,7 @@ class DooDalMan {
         return components.url!
     }
     
+    // MARK: Fetch Room List
     func fetchRooms(_ parameters:[String: AnyObject], _ compeletionHandler: @escaping (_ roomList:[Room]?, _ error:Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
@@ -86,6 +97,7 @@ class DooDalMan {
 
     }
     
+    // MARK: - Fetch Room Info
     func fetchRoomInfo(_ room: Room, _ compeletionHandler: @escaping (_ roomInfo: RoomInfo?, _ error: Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
@@ -116,6 +128,7 @@ class DooDalMan {
         }
     }
     
+    // MARK: - Like Room
     func likeRoom(_ room: Room, _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ result: Bool?, _ error: Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
@@ -142,11 +155,11 @@ class DooDalMan {
             }
             
             compeletionHandler(statusCode, result as? Bool,  nil)
-            
-            
         }
     }
     
+    
+    // MARK: - SIGN UP
     func signUp(_ parameters: [String: AnyObject], _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ error: Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
@@ -187,6 +200,7 @@ class DooDalMan {
         
     }
     
+    // MARK: - LOG IN
     func logIn(_ parameters: [String: AnyObject], _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ error: Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
@@ -224,6 +238,7 @@ class DooDalMan {
         }
     }
     
+    // MARK: - LOG IN With Auth Token
     func logIn(withToken token: String, _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ error: Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
@@ -264,6 +279,7 @@ class DooDalMan {
         
     }
     
+    // MARK: - Log Out
     func logOut(_ compeletionHandler: () -> ()) {
         self.authToken = nil
         UserDefaults.standard.set(false, forKey: "hasSignedBefore")
@@ -271,6 +287,7 @@ class DooDalMan {
         compeletionHandler()
     }
     
+    // MARK: - Contact by Guest
     func contact(_ room: Room, _ compeletionHandler: @escaping (_ httpStatusCode: HttpStatusCode?, _ contact: Contact?, _ error: Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
@@ -308,7 +325,7 @@ class DooDalMan {
         }
     }
     
-    
+    // MARK: - Fetch Contact List by Room Host
     func fetchContactList(_ room: Room, _ compeletionHandler: @escaping (_ result: [Contact]?, _ error: Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
@@ -333,7 +350,7 @@ class DooDalMan {
         }
     }
     
-    
+    // MARK: - Fetch User Info
     func fetchUserInfo(_ compeletionHandler: @escaping (_ result: [Contact]?, _ error: Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
@@ -358,6 +375,7 @@ class DooDalMan {
 
     }
     
+    // MARK: - Add Room
     func addRoom(_ parameters:[String: AnyObject], _ compeletionHandler: @escaping (_ roomList:[Room]?, _ error:Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)

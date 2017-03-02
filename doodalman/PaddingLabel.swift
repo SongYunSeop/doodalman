@@ -11,13 +11,13 @@ import UIKit
 class PaddingLabel: UILabel {
     
     override func drawText(in rect: CGRect) {
-        super.drawText(in: rect)
-        super.drawText(in: UIEdgeInsetsInsetRect(rect, UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)))
+//        super.drawText(in: rect)
+        super.drawText(in: UIEdgeInsetsInsetRect(rect, UIEdgeInsets(top: 6, left: 8, bottom: 6, right: 8)))
     }
     override public var intrinsicContentSize: CGSize {
         var intrinsicSuperViewContentSize = super.intrinsicContentSize
-        intrinsicSuperViewContentSize.height += 16
-        intrinsicSuperViewContentSize.width += 8
+        intrinsicSuperViewContentSize.height += 12
+        intrinsicSuperViewContentSize.width += 16
         return intrinsicSuperViewContentSize
     }
 }

@@ -21,20 +21,15 @@ class MainViewController: UIViewController, FilterViewDelegate, RoomDataDelegate
     @IBOutlet weak var listContainerView: UIView!
     
     var mapViewController: MapViewController?
-
     var roomListViewController: RoomListViewController?
-    
-    let locationManager = CLLocationManager()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.settingUI()
-        
+        self.setInitialUI()
     }
 
-    // UI setting
-    func settingUI() {
+    // UI set
+    func setInitialUI() {
         let attributes = [NSFontAttributeName: UIFont.fontAwesome(ofSize: 20)] as [String: Any]
         self.filterButton.setTitleTextAttributes(attributes, for: .normal)
         self.filterButton.title = String.fontAwesomeIcon(name: .filter)
