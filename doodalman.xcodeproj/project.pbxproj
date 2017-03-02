@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0418A59C1E68064500419AE9 /* DDMRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418A59B1E68064500419AE9 /* DDMRoom.swift */; };
+		0418A59E1E68066D00419AE9 /* DDMFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418A59D1E68066D00419AE9 /* DDMFilter.swift */; };
+		0418A5A01E68068700419AE9 /* DDMContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418A59F1E68068700419AE9 /* DDMContact.swift */; };
+		0418A5A21E6806BD00419AE9 /* DDMChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418A5A11E6806BD00419AE9 /* DDMChat.swift */; };
+		0418A5A41E6806DF00419AE9 /* DDMUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418A5A31E6806DF00419AE9 /* DDMUserInfo.swift */; };
 		0421CA861E4B51CC0064EA49 /* DooDalManClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421CA851E4B51CC0064EA49 /* DooDalManClient.swift */; };
 		045CA9F31E484978006C9645 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CA9F21E484978006C9645 /* AppDelegate.swift */; };
 		045CA9F51E484978006C9645 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CA9F41E484978006C9645 /* MainViewController.swift */; };
@@ -17,7 +22,6 @@
 		046BDA6B1E4999F900080576 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BDA6A1E4999F900080576 /* GCDBlackBox.swift */; };
 		046BDA721E49C4A900080576 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BDA711E49C4A900080576 /* RoomListViewController.swift */; };
 		046BDA751E49CA2E00080576 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 046BDA731E49CA2E00080576 /* Main.storyboard */; };
-		0479889F1E557812002FDD43 /* DooDalManData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479889E1E557812002FDD43 /* DooDalManData.swift */; };
 		047988A11E557904002FDD43 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047988A01E557904002FDD43 /* SignInViewController.swift */; };
 		047F7EFB1E541C8500A258C0 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F7EFA1E541C8500A258C0 /* SignUpViewController.swift */; };
 		049BCA8F1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BCA8E1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift */; };
@@ -48,6 +52,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0418A59B1E68064500419AE9 /* DDMRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDMRoom.swift; sourceTree = "<group>"; };
+		0418A59D1E68066D00419AE9 /* DDMFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDMFilter.swift; sourceTree = "<group>"; };
+		0418A59F1E68068700419AE9 /* DDMContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDMContact.swift; sourceTree = "<group>"; };
+		0418A5A11E6806BD00419AE9 /* DDMChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDMChat.swift; sourceTree = "<group>"; };
+		0418A5A31E6806DF00419AE9 /* DDMUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDMUserInfo.swift; sourceTree = "<group>"; };
 		0421CA851E4B51CC0064EA49 /* DooDalManClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DooDalManClient.swift; sourceTree = "<group>"; };
 		045CA9EF1E484978006C9645 /* doodalman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = doodalman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045CA9F21E484978006C9645 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,7 +71,6 @@
 		046BDA6A1E4999F900080576 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		046BDA711E49C4A900080576 /* RoomListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListViewController.swift; sourceTree = "<group>"; };
 		046BDA741E49CA2E00080576 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0479889E1E557812002FDD43 /* DooDalManData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DooDalManData.swift; sourceTree = "<group>"; };
 		047988A01E557904002FDD43 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		047F7EFA1E541C8500A258C0 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		049BCA8E1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListTableViewCell.swift; sourceTree = "<group>"; };
@@ -154,7 +162,11 @@
 			isa = PBXGroup;
 			children = (
 				0421CA851E4B51CC0064EA49 /* DooDalManClient.swift */,
-				0479889E1E557812002FDD43 /* DooDalManData.swift */,
+				0418A59B1E68064500419AE9 /* DDMRoom.swift */,
+				0418A59D1E68066D00419AE9 /* DDMFilter.swift */,
+				0418A59F1E68068700419AE9 /* DDMContact.swift */,
+				0418A5A11E6806BD00419AE9 /* DDMChat.swift */,
+				0418A5A31E6806DF00419AE9 /* DDMUserInfo.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -441,17 +453,20 @@
 			files = (
 				04DE64731E5DB1B0001E9E37 /* RoomAddTableViewController.swift in Sources */,
 				047988A11E557904002FDD43 /* SignInViewController.swift in Sources */,
-				0479889F1E557812002FDD43 /* DooDalManData.swift in Sources */,
 				046BDA6B1E4999F900080576 /* GCDBlackBox.swift in Sources */,
 				04E922681E598B3700DE21D5 /* ContactListViewController.swift in Sources */,
 				04BB7D641E51A16700B0AB3D /* MapViewController.swift in Sources */,
 				04E922621E57219C00DE21D5 /* ContactTableViewCell.swift in Sources */,
 				04DE64691E5C12AF001E9E37 /* DooDalManExtension.swift in Sources */,
 				046BDA691E4989E400080576 /* Constants.swift in Sources */,
+				0418A59C1E68064500419AE9 /* DDMRoom.swift in Sources */,
 				049BCA8F1E48CFAB00CC8BB9 /* RoomListTableViewCell.swift in Sources */,
 				049E287C1E608F35000B4FA9 /* PaddingLabel.swift in Sources */,
 				04DE646B1E5C2DF1001E9E37 /* UserTableViewController.swift in Sources */,
+				0418A5A21E6806BD00419AE9 /* DDMChat.swift in Sources */,
+				0418A59E1E68066D00419AE9 /* DDMFilter.swift in Sources */,
 				04DE64751E5DB915001E9E37 /* RoomPhotoCollectionViewCell.swift in Sources */,
+				0418A5A41E6806DF00419AE9 /* DDMUserInfo.swift in Sources */,
 				049BCA911E48E18700CC8BB9 /* RoomViewController.swift in Sources */,
 				04E9226A1E59C71F00DE21D5 /* ContactListTableViewCell.swift in Sources */,
 				047F7EFB1E541C8500A258C0 /* SignUpViewController.swift in Sources */,
@@ -460,6 +475,7 @@
 				046BDA721E49C4A900080576 /* RoomListViewController.swift in Sources */,
 				045CA9F51E484978006C9645 /* MainViewController.swift in Sources */,
 				04E922601E57203000DE21D5 /* ContactViewController.swift in Sources */,
+				0418A5A01E68068700419AE9 /* DDMContact.swift in Sources */,
 				045CA9F31E484978006C9645 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

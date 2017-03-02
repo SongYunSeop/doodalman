@@ -13,6 +13,16 @@ import AlamofireObjectMapper
 import Alamofire
 import ObjectMapper
 
+enum HttpStatusCode: Int {
+    case Http200_OK = 200
+    case Http400_BadRequest = 400
+    case Http401_Unauthorized = 401
+    case Http403_Forbidden = 403
+    case Http404_NotFound = 404
+    case Http500_InternalServerError = 500
+}
+
+
 
 // DooDalMan Single tone Model
 class DooDalMan {

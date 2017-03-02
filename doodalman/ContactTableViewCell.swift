@@ -10,8 +10,7 @@ import UIKit
 
 class ContactTableViewCell: UITableViewCell {
     
-//    @IBOutlet weak var contentTextView: UITextView!
-    @IBOutlet weak var contentTextView: UILabel!
+    @IBOutlet weak var contentTextView: PaddingLabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

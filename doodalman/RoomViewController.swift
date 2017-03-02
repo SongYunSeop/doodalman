@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import Nuke
 
-class RoomViewController: UIViewController, SignInDelegate, MKMapViewDelegate {
+class RoomViewController: UIViewController, SignInDelegate {
 
 //    @IBOutlet weak var roomTitle: UILabel!
     @IBOutlet weak var shareButton: UIBarButtonItem!
@@ -43,12 +43,11 @@ class RoomViewController: UIViewController, SignInDelegate, MKMapViewDelegate {
         self.addressIcon.text = String.fontAwesomeIcon(name: .mapMarker)
         self.priceIcon.font = UIFont.fontAwesome(ofSize: 24)
         self.priceIcon.text = String.fontAwesomeIcon(name: .money)
-
         self.dateIcon.font = UIFont.fontAwesome(ofSize: 24)
         self.dateIcon.text = String.fontAwesomeIcon(name: .calendar)
         self.infoIcon.font = UIFont.fontAwesome(ofSize: 24)
         self.infoIcon.text = String.fontAwesomeIcon(name: .infoCircle)
-//        self.roomTitle.text = self.room.title
+
         self.roomAddress.text = self.room.full_addr
         self.roomPrice.text = self.room.displayedPrice
         self.roomDate.text = self.room.displayedDate
@@ -64,25 +63,7 @@ class RoomViewController: UIViewController, SignInDelegate, MKMapViewDelegate {
         self.mapView.setRegion(region, animated: false)
 
     }
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-       print("test")
-        let annotationIdentifier = "room"
-        
-        var annotationView: MKAnnotationView?
-        if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
-            annotationView = dequeuedAnnotationView
-            annotationView?.annotation = annotation
-        } else {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-            annotationView?.canShowCallout = true
-            annotationView?.image = UIImage(named: "house")
-            
-        }
-        
-        return annotationView
-        
-    }
+  
     
     func fetchRoomInfo() {
         let model = DooDalMan.shared
@@ -106,9 +87,12 @@ class RoomViewController: UIViewController, SignInDelegate, MKMapViewDelegate {
     func setLikeButtonUI(_ isLiked: Bool) {
         if isLiked {
             self.likeButton.title = String.fontAwesomeIcon(name: .heart)
-
+            
+            self.likeButton.tintColor = .red
         } else {
             self.likeButton.title = String.fontAwesomeIcon(name: .heartO)
+            
+            self.likeButton.tintColor = .black
 
         }
     }
@@ -179,6 +163,27 @@ class RoomViewController: UIViewController, SignInDelegate, MKMapViewDelegate {
             contactVC.contact = sender as? Contact
         }
     }
-    
 
+}
+
+extension RoomViewController:  MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        print("test")
+        let annotationIdentifier = "room"
+        
+        var annotationView: MKAnnotationView?
+        if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
+            annotationView = dequeuedAnnotationView
+            annotationView?.annotation = annotation
+        } else {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+            annotationView?.canShowCallout = true
+            annotationView?.image = UIImage(named: "house")
+            
+        }
+        
+        return annotationView
+        
+    }
 }

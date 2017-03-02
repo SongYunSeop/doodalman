@@ -32,7 +32,6 @@ class RoomListViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "roomListCell", for: indexPath) as! RoomListTableViewCell
         
-        
         cell.roomThumbnail.image = nil
         Nuke.loadImage(with: URL(string: self.rooms[indexPath.row].thumbnail!)!, into: cell.roomThumbnail)
         cell.roomPrice.text = self.rooms[indexPath.row].displayedPrice
