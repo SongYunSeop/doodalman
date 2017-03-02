@@ -7,27 +7,24 @@
 //
 
 import Foundation
-
 import AlamofireObjectMapper
 import Alamofire
 import ObjectMapper
 
-
-
-class ContactList: Mappable {
-    var contacts: [Contact]?
+struct ContactList: Mappable {
+    var contacts: [Contact] = []
     
-    required init(map: Map) {
+    init(map: Map) {
         
     }
     
-    func mapping(map: Map) {
+    mutating func mapping(map: Map) {
         contacts <- map["contactList"]
     }
 }
 
 class Contact: Mappable {
-    var contactId: Int? = nil
+    var contactId: Int?
     var contactChats: [Chat]?
     var username: String?
     var thumbnail: String?

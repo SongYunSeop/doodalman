@@ -27,9 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let token = UserDefaults.standard.string(forKey: "authToken") {
                 let model = DooDalMan.shared
 
-                model.logIn(withToken: token, { (httpStatusCode, error) in
-                    print("success")
-                })
+                model.logIn(withToken: token) {_,_ in 
+                    //
+                }
             }
         }
     }

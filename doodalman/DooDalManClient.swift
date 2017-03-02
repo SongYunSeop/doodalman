@@ -30,7 +30,7 @@ class DooDalMan {
     static let shared = DooDalMan()
     
     // RoomListViewController와 MapViewController에서 사용할 방 리스트
-    var rooms = [Room]()
+    var rooms = Array<Room>()
     
     // room history
     // var history = [Int]()

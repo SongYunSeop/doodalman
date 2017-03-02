@@ -45,8 +45,10 @@ class MainViewController: UIViewController, FilterViewDelegate, RoomDataDelegate
         let model = DooDalMan.shared
         self.roomCountLabel?.text = "\(model.rooms.count) 개의 방"
         if let mapView = self.mapViewController?.mapView {
+//
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotations(model.rooms)
+//
         }
         roomListViewController?.rooms = model.rooms
 

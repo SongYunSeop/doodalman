@@ -61,8 +61,19 @@ class MapViewController: UIViewController {
 
         model.fetchRooms(parameters ) { roomList, error in
             performUIUpdatesOnMain {
-                self.mapView.removeAnnotations(self.mapView.annotations)
-                self.mapView.addAnnotations(model.rooms)
+                
+//                print("before annotation count: \(self.mapView.annotations.count)")
+//                print("fetched room count: \(model.rooms.count)")
+//                
+//                let willRemove = (self.mapView.annotations as! [Room]).substracting(other: model.rooms)
+//                let willAdd = model.rooms.substracting(other: self.mapView.annotations as! [Room])
+//
+//                print("will remove count: \(willRemove.count)")
+//                print("will add count: \(willAdd.count)")
+//                
+//                
+//                self.mapView.removeAnnotations(willRemove)
+//                self.mapView.addAnnotations(willAdd)
                 self.delegate?.roomLoaded()
             }
         }

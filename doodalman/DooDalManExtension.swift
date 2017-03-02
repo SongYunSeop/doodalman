@@ -65,3 +65,15 @@ extension UIImage {
         return newImage!
     }
 }
+
+extension Array where Element: Hashable{
+    func substracting(other: [Element]) -> [Element] {
+        
+        
+        let selfSet: Set<Element> = Set<Element>(self)
+        let otherSet: Set<Element> = Set<Element>(other)
+        
+        
+        return Array(selfSet.subtracting(otherSet))
+    }
+}

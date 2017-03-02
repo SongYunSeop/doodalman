@@ -8,7 +8,7 @@
 
 import Foundation
 
-
+// 필터 모델
 struct Filter {
     var startDate: Date?
     var endDate: Date?

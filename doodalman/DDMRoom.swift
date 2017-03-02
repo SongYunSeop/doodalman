@@ -12,19 +12,24 @@ import AlamofireObjectMapper
 import Alamofire
 import ObjectMapper
 
-class RoomsResponse: Mappable {
-    var rooms: [Room]?
+// Room list Response Mapper
+struct RoomsResponse: Mappable {
+    var rooms: [Room] = []
     
-    required init(map: Map) {
+    init(map: Map) {
         
     }
     
-    func mapping(map: Map) {
+    mutating func mapping(map: Map) {
         rooms <- map["rooms"]
     }
 }
 
-class Room: NSObject, MKAnnotation, Mappable {
+
+// Room Class
+// Mapper
+// MKAnnotation 프로토콜 채택으로 지도에서 따로 어노테이션 객체를 생성 안함
+class Room: NSObject, Mappable, MKAnnotation {
     
     var id: Int?
     var title: String?
@@ -71,12 +76,15 @@ class Room: NSObject, MKAnnotation, Mappable {
     var isLike: Bool = false
     var isHost: Bool = false
     
+    override var hashValue: Int {
+        return self.id!
+    }
+    
     required init(map: Map) { }
     
     func mapping(map: Map) {
         
         id <- map["id"]
-        //        title <- map["title"]
         price <- map["price"]
         username <- map["username"]
         title = self.displayedPrice
@@ -95,9 +103,21 @@ class Room: NSObject, MKAnnotation, Mappable {
         
         
     }
-    
+//    
+//    static func ==(lhs: Room, rhs: Room) -> Bool {
+//        
+//        if lhs.id! == rhs.id! {
+//            print("true")
+//            return true
+//        } else {
+//            print("false")
+//            return false
+//        }
+//    }
+
 }
 
+// 방 화면으로 진입했을 때 추가적으로 정보를 가져오기 위해 생성한 Mapper
 struct RoomInfo: Mappable {
     var photoList: [String] = []
     var detail: String = ""
