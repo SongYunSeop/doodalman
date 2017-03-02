@@ -6,3 +6,4 @@ Team latte
 ## 일정
 
 ![](./schedule.png)
+
