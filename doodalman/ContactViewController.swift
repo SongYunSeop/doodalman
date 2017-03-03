@@ -92,6 +92,7 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
 
     }
     
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // test
     }
@@ -154,7 +155,6 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func scrollToLastRow() {
-        
         if (self.contact?.contactChats?.count)! > 0 {
             let indexPath = IndexPath(row: (self.contact?.contactChats?.count)! - 1 , section: 0)
             self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
