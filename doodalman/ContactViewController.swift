@@ -122,15 +122,11 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
 //    // keybord가 올라올 때 이벤트 핸들러
     func keyboardWillShow(_ notification:Notification) {
         //keyboard 높이
-        
         let keyboardHeight = getKeyboardHeight(notification)
-
-        self.toolbar.frame.origin.y -= keyboardHeight
-        
-        
+        let toolbarHeight = self.toolbar.frame.height
+        self.toolbar.frame.origin.y = self.view.frame.height - keyboardHeight - toolbarHeight
         self.tableView.contentInset.bottom = keyboardHeight
         self.tableView.scrollIndicatorInsets.bottom = keyboardHeight
-
         self.scrollToLastRow()
 
         
@@ -139,14 +135,10 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
 
 //    // keyboard가 내려갈 때 이벤트 핸들러
     func keyboardWillHide(_ notification: Notification) {
-
         let toolbarHeight = self.toolbar.frame.height
         self.toolbar.frame.origin.y = self.view.frame.height - toolbarHeight
         self.tableView.contentInset.bottom = 0
         self.tableView.scrollIndicatorInsets.bottom = 0
-
-//        self.scrollToLastRow()
-
     }
 
 //    // keyboard 높이 구하는 함수
