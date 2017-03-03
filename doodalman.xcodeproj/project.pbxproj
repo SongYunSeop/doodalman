@@ -12,7 +12,7 @@
 		0418A5A01E68068700419AE9 /* DDMContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418A59F1E68068700419AE9 /* DDMContact.swift */; };
 		0418A5A21E6806BD00419AE9 /* DDMChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418A5A11E6806BD00419AE9 /* DDMChat.swift */; };
 		0418A5A41E6806DF00419AE9 /* DDMUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418A5A31E6806DF00419AE9 /* DDMUserInfo.swift */; };
-		0421CA861E4B51CC0064EA49 /* DooDalManClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421CA851E4B51CC0064EA49 /* DooDalManClient.swift */; };
+		0421CA861E4B51CC0064EA49 /* DDMModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0421CA851E4B51CC0064EA49 /* DDMModel.swift */; };
 		045CA9F31E484978006C9645 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CA9F21E484978006C9645 /* AppDelegate.swift */; };
 		045CA9F51E484978006C9645 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CA9F41E484978006C9645 /* MainViewController.swift */; };
 		045CA9FA1E484978006C9645 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 045CA9F91E484978006C9645 /* Assets.xcassets */; };
@@ -57,7 +57,7 @@
 		0418A59F1E68068700419AE9 /* DDMContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDMContact.swift; sourceTree = "<group>"; };
 		0418A5A11E6806BD00419AE9 /* DDMChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDMChat.swift; sourceTree = "<group>"; };
 		0418A5A31E6806DF00419AE9 /* DDMUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDMUserInfo.swift; sourceTree = "<group>"; };
-		0421CA851E4B51CC0064EA49 /* DooDalManClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DooDalManClient.swift; sourceTree = "<group>"; };
+		0421CA851E4B51CC0064EA49 /* DDMModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDMModel.swift; sourceTree = "<group>"; };
 		045CA9EF1E484978006C9645 /* doodalman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = doodalman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045CA9F21E484978006C9645 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		045CA9F41E484978006C9645 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 		046BDA6C1E49B16E00080576 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0421CA851E4B51CC0064EA49 /* DooDalManClient.swift */,
+				0421CA851E4B51CC0064EA49 /* DDMModel.swift */,
 				0418A59B1E68064500419AE9 /* DDMRoom.swift */,
 				0418A59D1E68066D00419AE9 /* DDMFilter.swift */,
 				0418A59F1E68068700419AE9 /* DDMContact.swift */,
@@ -471,7 +471,7 @@
 				04E9226A1E59C71F00DE21D5 /* ContactListTableViewCell.swift in Sources */,
 				047F7EFB1E541C8500A258C0 /* SignUpViewController.swift in Sources */,
 				04AF38351E4D9C7B008F3484 /* FilterViewController.swift in Sources */,
-				0421CA861E4B51CC0064EA49 /* DooDalManClient.swift in Sources */,
+				0421CA861E4B51CC0064EA49 /* DDMModel.swift in Sources */,
 				046BDA721E49C4A900080576 /* RoomListViewController.swift in Sources */,
 				045CA9F51E484978006C9645 /* MainViewController.swift in Sources */,
 				04E922601E57203000DE21D5 /* ContactViewController.swift in Sources */,

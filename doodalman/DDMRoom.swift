@@ -76,6 +76,10 @@ class Room: NSObject, MKAnnotation, Mappable {
     var isLike: Bool = false
     var isHost: Bool = false
     
+    override var hashValue: Int {
+        return self.id!
+    }
+    
     required init?(map: Map) { }
     
     func mapping(map: Map) {
