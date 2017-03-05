@@ -68,8 +68,8 @@ class MainViewController: UIViewController, FilterViewDelegate, RoomDataDelegate
     
     // 필터 띄우는 액션
     @IBAction func showFilter(_ sender: UIBarButtonItem) {
-        let filterVC = self.storyboard?.instantiateViewController(withIdentifier: "filterview") as! FilterViewController
-        filterVC.delegate = self
+        let filterVC = self.storyboard?.instantiateViewController(withIdentifier: "DDMFilter") as! DDMFilterViewController
+//        filterVC.delegate = self
         self.present(filterVC, animated: true, completion: nil)
     }
     
