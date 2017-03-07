@@ -24,7 +24,10 @@ enum HttpStatusCode: Int {
 
 
 
-// DooDalMan Single tone Model
+
+/**
+ DooDalMan Single Tone Model
+ */
 class DooDalMan {
     
     static let shared = DooDalMan()
@@ -55,6 +58,11 @@ class DooDalMan {
     
     
     // MARK: - Make URL From Parameters
+    /**
+     make url from parameters
+     - parameter url: just url path string
+     - parameter parameters: dictionary parameters. it is used query string
+     */
     private func makeURLFromParameters(_ url: String, _ parameters: [String:AnyObject]?) -> URL {
         
         var components = URLComponents()
@@ -81,6 +89,10 @@ class DooDalMan {
     }
     
     // MARK: Fetch Room List
+    /**
+     Fetch Room List use map center & map span
+     - parameter parameters: It contain mapView.region.center.latitude, mapView.region.center.longitude, mapView.region.span.latitudeDelta, mapView.region.span.longitudeDelta
+     */
     func fetchRooms(_ parameters:[String: AnyObject], _ compeletionHandler: @escaping (_ roomList:[Room]?, _ error:Error?) -> ()) {
         func sendError(_ error: String) {
             print(error)
@@ -98,7 +110,19 @@ class DooDalMan {
             }
             
             let roomsResponse = response.result.value
+
+            
             if let rooms = roomsResponse?.rooms {
+                print("before annotation count: \(self.rooms.count)")
+                print("fetched room count: \(rooms.count)")
+//
+                
+                let willRemove = self.rooms.substracting(other: rooms)
+                let willAdd = rooms.substracting(other: self.rooms)
+                
+                print("will remove count: \(willRemove.count)")
+                print("will add count: \(willAdd.count)")
+
                 self.rooms = rooms
             }
             

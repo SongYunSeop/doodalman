@@ -29,7 +29,7 @@ struct RoomsResponse: Mappable {
 // Room Class
 // Mapper
 // MKAnnotation 프로토콜 채택으로 지도에서 따로 어노테이션 객체를 생성 안함
-class Room: NSObject, Mappable, MKAnnotation {
+class Room: NSObject, MKAnnotation, Mappable {
     
     var id: Int?
     var title: String?
@@ -80,7 +80,7 @@ class Room: NSObject, Mappable, MKAnnotation {
         return self.id!
     }
     
-    required init(map: Map) { }
+    required init?(map: Map) { }
     
     func mapping(map: Map) {
         
@@ -100,21 +100,7 @@ class Room: NSObject, Mappable, MKAnnotation {
         endDate = dateFormatter.date(from: endDateString!)
         full_addr <- map["full_addr"]
         subtitle = self.displayedDate
-        
-        
     }
-//    
-//    static func ==(lhs: Room, rhs: Room) -> Bool {
-//        
-//        if lhs.id! == rhs.id! {
-//            print("true")
-//            return true
-//        } else {
-//            print("false")
-//            return false
-//        }
-//    }
-
 }
 
 // 방 화면으로 진입했을 때 추가적으로 정보를 가져오기 위해 생성한 Mapper

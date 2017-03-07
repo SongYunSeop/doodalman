@@ -44,12 +44,9 @@ class MainViewController: UIViewController, FilterViewDelegate, RoomDataDelegate
     func roomLoaded() {
         let model = DooDalMan.shared
         self.roomCountLabel?.text = "\(model.rooms.count) 개의 방"
-        if let mapView = self.mapViewController?.mapView {
-//
-            mapView.removeAnnotations(mapView.annotations)
-            mapView.addAnnotations(model.rooms)
-//
-        }
+//        if let mapView = self.mapViewController?.mapView {
+
+//        }
         roomListViewController?.rooms = model.rooms
 
         if let tableView = self.roomListViewController?.tableView {
@@ -71,8 +68,8 @@ class MainViewController: UIViewController, FilterViewDelegate, RoomDataDelegate
     
     // 필터 띄우는 액션
     @IBAction func showFilter(_ sender: UIBarButtonItem) {
-        let filterVC = self.storyboard?.instantiateViewController(withIdentifier: "filterview") as! FilterViewController
-        filterVC.delegate = self
+        let filterVC = self.storyboard?.instantiateViewController(withIdentifier: "DDMFilter") as! DDMFilterViewController
+//        filterVC.delegate = self
         self.present(filterVC, animated: true, completion: nil)
     }
     

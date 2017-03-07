@@ -26,12 +26,6 @@ class UserTableViewController: UITableViewController, SignInDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-//        let model = DooDalMan.shared
-//        
-//        if model.authToken != nil {
-//            self.fetchUserInfo()
-//        }
     }
 
     // MARK: - Table view data source
